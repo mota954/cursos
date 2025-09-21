@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Geovanne Cursos</title>
+  <style>
+    body { font-family: Arial; margin: 0; background: #f4f4f4; }
+    header, footer { background: #2c3e50; color: white; text-align: center; padding: 20px; }
+    .banner { background: #3498db; color: white; text-align: center; padding: 60px 20px; }
+    .btn { background: white; color: #3498db; padding: 10px 20px; border-radius: 5px; text-decoration: none; }
+    .cursos { padding: 40px 20px; text-align: center; }
+    .curso-card { background: white; margin: 20px auto; padding: 20px; max-width: 400px; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+    .curso-card button { background: #2ecc71; color: white; border: none; padding: 10px; border-radius: 5px; cursor: pointer; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>🎓 Geovanne Cursos</h1>
+  </header>
+  <section class="banner">
+    <h2>Aprenda com os melhores</h2>
+    <p>Invista no seu futuro com nossos cursos online</p>
+    <a href="#cursos" class="btn">Ver Cursos</a>
+  </section>
+  <section id="cursos" class="cursos">
+    <h2>Nossos Cursos</h2>
+    <div class="curso-card">
+      <h3>Curso de Programação</h3>
+      <p>Aprenda HTML, CSS e JavaScript do zero</p>
+      <span>R$ 199,00</span>
+      <button onclick="alert('Você escolheu Programação')">Comprar</button>
+    </div>
+    <div class="curso-card">
+      <h3>Curso de Marketing Digital</h3>
+      <p>Domine estratégias para redes sociais e anúncios</p>
+      <span>R$ 149,00</span>
+      <button onclick="alert('Você escolheu Marketing Digital')">Comprar</button>
+    </div>
+  </section>
+  <footer>
+    <p>&copy; 2025 Geovanne Cursos</p>
+  </footer>
+</body>
+</html>
