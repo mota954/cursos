@@ -28,11 +28,14 @@ nav a {
 }
 
 .banner {
-  background: url('banner-prime.jpg') no-repeat center center;
-  background-size: cover;
+  background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('banner-prime.jpg') center/cover no-repeat;
   color: white;
   padding: 80px 20px;
   text-align: center;
+  min-height: 300px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .banner h1 {
