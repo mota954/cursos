@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Material Didático</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Roboto', sans-serif;
+      background: #f4f6f8;
+      color: #2c3e50;
+      padding: 40px 20px;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: auto;
+      background: white;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    h2 {
+      color: #3498db;
+      margin-top: 30px;
+    }
+
+    ul {
+      margin-top: 10px;
+      padding-left: 20px;
+    }
+
+    li {
+      margin-bottom: 8px;
+    }
+
+    a {
+      color: #27ae60;
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    .voltar {
+      display: block;
+      margin-top: 40px;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="container" id="conteudo">
+    <h1>📚 Material Didático</h1>
+    <!-- O conteúdo será inserido aqui via JavaScript -->
+  </div>
+
+  <script>
+    const cursos = {
+      programacao: {
+        titulo: "💻 Programação",
+        topicos: [
+          "✅ Introdução ao HTML e estrutura de páginas",
+          "✅ Estilização com CSS: cores, fontes e layout",
+          "✅ Fundamentos do JavaScript: variáveis, funções e DOM"
+        ],
+        pdf: "material/html-css-js.pdf",
+        video: "https://www.youtube.com/watch?v=jDI6qzd0UHQ"
+      },
+      marketing: {
+        titulo: "📱 Marketing Digital",
+        topicos: [
+          "✅ Estratégias para Instagram, Facebook e TikTok",
+          "✅ Criação de campanhas com Meta Ads",
+          "✅ Análise de métricas e conversão"
+        ],
+        pdf: "material/marketing.pdf",
+        video: "https://www.youtube.com/watch?v=VB7xAgA74E8"
+      },
+      contabilidade: {
+        titulo: "📊 Contabilidade",
+        topicos: [
+          "✅ Conceitos de ativo, passivo e patrimônio líquido",
+          "✅ Lançamentos contábeis e balancetes",
+          "✅ Demonstrações financeiras básicas"
+        ],
+        pdf: "material/contabilidade.pdf",
+        video: "https://www.youtube.com/watch?v=FFXnJ_In8Qw"
+      },
+      economia: {
+        titulo: "📈 Economia",
+        topicos: [
+          "✅ Oferta, demanda e equilíbrio de mercado",
+          "✅ Inflação, juros e política monetária",
+          "✅ Introdução à macroeconomia"
+        ],
+        pdf: "material/economia.pdf",
+        video: "https://www.youtube.com/watch?v=01CW53fm89A"
+      }
+    };
+
+    const params = new URLSearchParams(window.location.search);
+    const curso = params.get("curso");
+    const conteudo = document.getElementById("conteudo");
+
+    if (cursos[curso]) {
+      const dados = cursos[curso];
+      let html = `<h2>${dados.titulo}</h2><ul>`;
+      dados.topicos.forEach(topico => {
+        html += `<li>${topico}</li>`;
+      });
+      html += `
+        <li>📄 <a href="${dados.pdf}" target="_blank">Baixar apostila em PDF</a></li>
+        <li>🎥 <a href="${dados.video}" target="_blank">Aula introdutória</a></li>
+        </ul>
+        <a href="index.html" class="voltar">🔙 Voltar para a página inicial</a>
+      `;
+      conteudo.innerHTML += html;
+    } else {
+      conteudo.innerHTML += `<h2>Curso não encontrado</h2><p>Verifique o link e tente novamente.</p>`;
+    }
+  </script>
+</body>
+</html>
