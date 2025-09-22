@@ -59,69 +59,46 @@
   </style>
 </head>
 <body>
-  <div class="container" id="conteudo">
+  <div class="container">
     <h1>📚 Material Didático</h1>
+
+    <h2>💻 Programação</h2>
+    <ul>
+      <li><strong>Material 1:</strong> Introdução ao HTML e estrutura de páginas</li>
+      <li><strong>Material 2:</strong> Estilização com CSS: cores, fontes e layout</li>
+      <li><strong>Material 3:</strong> Fundamentos do JavaScript: variáveis, funções e DOM</li>
+      <li><strong>Material 4:</strong> 📄 <a href="material/apostila-programacao.pdf" target="_blank">Baixar apostila em PDF</a></li>
+      <li><strong>Material 5:</strong> 🎥 <a href="https://www.youtube.com/watch?v=jDI6qzd0UHQ" target="_blank">Aula introdutória</a></li>
+    </ul>
+
+    <h2>📱 Marketing Digital</h2>
+    <ul>
+      <li><strong>Material 1:</strong> Estratégias para Instagram, Facebook e TikTok</li>
+      <li><strong>Material 2:</strong> Criação de campanhas com Meta Ads</li>
+      <li><strong>Material 3:</strong> Análise de métricas e conversão</li>
+      <li><strong>Material 4:</strong> 📄 <a href="material/marketing.pdf" target="_blank">Baixar apostila em PDF</a></li>
+      <li><strong>Material 5:</strong> 🎥 <a href="https://www.youtube.com/watch?v=VB7xAgA74E8" target="_blank">Aula introdutória</a></li>
+    </ul>
+
+    <h2>📊 Contabilidade</h2>
+    <ul>
+      <li><strong>Material 1:</strong> Conceitos de ativo, passivo e patrimônio líquido</li>
+      <li><strong>Material 2:</strong> Lançamentos contábeis e balancetes</li>
+      <li><strong>Material 3:</strong> Demonstrações financeiras básicas</li>
+      <li><strong>Material 4:</strong> 📄 <a href="material/contabilidade.pdf" target="_blank">Baixar apostila em PDF</a></li>
+      <li><strong>Material 5:</strong> 🎥 <a href="https://www.youtube.com/watch?v=FFXnJ_In8Qw" target="_blank">Aula introdutória</a></li>
+    </ul>
+
+    <h2>📈 Economia</h2>
+    <ul>
+      <li><strong>Material 1:</strong> Oferta, demanda e equilíbrio de mercado</li>
+      <li><strong>Material 2:</strong> Inflação, juros e política monetária</li>
+      <li><strong>Material 3:</strong> Introdução à macroeconomia</li>
+      <li><strong>Material 4:</strong> 📄 <a href="material/economia.pdf" target="_blank">Baixar apostila em PDF</a></li>
+      <li><strong>Material 5:</strong> 🎥 <a href="https://www.youtube.com/watch?v=01CW53fm89A" target="_blank">Aula introdutória</a></li>
+    </ul>
+
+    <a href="index.html" class="voltar">🔙 Voltar para a página inicial</a>
   </div>
-
-  <script>
-    const cursos = {
-      programacao: {
-        titulo: "💻 Programação",
-        materiais: [
-          "Material 1: Introdução ao HTML e estrutura de páginas",
-          "Material 2: Estilização com CSS: cores, fontes e layout",
-          "Material 3: Fundamentos do JavaScript: variáveis, funções e DOM",
-          "Material 4: 📄 <a href='material/html-css-js.pdf' target='_blank'>Baixar apostila em PDF</a>",
-          "Material 5: 🎥 <a href='https://www.youtube.com/watch?v=jDI6qzd0UHQ' target='_blank'>Aula introdutória</a>"
-        ]
-      },
-      marketing: {
-        titulo: "📱 Marketing Digital",
-        materiais: [
-          "Material 1: Estratégias para Instagram, Facebook e TikTok",
-          "Material 2: Criação de campanhas com Meta Ads",
-          "Material 3: Análise de métricas e conversão",
-          "Material 4: 📄 <a href='material/marketing.pdf' target='_blank'>Baixar apostila em PDF</a>",
-          "Material 5: 🎥 <a href='https://www.youtube.com/watch?v=VB7xAgA74E8' target='_blank'>Aula introdutória</a>"
-        ]
-      },
-      contabilidade: {
-        titulo: "📊 Contabilidade",
-        materiais: [
-          "Material 1: Conceitos de ativo, passivo e patrimônio líquido",
-          "Material 2: Lançamentos contábeis e balancetes",
-          "Material 3: Demonstrações financeiras básicas",
-          "Material 4: 📄 <a href='material/contabilidade.pdf' target='_blank'>Baixar apostila em PDF</a>",
-          "Material 5: 🎥 <a href='https://www.youtube.com/watch?v=FFXnJ_In8Qw' target='_blank'>Aula introdutória</a>"
-        ]
-      },
-      economia: {
-        titulo: "📈 Economia",
-        materiais: [
-          "Material 1: Oferta, demanda e equilíbrio de mercado",
-          "Material 2: Inflação, juros e política monetária",
-          "Material 3: <a href="material apostila-introduçãogeral.pdf.pdf" target="_blank">📄 Baixar apostila em PDF</a>
-          "Material 4: 📄 <a href='material/economia.pdf' target='_blank'>Baixar apostila em PDF</a>",
-          "Material 5: 🎥 <a href='https://www.youtube.com/watch?v=01CW53fm89A' target='_blank'>Aula introdutória</a>"
-        ]
-      }
-    };
-
-    const params = new URLSearchParams(window.location.search);
-    const curso = params.get("curso");
-    const conteudo = document.getElementById("conteudo");
-
-    if (cursos[curso]) {
-      const dados = cursos[curso];
-      let html = `<h2>${dados.titulo}</h2><ul>`;
-      dados.materiais.forEach(item => {
-        html += `<li>${item}</li>`;
-      });
-      html += `</ul><a href="index.html" class="voltar">🔙 Voltar para a página inicial</a>`;
-      conteudo.innerHTML += html;
-    } else {
-      conteudo.innerHTML += `<h2>Curso não encontrado</h2><p>Verifique o link e tente novamente.</p>`;
-    }
-  </script>
 </body>
 </html>
