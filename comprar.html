@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Comprar Curso</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Roboto', sans-serif;
+      background: #ecf0f1;
+      color: #2c3e50;
+      padding: 40px 20px;
+      text-align: center;
+    }
+
+    .card {
+      background: white;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      max-width: 500px;
+      margin: auto;
+    }
+
+    .card h2 {
+      margin-bottom: 20px;
+    }
+
+    .card p {
+      font-size: 1.1em;
+      margin-bottom: 10px;
+    }
+
+    .card span {
+      display: block;
+      font-weight: bold;
+      font-size: 1.2em;
+      color: #27ae60;
+      margin-bottom: 20px;
+    }
+
+    .btn {
+      background: #27ae60;
+      color: white;
+      padding: 12px 24px;
+      border: none;
+      border-radius: 30px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .btn:hover {
+      background: #2ecc71;
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h2 id="titulo">Curso</h2>
+    <p id="descricao">Descrição do curso</p>
+    <span id="preco">R$ 19,99</span>
+    <button class="btn">Finalizar Compra</button>
+  </div>
+
+  <script>
+    const cursos = {
+      programacao: {
+        titulo: "💻 Programação",
+        descricao: "Aprenda HTML, CSS e JavaScript do zero",
+        preco: "R$ 19,99"
+      },
+      marketing: {
+        titulo: "📱 Marketing Digital",
+        descricao: "Domine estratégias para redes sociais e anúncios",
+        preco: "R$ 19,99"
+      },
+      contabilidade: {
+        titulo: "📊 Contabilidade",
+        descricao: "Fundamentos da contabilidade empresarial",
+        preco: "R$ 19,99"
+      },
+      economia: {
+        titulo: "📈 Economia",
+        descricao: "Conceitos básicos de economia e mercado",
+        preco: "R$ 19,99"
+      }
+    };
+
+    const params = new URLSearchParams(window.location.search);
+    const curso = params.get("curso");
+
+    if (cursos[curso]) {
+      document.getElementById("titulo").textContent = cursos[curso].titulo;
+      document.getElementById("descricao").textContent = cursos[curso].descricao;
+      document.getElementById("preco").textContent = cursos[curso].preco;
+    } else {
+      document.querySelector(".card").innerHTML = "<h2>Curso não encontrado</h2><p>Verifique o link e tente novamente.</p>";
+    }
+  </script>
+</body>
+</html>
