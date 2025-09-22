@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Comprar Curso</title>
+  <title>Finalizar Compra</title>
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
   <style>
     body {
@@ -49,10 +49,16 @@
       font-weight: bold;
       cursor: pointer;
       transition: background 0.3s;
+      margin-top: 10px;
     }
 
     .btn:hover {
       background: #2ecc71;
+    }
+
+    #acessoMaterial {
+      margin-top: 30px;
+      display: none;
     }
   </style>
 </head>
@@ -61,7 +67,13 @@
     <h2 id="titulo">Curso</h2>
     <p id="descricao">Descrição do curso</p>
     <span id="preco">R$ 19,99</span>
-    <button class="btn">Finalizar Compra</button>
+    <button class="btn" onclick="finalizarCompra()">Finalizar Compra</button>
+
+    <div id="acessoMaterial">
+      <a id="linkMaterial" href="#">
+        <button class="btn">Acessar Material</button>
+      </a>
+    </div>
   </div>
 
   <script>
@@ -95,8 +107,14 @@
       document.getElementById("titulo").textContent = cursos[curso].titulo;
       document.getElementById("descricao").textContent = cursos[curso].descricao;
       document.getElementById("preco").textContent = cursos[curso].preco;
+      document.getElementById("linkMaterial").href = `material.html?curso=${curso}`;
     } else {
       document.querySelector(".card").innerHTML = "<h2>Curso não encontrado</h2><p>Verifique o link e tente novamente.</p>";
+    }
+
+    function finalizarCompra() {
+      alert("Compra realizada com sucesso!");
+      document.getElementById("acessoMaterial").style.display = "block";
     }
   </script>
 </body>
