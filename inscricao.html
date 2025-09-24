@@ -1,0 +1,60 @@
+<!-- inscricao.html -->
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <title>Confirmação de Inscrição</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f6f8;
+      padding: 40px;
+      max-width: 600px;
+      margin: auto;
+      text-align: center;
+    }
+    a {
+      display: inline-block;
+      background: #27ae60;
+      color: white;
+      padding: 12px 25px;
+      border-radius: 30px;
+      text-decoration: none;
+      font-weight: bold;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>✅ Inscrição confirmada!</h2>
+  <p>Obrigado por adquirir o curso. Agora você pode acessar o material didático.</p>
+
+  <div id="link"></div>
+
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const curso = params.get("curso");
+
+    const links = {
+      programacao: "download-programacao.html",
+      marketing: "download-marketing.html",
+      economia: "download-economia.html",
+      contabilidade: "download-contabilidade.html",
+      administracao: "download-administracao.html",
+      vendas: "download-vendas.html",
+      pessoas: "download-pessoas.html",
+      financas: "download-financas.html"
+    };
+
+    if (curso && links[curso]) {
+      document.getElementById("link").innerHTML = `
+        <a href="${links[curso]}">📥 Acessar Material de ${curso.charAt(0).toUpperCase() + curso.slice(1)}</a>
+      `;
+    } else {
+      document.getElementById("link").innerHTML = `<p>Curso não identificado.</p>`;
+    }
+  </script>
+
+</body>
+</html>
