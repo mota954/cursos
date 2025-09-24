@@ -2,7 +2,7 @@
 <html lang="pt-br">
 <head>
   <meta charset="UTF-8" />
-  <title>Curso de Programação</title>
+  <title>Material de Programação</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -12,39 +12,24 @@
       margin: auto;
       text-align: center;
     }
-    button {
-      padding: 12px 25px;
-      font-size: 16px;
-      background: #27ae60;
+    a {
+      display: inline-block;
+      background: #3498db;
       color: white;
-      border: none;
+      padding: 12px 25px;
       border-radius: 30px;
-      cursor: pointer;
-    }
-    #material {
-      margin-top: 30px;
-      display: none;
+      text-decoration: none;
+      font-weight: bold;
     }
   </style>
 </head>
 <body>
 
-  <h2>💻 Curso de Programação</h2>
-  <p>Valor: 22x R$ 19,99</p>
-  <p>Para acessar o material, confirme o pagamento abaixo:</p>
+  <h2>✅ Pagamento confirmado!</h2>
+  <p>Obrigado por adquirir o curso de Programação.</p>
+  <p>Clique abaixo para baixar o material:</p>
 
-  <button onclick="liberar()">✅ Confirmar Pagamento</button>
-
-  <div id="material">
-    <h3>📥 Material Liberado!</h3>
-    <a href="materiais/programacao.pdf" target="_blank">📄 Baixar PDF</a>
-  </div>
-
-  <script>
-    function liberar() {
-      document.getElementById("material").style.display = "block";
-    }
-  </script>
+  <a href="materiais/programacao.pdf" target="_blank">📄 Baixar PDF</a>
 
 </body>
 </html>
