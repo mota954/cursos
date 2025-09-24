@@ -20,7 +20,7 @@
       margin-bottom: 40px;
     }
 
-    .form-box {
+    form {
       background: white;
       padding: 30px;
       border-radius: 12px;
@@ -30,7 +30,7 @@
       margin-bottom: 40px;
     }
 
-    .form-box input {
+    form input {
       width: 100%;
       padding: 12px;
       margin-bottom: 15px;
@@ -38,7 +38,7 @@
       border-radius: 8px;
     }
 
-    .form-box button {
+    form button {
       width: 100%;
       padding: 12px;
       background: #1a2b4c;
@@ -49,7 +49,7 @@
       cursor: pointer;
     }
 
-    .form-box button:hover {
+    form button:hover {
       background: #34495e;
     }
 
@@ -87,18 +87,18 @@
   <h1>Área do Aluno</h1>
 
   <!-- Formulário de Login -->
-  <div class="form-box">
+  <form action="materiais.html" method="get">
     <h2>Login</h2>
-    <input type="email" placeholder="Seu e-mail" />
-    <input type="password" placeholder="Sua senha" />
-    <button>Entrar</button>
-  </div>
+    <input type="email" name="email" placeholder="Seu e-mail" required />
+    <input type="password" name="senha" placeholder="Sua senha" required />
+    <button type="submit">Entrar</button>
+  </form>
 
   <!-- Campo de Busca -->
-  <div class="search-box">
-    <input type="text" placeholder="Buscar curso ou material..." />
-    <button>Buscar</button>
-  </div>
+  <form class="search-box" action="materiais.html" method="get">
+    <input type="text" name="busca" placeholder="Buscar curso ou material..." required />
+    <button type="submit">Buscar</button>
+  </form>
 
 </body>
 </html>
