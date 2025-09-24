@@ -2,11 +2,49 @@
 <html lang="pt-br">
 <head>
   <meta charset="UTF-8" />
-  <title>Material de Programação</title>
+  <title>Curso de Programação</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f6f8;
+      padding: 40px;
+      max-width: 600px;
+      margin: auto;
+      text-align: center;
+    }
+    button {
+      padding: 12px 25px;
+      font-size: 16px;
+      background: #27ae60;
+      color: white;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+    }
+    #material {
+      margin-top: 30px;
+      display: none;
+    }
+  </style>
 </head>
 <body>
-  <h2>📥 Material do Curso de Programação</h2>
-  <p>Clique abaixo para baixar:</p>
-  <a href="materiais/programacao.pdf" target="_blank">📄 Baixar PDF</a>
+
+  <h2>💻 Curso de Programação</h2>
+  <p>Valor: 22x R$ 19,99</p>
+  <p>Para acessar o material, confirme o pagamento abaixo:</p>
+
+  <button onclick="liberar()">✅ Confirmar Pagamento</button>
+
+  <div id="material">
+    <h3>📥 Material Liberado!</h3>
+    <a href="materiais/programacao.pdf" target="_blank">📄 Baixar PDF</a>
+  </div>
+
+  <script>
+    function liberar() {
+      document.getElementById("material").style.display = "block";
+    }
+  </script>
+
 </body>
 </html>
