@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Login e Busca</title>
+  <title>Login</title>
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
   <style>
     body {
@@ -13,24 +13,26 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      padding: 60px 20px;
+      justify-content: center;
+      height: 100vh;
+      padding: 20px;
     }
 
-    h1 {
-      margin-bottom: 40px;
-    }
-
-    form {
+    .login-box {
       background: white;
       padding: 30px;
       border-radius: 12px;
       box-shadow: 0 4px 12px rgba(0,0,0,0.1);
       width: 100%;
       max-width: 400px;
-      margin-bottom: 40px;
     }
 
-    form input {
+    .login-box h2 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .login-box input {
       width: 100%;
       padding: 12px;
       margin-bottom: 15px;
@@ -38,7 +40,7 @@
       border-radius: 8px;
     }
 
-    form button {
+    .login-box button {
       width: 100%;
       padding: 12px;
       background: #1a2b4c;
@@ -49,56 +51,45 @@
       cursor: pointer;
     }
 
-    form button:hover {
+    .login-box button:hover {
       background: #34495e;
     }
 
-    .search-box {
-      width: 100%;
-      max-width: 400px;
-      display: flex;
-      gap: 10px;
-    }
-
-    .search-box input {
-      flex: 1;
-      padding: 12px;
-      border: 1px solid #ccc;
-      border-radius: 8px;
-    }
-
-    .search-box button {
-      padding: 12px 20px;
-      background: #27ae60;
-      color: white;
-      border: none;
-      border-radius: 8px;
-      font-weight: bold;
-      cursor: pointer;
-    }
-
-    .search-box button:hover {
-      background: #219150;
+    .error {
+      color: red;
+      font-size: 0.9em;
+      margin-bottom: 10px;
+      display: none;
     }
   </style>
 </head>
 <body>
 
-  <h1>Área do Aluno</h1>
-
-  <!-- Formulário de Login -->
-  <form action="materiais.html" method="get">
+  <div class="login-box">
     <h2>Login</h2>
-    <input type="email" name="email" placeholder="Seu e-mail" required />
-    <input type="password" name="senha" placeholder="Sua senha" required />
-    <button type="submit">Entrar</button>
-  </form>
+    <div class="error" id="error-msg">E-mail ou senha inválidos.</div>
+    <form id="login-form">
+      <input type="email" id="email" placeholder="Seu e-mail" required />
+      <input type="password" id="senha" placeholder="Sua senha" required />
+      <button type="submit">Entrar</button>
+    </form>
+  </div>
 
-  <!-- Campo de Busca -->
-  <form class="search-box" action="materiais.html" method="get">
-    <input type="text" name="busca" placeholder="Buscar curso ou material..." required />
-    <button type="submit">Buscar</button>
-  </form>
+  <script>
+    document.getElementById('login-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      const email = document.getElementById('email').value;
+      const senha = document.getElementById('senha').value;
+
+      // Simulação de login válido
+      if (email === 'aluno@curso.com' && senha === '123456') {
+        window.location.href = 'materiais.html';
+      } else {
+        document.getElementById('error-msg').style.display = 'block';
+      }
+    });
+  </script>
 
 </body>
 </html>
