@@ -3,212 +3,181 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Cursos Online</title>
+  <title>Instituto de Cursos Profissionais</title>
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
-    body { font-family: 'Roboto', sans-serif; background: #ecf0f1; color: #2c3e50; }
+    body { font-family: 'Roboto', sans-serif; background: #f4f6f8; color: #2c3e50; }
 
-    header, footer {
-      background: #2c3e50;
+    header {
+      background: #1a2b4c;
       color: white;
-      text-align: center;
       padding: 20px;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    nav a {
+      color: white;
+      margin: 0 15px;
+      text-decoration: none;
+      font-weight: bold;
     }
 
     .banner {
-      background: linear-gradient(135deg, #3498db, #2980b9);
+      background: linear-gradient(135deg, #2c3e50, #34495e);
       color: white;
       text-align: center;
-      padding: 60px 20px;
+      padding: 80px 20px;
     }
 
-    .btn {
-      background: white;
-      color: #3498db;
-      padding: 12px 24px;
+    .banner .btn {
+      background: #f1c40f;
+      color: #2c3e50;
+      padding: 12px 30px;
       border-radius: 30px;
       text-decoration: none;
       font-weight: bold;
-      transition: background 0.3s;
+      margin-top: 20px;
+      display: inline-block;
     }
 
-    .btn:hover {
-      background: #ecf0f1;
-    }
-
-    .cursos {
-      padding: 40px 20px;
+    .section {
+      padding: 60px 20px;
       text-align: center;
     }
 
-    .curso-grid {
+    .grid {
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
-      gap: 20px;
+      gap: 30px;
+      margin-top: 30px;
     }
 
-    .curso-card {
+    .card {
       background: white;
       padding: 20px;
-      width: 320px;
+      width: 300px;
       border-radius: 12px;
       box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-      transition: transform 0.3s;
     }
 
-    .curso-card:hover {
-      transform: translateY(-5px);
-    }
-
-    .curso-card h3 {
-      margin-bottom: 10px;
-    }
-
-    .curso-card img {
+    .card img {
       width: 100%;
       border-radius: 8px;
+      margin-bottom: 15px;
+    }
+
+    .card h3 {
       margin-bottom: 10px;
     }
 
-    .curso-card p {
+    .card p {
       font-size: 0.95em;
       margin-bottom: 10px;
     }
 
-    .curso-card span {
+    .card span {
       display: block;
       font-weight: bold;
-      margin-bottom: 15px;
       color: #27ae60;
+      margin-bottom: 15px;
     }
 
-    .curso-card button {
+    .card button {
       background: #27ae60;
       color: white;
       border: none;
       padding: 10px 20px;
       border-radius: 30px;
       cursor: pointer;
-      transition: background 0.3s;
     }
 
-    .curso-card button:hover {
-      background: #2ecc71;
+    footer {
+      background: #1a2b4c;
+      color: white;
+      text-align: center;
+      padding: 30px 20px;
+      margin-top: 60px;
     }
 
     @media (max-width: 768px) {
-      .curso-grid {
-        flex-direction: column;
-        align-items: center;
-      }
+      .grid { flex-direction: column; align-items: center; }
     }
   </style>
 </head>
 <body>
+
   <header>
-    <h1>🎓 Cursos Online</h1>
+    <nav>
+      <a href="#home">Home</a>
+      <a href="#cursos">Cursos</a>
+      <a href="#depoimentos">Depoimentos</a>
+      <a href="#inscricao">Inscreva-se</a>
+      <a href="#contato">Contato</a>
+    </nav>
   </header>
 
-  <section class="banner">
-    <h2>Aprenda com os melhores</h2>
-    <p>Invista no seu futuro com nossos cursos online</p>
-    <a href="#cursos" class="btn">Ver Cursos</a>
-    <a href="#academico" class="btn">Área Acadêmica</a>
-   
+  <section class="banner" id="home">
+    <h1>Excelência que transforma seu futuro</h1>
+    <p>Estude com os melhores e conquiste seu certificado profissional</p>
+    <a href="#inscricao" class="btn">Inscreva-se já</a>
   </section>
 
-  <!-- Cursos -->
-  <section id="cursos" class="cursos">
-    <h2>Nossos Cursos em Promoção de R$ 159,99 por R$ 19,99</h2>
-    <div class="curso-grid">
-      <div class="curso-card">
+  <section class="section" id="cursos">
+    <h2>Nossos Cursos</h2>
+    <div class="grid">
+      <div class="card">
+        <img src="https://img.youtube.com/vi/jDI6qzd0UHQ/hqdefault.jpg" alt="Programação">
         <h3>💻 Programação</h3>
-        <img src="https://img.youtube.com/vi/jDI6qzd0UHQ/hqdefault.jpg" alt="Curso de Programação">
-        <p>Aprenda HTML, CSS e JavaScript do zero</p>
-        <span>R$ 19,99</span>
-        <a href="comprar.html?curso=programacao"><button>Comprar</button></a>
+        <p>HTML, CSS e JavaScript do zero</p>
+        <span>22x R$ 19,99</span>
+        <button>Saiba mais</button>
       </div>
-
-      <div class="curso-card">
-        <h3>📱 Marketing</h3>
-        <img src="https://img.youtube.com/vi/VB7xAgA74E8/hqdefault.jpg" alt="Curso de Marketing Digital">
-        <p>Domine estratégias para redes sociais e anúncios</p>
-        <span>R$ 19,99</span>
-        <a href="comprar.html?curso=marketing"><button>Comprar</button></a>
-      </div>
-
-      <div class="curso-card">
-        <h3>📊 Contabilidade</h3>
-        <img src="https://img.youtube.com/vi/FFXnJ_In8Qw/hqdefault.jpg" alt="Curso de Contabilidade">
-        <p>Fundamentos da contabilidade empresarial</p>
-        <span>R$ 19,99</span>
-        <a href="comprar.html?curso=contabilidade"><button>Comprar</button></a>
-      </div>
-
-      <div class="curso-card">
-        <h3>📈 Economia</h3>
-        <img src="https://img.youtube.com/vi/01CW53fm89A/hqdefault.jpg" alt="Curso de Economia">
-        <p>Conceitos básicos de economia e mercado</p>
-        <span>R$ 19,99</span>
-        <a href="comprar.html?curso=economia"><button>Comprar</button></a>
-      </div>
-  
-      <div class="curso-card">
-        <h3>📈 Administracao</h3>
-        <img src="https://img.youtube.com/vi/VIDEO_ID/maxresdefault.jpg" alt="Curso de administracao">
-        <p>Administracao Geral</p>
-        <span>R$ 19,99</span>
-        <a href="comprar.html?curso=administracao" class="btn-comprar">Comprar</a>
-      </div>    
-    </div>
-  </section>
-
-  <!-- Área Acadêmica -->
-  <section id="academico" class="cursos">
-    <h2>Área Acadêmica</h2>
-    <div class="curso-grid">
-      <div class="curso-card">
-        <h3>📚 Trabalhos Academicos</h3>
-        <p>Traga seus trabalhos academicos que nossa equipe ira fazer uma analise e fazer para voce!.</p>
-        <span>A partir de R$ 49,99</span>
-        <a href="https://wa.me/5511999999999" target="_blank"><button>Comprar pelo WhatsApp</button></a>
-        <a href="https://www.instagram.com/seuusuario" target="_blank" style="margin-top:10px; display:inline-block;"><button>Comprar pelo Instagram</button></a>
-      </div>
-
-      <div class="curso-card">
-        <h3>⏱️ Horas Complementares</h3>
-        <p>Traga suas horas complementares que nossa equipe ira fazer uma analise e fazer para voce!s.</p>
-        <span>A partir de R$ 49,99</span>
-        <a href="https://wa.me/5511999999999?text=Olá%2C+gostaria+de+registrar+minhas+horas+complementares" target="_blank"><button>Comprar pelo WhatsApp</button></a>
-        <a href="https://www.instagram.com/seuusuario" target="_blank" style="margin-top:10px; display:inline-block;"><button>Comprar pelo Instagram</button></a>
+      <div class="card">
+        <img src="https://img.youtube.com/vi/VB7xAgA74E8/hqdefault.jpg" alt="Marketing">
+        <h3>📱 Marketing Digital</h3>
+        <p>Redes sociais e anúncios eficazes</p>
+        <span>22x R$ 19,99</span>
+        <button>Saiba mais</button>
       </div>
     </div>
   </section>
 
-  <!-- Trabalhe Conosco -->
-  <section class="cursos">
-    <h2>💼 Trabalhe Conosco</h2>
-    <div class="curso-grid">
-      <div class="curso-card">
-        <img src="https://images.unsplash.com/photo-1581090700227-1e7c7b1f7c3e?auto=format&fit=crop&w=800&q=80" alt="Equipe trabalhando">
-        <p>Estamos em busca de profissionais apaixonados por educação. Envie seu currículo e faça parte do nosso time!</p>
-        <a href="mailto:rh@cursosonline.com.br"><button>Enviar Currículo</button></a>
+  <section class="section" id="depoimentos">
+    <h2>Depoimentos de Alunos</h2>
+    <div class="grid">
+      <div class="card">
+        <p>“O curso mudou minha carreira. Hoje trabalho com programação e ganho o dobro.”</p>
+        <span>— Ana, São Paulo</span>
+      </div>
+      <div class="card">
+        <p>“Aprendi mais em 3 meses do que em 4 anos de faculdade. Recomendo demais!”</p>
+        <span>— João, Recife</span>
       </div>
     </div>
   </section>
 
-  <!-- Inscreva-se -->
-  <section class="cursos">
-    <h2>📝 Inscreva-se</h2>
-    <div class="curso-grid">
-      <div class="curso-card">
-        <img src="https://images.unsplash.com/photo-1607746882042-944635dfe10e?auto=format&fit=crop&w=800&q=80" alt="Pessoa se inscrevendo">
-        <p>Cadastre-se para receber novidades, promoções e conteúdos exclusivos.</p>
-        <span>Gratuito</span>
-        <a href="formulario.html"><button>Preencher Formulário</button></a>
-      </div>
-    </div>
+  <section class="section" id="inscricao">
+    <h2>Inscreva-se</h2>
+    <p>Preencha o formulário abaixo para receber novidades e promoções:</p>
+    <form style="margin-top:30px;">
+      <input type="text" placeholder="Seu nome" style="padding:10px; width:300px; margin-bottom:10px;"><br>
+      <input type="email" placeholder="Seu e-mail" style="padding:10px; width:300px; margin-bottom:10px;"><br>
+      <button type="submit" style="padding:10px 30px; background:#f1c40f; border:none; border-radius:30px;">Cadastrar</button>
+    </form>
   </section>
 
+  <footer id="contato">
+    <p>&copy; 2025 Instituto de Cursos Profissionais</p>
+    <p>Contato: contato@institutocursos.com.br | WhatsApp: (11) 99999-9999</p>
+    <p>
+      <a href="https://www.instagram.com/seuusuario" target="_blank" style="color:white;">Instagram</a> |
+      <a href="https://wa.me/5511999999999" target="_blank" style="color:white;">WhatsApp</a>
+    </p>
+  </footer>
+
+</body>
+</html>
