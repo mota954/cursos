@@ -1,48 +1,63 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 <head>
-  <meta charset="UTF-8">
-  <title>Materiais de Programação</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Materiais Didáticos</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
   <style>
     body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: #f9f9f9;
-      padding: 40px;
-      color: #333;
-      text-align: center;
+      font-family: 'Roboto', sans-serif;
+      background: #f4f6f8;
+      color: #2c3e50;
+      padding: 40px 20px;
+      max-width: 800px;
+      margin: auto;
     }
 
     h1 {
-      font-size: 36px;
-      color: #003366;
+      margin-bottom: 20px;
+    }
+
+    p {
       margin-bottom: 30px;
     }
 
-    .material-link {
-      display: block;
-      margin: 15px auto;
-      padding: 12px 20px;
-      background: #0055a5;
-      color: white;
-      text-decoration: none;
-      border-radius: 8px;
-      max-width: 300px;
-      font-weight: bold;
-      transition: background 0.3s ease;
+    ul {
+      list-style: none;
+      padding: 0;
     }
 
-    .material-link:hover {
-      background: #003f7d;
+    li {
+      background: #ecf0f1;
+      padding: 15px;
+      margin-bottom: 15px;
+      border-radius: 10px;
+    }
+
+    a {
+      text-decoration: none;
+      color: #2980b9;
+      font-weight: bold;
+    }
+
+    a:hover {
+      text-decoration: underline;
     }
   </style>
 </head>
 <body>
 
-  <h1>💻 Materiais do Curso de Programação</h1>
+  <h1>📚 Materiais Didáticos</h1>
+  <p>Baixe os materiais complementares para acompanhar o curso e reforçar seus estudos:</p>
 
-  <a href="material-html.pdf" class="material-link" target="_blank">Material de HTML</a>
-  <a href="material-css.pdf" class="material-link" target="_blank">Material de CSS</a>
-  <a href="material-js.pdf" class="material-link" target="_blank">Material de JavaScript</a>
+  <ul>
+    <li>📘 <a href="apostila-html.pdf" target="_blank">Apostila de HTML5</a></li>
+    <li>🎨 <a href="apostila-css.pdf" target="_blank">Apostila de CSS3</a></li>
+    <li>🧠 <a href="apostila-js.pdf" target="_blank">Apostila de JavaScript</a></li>
+    <li>📝 <a href="exercicios-programacao.pdf" target="_blank">Lista de Exercícios</a></li>
+    <li>🧾 <a href="cheatsheet-front-end.pdf" target="_blank">Cheat Sheet Front-End</a></li>
+  </ul>
 
 </body>
 </html>
