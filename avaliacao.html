@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Avaliação de Marketing</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 40px; background: #f9f9f9; }
+    h1 { color: #333; }
+    .question { margin-bottom: 20px; }
+    button { padding: 10px 20px; background: #007bff; color: white; border: none; cursor: pointer; }
+    button:hover { background: #0056b3; }
+    #resultado { margin-top: 30px; font-weight: bold; }
+  </style>
+</head>
+<body>
+  <h1>Avaliação de Marketing</h1>
+  <form id="quizForm">
+    <!-- Aqui vão as 10 perguntas -->
+    <div class="question">
+      <p>1. O que é o composto de marketing (4Ps)?</p>
+      <label><input type="radio" name="q1" value="a"> Produto, Preço, Praça, Promoção</label><br>
+      <label><input type="radio" name="q1" value="b"> Preço, Pessoas, Processo, Produto</label><br>
+      <label><input type="radio" name="q1" value="c"> Promoção, Planejamento, Produto, Posicionamento</label>
+    </div>
+
+    <div class="question">
+      <p>2. Qual é o objetivo da segmentação de mercado?</p>
+      <label><input type="radio" name="q2" value="a"> Identificar grupos com necessidades semelhantes</label><br>
+      <label><input type="radio" name="q2" value="b"> Aumentar o preço do produto</label><br>
+      <label><input type="radio" name="q2" value="c"> Reduzir custos de produção</label>
+    </div>
+
+    <div class="question">
+      <p>3. O que significa "branding"?</p>
+      <label><input type="radio" name="q3" value="a"> Pesquisa de mercado</label><br>
+      <label><input type="radio" name="q3" value="b"> Promoção de vendas</label><br>
+      <label><input type="radio" name="q3" value="c"> Gestão da marca</label>
+    </div>
+
+    <div class="question">
+      <p>4. Qual é a função da pesquisa de mercado?</p>
+      <label><input type="radio" name="q4" value="a"> Coletar informações estratégicas</label><br>
+      <label><input type="radio" name="q4" value="b"> Criar campanhas publicitárias</label><br>
+      <label><input type="radio" name="q4" value="c"> Determinar o preço do produto</label>
+    </div>
+
+    <div class="question">
+      <p>5. O que é marketing digital?</p>
+      <label><input type="radio" name="q5" value="a"> Marketing de porta em porta</label><br>
+      <label><input type="radio" name="q5" value="b"> Marketing feito por telefone</label><br>
+      <label><input type="radio" name="q5" value="c"> Marketing em ambientes online</label>
+    </div>
+
+    <div class="question">
+      <p>6. Vantagem do marketing de conteúdo?</p>
+      <label><input type="radio" name="q6" value="a"> Aumentar o estoque</label><br>
+      <label><input type="radio" name="q6" value="b"> Engajar clientes com conteúdo relevante</label><br>
+      <label><input type="radio" name="q6" value="c"> Distribuir panfletos</label>
+    </div>
+
+    <div class="question">
+      <p>7. O que é persona?</p>
+      <label><input type="radio" name="q7" value="a"> Um tipo de produto</label><br>
+      <label><input type="radio" name="q7" value="b"> Um concorrente</label><br>
+      <label><input type="radio" name="q7" value="c"> Um personagem fictício do cliente ideal</label>
+    </div>
+
+    <div class="question">
+      <p>8. Canal mais usado para e-mail marketing?</p>
+      <label><input type="radio" name="q8" value="a"> Instagram</label><br>
+      <label><input type="radio" name="q8" value="b"> WhatsApp</label><br>
+      <label><input type="radio" name="q8" value="c"> Plataformas de automação de e-mail</label>
+    </div>
+
+    <div class="question">
+      <p>9. O que é funil de vendas?</p>
+      <label><input type="radio" name="q9" value="a"> Modelo da jornada do cliente</label><br>
+      <label><input type="radio" name="q9" value="b"> Técnica de precificação</label><br>
+      <label><input type="radio" name="q9" value="c"> Segmentação de produtos</label>
+    </div>
+
+    <div class="question">
+      <p>10. Métrica de retorno sobre investimento?</p>
+      <label><input type="radio" name="q10" value="a"> CPC</label><br>
+      <label><input type="radio" name="q10" value="b"> CTR</label><br>
+      <label><input type="radio" name="q10" value="c"> ROI</label>
+    </div>
+
+    <button type="button" onclick="verificarRespostas()">Enviar</button>
+  </form>
+
+  <div id="resultado"></div>
+
+  <script>
+    function verificarRespostas() {
+      const corretas = {
+        q1: 'a', q2: 'a', q3: 'c', q4: 'a', q5: 'c',
+        q6: 'b', q7: 'c', q8: 'c', q9: 'a', q10: 'c'
+      };
+      let acertos = 0;
+      for (let q in corretas) {
+        const resposta = document.querySelector(`input[name="${q}"]:checked`);
+        if (resposta && resposta.value === corretas[q]) acertos++;
+      }
+      document.getElementById('resultado').innerText = `Você acertou ${acertos} de 10 questões.`;
+    }
+  </script>
+</body>
+</html>
