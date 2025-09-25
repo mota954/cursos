@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Avaliação de Economia</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(to right, #f0f4f8, #d9eaf7);
+      color: #333;
+      padding: 40px;
+      max-width: 900px;
+      margin: auto;
+    }
+
+    h1 {
+      text-align: center;
+      color: #2c3e50;
+      margin-bottom: 30px;
+    }
+
+    input[type="text"] {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 30px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      font-size: 16px;
+    }
+
+    .question {
+      background: #fff;
+      padding: 20px;
+      margin-bottom: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.05);
+    }
+
+    .question p {
+      font-weight: 600;
+      margin-bottom: 10px;
+    }
+
+    label {
+      display: block;
+      margin: 8px 0;
+      cursor: pointer;
+    }
+
+    button {
+      display: block;
+      margin: 30px auto;
+      padding: 12px 30px;
+      background: #3498db;
+      color: white;
+      border: none;
+      border-radius: 30px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    button:hover {
+      background: #2980b9;
+    }
+
+    #resultado {
+      text-align: center;
+      font-size: 18px;
+      font-weight: bold;
+      margin-top: 20px;
+      color: #27ae60;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>📈 Avaliação do Curso de Economia</h1>
+
+  <form id="quizForm">
+    <input type="text" id="nomeAluno" placeholder="Digite seu nome completo" required>
+
+    <!-- 10 perguntas -->
+    <div class="question">
+      <p>1. O que é inflação?</p>
+      <label><input type="radio" name="q1" value="a"> Aumento do desemprego</label>
+      <label><input type="radio" name="q1" value="b"> Queda nos preços</label>
+      <label><input type="radio" name="q1" value="c"> Aumento generalizado dos preços</label>
+      <label><input type="radio" name="q1" value="d"> Crescimento econômico</label>
+    </div>
+
+    <div class="question">
+      <p>2. O que é PIB?</p>
+      <label><input type="radio" name="q2" value="a"> Produto Interno Bruto</label>
+      <label><input type="radio" name="q2" value="b"> Produto Industrial Básico</label>
+      <label><input type="radio" name="q2" value="c"> Programa de Investimento Bancário</label>
+      <label><input type="radio" name="q2" value="d"> Plano de Integração Brasileira</label>
+    </div>
+
+    <div class="question">
+      <p>3. O que é taxa de juros?</p>
+      <label><input type="radio" name="q3" value="a"> Valor do salário mínimo</label>
+      <label><input type="radio" name="q3" value="b"> Percentual cobrado sobre empréstimos</label>
+      <label><input type="radio" name="q3" value="c"> Imposto sobre produtos</label>
+      <label><input type="radio" name="q3" value="d"> Valor da moeda estrangeira</label>
+    </div>
+
+    <div class="question">
+      <p>4. O que é oferta e demanda?</p>
+      <label><input type="radio" name="q4" value="a"> Teoria sobre impostos</label>
+      <label><input type="radio" name="q4" value="b"> Relação entre produção e exportação</label>
+      <label><input type="radio" name="q4" value="c"> Relação entre disponibilidade de produtos e interesse dos consumidores</label>
+      <label><input type="radio" name="q4" value="d"> Política de preços do governo</label>
+    </div>
+
+    <div class="question">
+      <p>5. O que é mercado?</p>
+      <label><input type="radio" name="q5" value="a"> Lugar físico onde se vendem alimentos</label>
+      <label><input type="radio" name="q5" value="b"> Sistema de troca entre compradores e vendedores</label>
+      <label><input type="radio" name="q5" value="c"> Banco central</label>
+      <label><input type="radio" name="q5" value="d"> Loja de departamentos</label>
+    </div>
+
+    <div class="question">
+      <p>6. O que é moeda?</p>
+      <label><input type="radio" name="q6" value="a"> Produto de exportação</label>
+      <label><input type="radio" name="q6" value="b"> Instrumento de troca e unidade de valor</label>
+      <label><input type="radio" name="q6" value="c"> Documento fiscal</label>
+      <label><input type="radio" name="q6" value="d"> Título de crédito</label>
+    </div>
+
+    <div class="question">
+      <p>7. O que é desemprego estrutural?</p>
+      <label><input type="radio" name="q7" value="a"> Falta de qualificação para novas tecnologias</label>
+      <label><input type="radio" name="q7" value="b"> Falta de vagas temporárias</label>
+      <label><input type="radio" name="q7" value="c"> Crise econômica global</label>
+      <label><input type="radio" name="q7" value="d"> Greve geral</label>
+    </div>
+
+    <div class="question">
+      <p>8. O que é política fiscal?</p>
+      <label><input type="radio" name="q8" value="a"> Controle da taxa de câmbio</label>
+      <label><input type="radio" name="q8" value="b"> Política de arrecadação e gastos públicos</label>
+      <label><input type="radio" name="q8" value="c"> Política de juros bancários</label>
+      <label><input type="radio" name="q8" value="d"> Política de exportação</label>
+    </div>
+
+    <div class="question">
+      <p>9. O que é balança comercial?</p>
+      <label><input type="radio" name="q9" value="a"> Relação entre receita e despesa pública</label>
+      <label><input type="radio" name="q9" value="b"> Relação entre exportações e importações</label>
+      <label><input type="radio" name="q9" value="c"> Relação entre produção e consumo</label>
+      <label><input type="radio" name="q9" value="d"> Relação entre oferta e demanda</label>
+    </div>
+
+    <div class="question">
+      <p>10. O que é inflação de demanda?</p>
+      <label><input type="radio" name="q10" value="a"> Aumento de preços por falta de oferta</label>
+      <label><input type="radio" name="q10" value="b"> Aumento de preços por excesso de demanda</label>
+      <label><input type="radio" name="q10" value="c"> Aumento de salários</label>
+      <label><input type="radio" name="q10" value="d"> Queda na produção industrial</label>
+    </div>
+
+    <button type="button" onclick="verificarRespostas()">Enviar Avaliação</button>
+  </form>
+
+  <div id="resultado"></div>
+
+  <script>
+    let tentativas = 0;
+
+    function verificarRespostas() {
+      const nome = document.getElementById('nomeAluno').value.trim();
+      if (!nome) {
+        alert("Por favor, digite seu nome antes de enviar.");
+        return;
+      }
+
+      localStorage.setItem("nomeAluno", nome);
+      localStorage.setItem("cursoAluno", "Economia");
+      const corretas = {
+        q1: 'c',
+        q2: 'a',
+        q3: 'b',
+        q4: 'c',
+        q5: 'b',
+        q6: 'b',
+        q7: 'a',
+        q8: 'b',
+        q9: 'b',
+        q10: 'b'
+      };
+
+      let acertos = 0;
+      for (let q in corretas) {
+        const resposta = document.querySelector(`input[name="${q}"]:checked`);
+        if (resposta && resposta.value === corretas[q]) {
+          acertos++;
+        }
+      }
+
+      tentativas++;
+      const resultado = document.getElementById('resultado');
+      resultado.innerHTML = `Tentativa ${tentativas} de 3<br>Você acertou ${acertos} de 10 perguntas.`;
+
+      if (acertos >= 7) {
+        resultado.innerHTML += `<br><br>✅ Parabéns, ${nome}! Você foi aprovado.<br>
+        <a href="certificado.html" target="_blank" style="display:inline-block;margin-top:15px;padding:10px 20px;background:#27ae60;color:#fff;border-radius:30px;text-decoration:none;font-weight:bold;">🎓 Gerar Certificado</a>`;
+        document.querySelector("button").disabled = true;
+      } else if (tentativas >= 3) {
+        resultado.innerHTML += `<br><br>❌ Você excedeu o número máximo de tentativas.`;
+        document.querySelector("button").disabled = true;
+      } else {
+        resultado.innerHTML += `<br><br>❌ Você não atingiu a nota mínima. Tente novamente.`;
+      }
+    }
+  </script>
+
+</body>
+</html>
+
