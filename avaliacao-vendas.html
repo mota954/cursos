@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Avaliação de Vendas</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(to right, #f0f4f8, #d9eaf7);
+      color: #333;
+      padding: 40px;
+      max-width: 900px;
+      margin: auto;
+    }
+
+    h1 {
+      text-align: center;
+      color: #2c3e50;
+      margin-bottom: 30px;
+    }
+
+    input[type="text"] {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 30px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      font-size: 16px;
+    }
+
+    .question {
+      background: #fff;
+      padding: 20px;
+      margin-bottom: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.05);
+    }
+
+    .question p {
+      font-weight: 600;
+      margin-bottom: 10px;
+    }
+
+    label {
+      display: block;
+      margin: 8px 0;
+      cursor: pointer;
+    }
+
+    button {
+      display: block;
+      margin: 30px auto;
+      padding: 12px 30px;
+      background: #3498db;
+      color: white;
+      border: none;
+      border-radius: 30px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    button:hover {
+      background: #2980b9;
+    }
+
+    #resultado {
+      text-align: center;
+      font-size: 18px;
+      font-weight: bold;
+      margin-top: 20px;
+      color: #27ae60;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>🛒 Avaliação do Curso de Vendas</h1>
+
+  <form id="quizForm">
+    <input type="text" id="nomeAluno" placeholder="Digite seu nome completo" required>
+
+    <!-- 10 perguntas -->
+    <div class="question">
+      <p>1. O que é abordagem de vendas?</p>
+      <label><input type="radio" name="q1" value="a"> Técnica de precificação</label>
+      <label><input type="radio" name="q1" value="b"> Primeiro contato com o cliente</label>
+      <label><input type="radio" name="q1" value="c"> Entrega do produto</label>
+      <label><input type="radio" name="q1" value="d"> Pós-venda</label>
+    </div>
+
+    <div class="question">
+      <p>2. O que é objeção em vendas?</p>
+      <label><input type="radio" name="q2" value="a"> Reclamação do vendedor</label>
+      <label><input type="radio" name="q2" value="b"> Dificuldade do cliente em decidir</label>
+      <label><input type="radio" name="q2" value="c"> Falta de estoque</label>
+      <label><input type="radio" name="q2" value="d"> Erro na entrega</label>
+    </div>
+
+    <div class="question">
+      <p>3. O que é funil de vendas?</p>
+      <label><input type="radio" name="q3" value="a"> Lista de produtos disponíveis</label>
+      <label><input type="radio" name="q3" value="b"> Processo que representa a jornada do cliente até a compra</label>
+      <label><input type="radio" name="q3" value="c"> Estoque de produtos</label>
+      <label><input type="radio" name="q3" value="d"> Planejamento financeiro</label>
+    </div>
+
+    <div class="question">
+      <p>4. O que é pós-venda?</p>
+      <label><input type="radio" name="q4" value="a"> Atendimento ao cliente após a compra</label>
+      <label><input type="radio" name="q4" value="b"> Planejamento de vendas</label>
+      <label><input type="radio" name="q4" value="c"> Controle de estoque</label>
+      <label><input type="radio" name="q4" value="d"> Ação promocional</label>
+    </div>
+
+    <div class="question">
+      <p>5. O que é CRM?</p>
+      <label><input type="radio" name="q5" value="a"> Sistema de controle de estoque</label>
+      <label><input type="radio" name="q5" value="b"> Gestão de relacionamento com o cliente</label>
+      <label><input type="radio" name="q5" value="c"> Planejamento de marketing</label>
+      <label><input type="radio" name="q5" value="d"> Controle de vendas</label>
+    </div>
+
+    <div class="question">
+      <p>6. O que é gatilho mental?</p>
+      <label><input type="radio" name="q6" value="a"> Estratégia para influenciar decisões</label>
+      <label><input type="radio" name="q6" value="b"> Erro de comunicação</label>
+      <label><input type="radio" name="q6" value="c"> Falha no sistema</label>
+      <label><input type="radio" name="q6" value="d"> Técnica de precificação</label>
+    </div>
+
+    <div class="question">
+      <p>7. O que é proposta de valor?</p>
+      <label><input type="radio" name="q7" value="a"> Preço do produto</label>
+      <label><input type="radio" name="q7" value="b"> Benefício que o cliente recebe ao comprar</label>
+      <label><input type="radio" name="q7" value="c"> Lucro da empresa</label>
+      <label><input type="radio" name="q7" value="d"> Desconto oferecido</label>
+    </div>
+
+    <div class="question">
+      <p>8. O que é técnica de rapport?</p>
+      <label><input type="radio" name="q8" value="a"> Técnica de fechamento</label>
+      <label><input type="radio" name="q8" value="b"> Criação de conexão e empatia com o cliente</label>
+      <label><input type="radio" name="q8" value="c"> Controle de objeções</label>
+      <label><input type="radio" name="q8" value="d"> Estratégia de preço</label>
+    </div>
+
+    <div class="question">
+      <p>9. O que é lead?</p>
+      <label><input type="radio" name="q9" value="a"> Cliente que já comprou</label>
+      <label><input type="radio" name="q9" value="b"> Potencial cliente interessado</label>
+      <label><input type="radio" name="q9" value="c"> Funcionário da empresa</label>
+      <label><input type="radio" name="q9" value="d"> Produto em promoção</label>
+    </div>
+
+    <div class="question">
+      <p>10. O que é fechamento de vendas?</p>
+      <label><input type="radio" name="q10" value="a"> Entrega do produto</label>
+      <label><input type="radio" name="q10" value="b"> Conclusão do processo de venda com aceitação do cliente</label>
+      <label><input type="radio" name="q10" value="c"> Planejamento de estoque</label>
+      <label><input type="radio" name="q10" value="d"> Atendimento pós-venda</label>
+    </div>
+
+    <button type="button" onclick="verificarRespostas()">Enviar Avaliação</button>
+  </form>
+
+  <div id="resultado"></div>
+
+  <script>
+    let tentativas = 0;
+
+    function verificarRespostas() {
+      const nome = document.getElementById('nomeAluno').value.trim();
+      if (!nome) {
+        alert("Por favor, digite seu nome antes de enviar.");
+        return;
+      }
+
+      localStorage.setItem("nomeAluno", nome);
+      localStorage.setItem("cursoAluno", "Vendas");
+
+      const corretas = {
+        q1: 'b',
+        q2: 'b',
+        q3: 'b',
+        q4: 'a',
+        q5: 'b',
+        q6: 'a',
+        q7: 'b',
+        q8: 'b',
+        q9: 'b',
+        q10: 'b'
+      };
+
+      let acertos = 0;
+      for (let q in corretas) {
+        const resposta = document.querySelector(`input[name="${q}"]:checked`);
+        if (resposta && resposta.value === corretas[q]) {
+          acertos++;
+        }
+      }
+
+      tentativas++;
+      const resultado = document.getElementById('resultado');
+      resultado.innerHTML = `Tentativa ${tentativas} de 3<br>Você acertou ${acertos} de 10 perguntas.`;
+
+      if (acertos >= 7) {
+        resultado.innerHTML += `<br><br>✅ Parabéns, ${nome}! Você foi aprovado.<br>
+        <a href="certificado.html" target="_blank" style="display:inline-block;margin-top:15px;padding:10px 20px;background:#27ae60;color:#fff;border-radius:30px;text-decoration:none;font-weight:bold;">🎓 Gerar Certificado</a>`;
+        document.querySelector("button").disabled = true;
+      } else if (tentativas >= 3) {
+        resultado.innerHTML += `<br><br>❌ Você excedeu o número máximo de tentativas.`;
+        document.querySelector("button").disabled = true;
+      } else {
+        resultado.innerHTML += `<br><br>❌ Você não atingiu a nota mínima. Tente novamente.`;
+      }
+    }
+  </script>
+
+</body>
+</html>
