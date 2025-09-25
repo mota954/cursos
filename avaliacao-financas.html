@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Avaliação de Finanças</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(to right, #f0f4f8, #d9eaf7);
+      color: #333;
+      padding: 40px;
+      max-width: 900px;
+      margin: auto;
+    }
+
+    h1 {
+      text-align: center;
+      color: #2c3e50;
+      margin-bottom: 30px;
+    }
+
+    input[type="text"] {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 30px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      font-size: 16px;
+    }
+
+    .question {
+      background: #fff;
+      padding: 20px;
+      margin-bottom: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.05);
+    }
+
+    .question p {
+      font-weight: 600;
+      margin-bottom: 10px;
+    }
+
+    label {
+      display: block;
+      margin: 8px 0;
+      cursor: pointer;
+    }
+
+    button {
+      display: block;
+      margin: 30px auto;
+      padding: 12px 30px;
+      background: #3498db;
+      color: white;
+      border: none;
+      border-radius: 30px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    button:hover {
+      background: #2980b9;
+    }
+
+    #resultado {
+      text-align: center;
+      font-size: 18px;
+      font-weight: bold;
+      margin-top: 20px;
+      color: #27ae60;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>💰 Avaliação do Curso de Finanças</h1>
+
+  <form id="quizForm">
+    <input type="text" id="nomeAluno" placeholder="Digite seu nome completo" required>
+
+    <!-- 10 perguntas -->
+    <div class="question">
+      <p>1. O que é fluxo de caixa?</p>
+      <label><input type="radio" name="q1" value="a"> Controle de estoque</label>
+      <label><input type="radio" name="q1" value="b"> Entrada e saída de dinheiro da empresa</label>
+      <label><input type="radio" name="q1" value="c"> Planejamento de vendas</label>
+      <label><input type="radio" name="q1" value="d"> Controle de pessoal</label>
+    </div>
+
+    <div class="question">
+      <p>2. O que é capital de giro?</p>
+      <label><input type="radio" name="q2" value="a"> Investimento em imóveis</label>
+      <label><input type="radio" name="q2" value="b"> Recursos para manter operações diárias</label>
+      <label><input type="radio" name="q2" value="c"> Lucro líquido</label>
+      <label><input type="radio" name="q2" value="d"> Receita bruta</label>
+    </div>
+
+    <div class="question">
+      <p>3. O que é receita?</p>
+      <label><input type="radio" name="q3" value="a"> Valor que entra na empresa</label>
+      <label><input type="radio" name="q3" value="b"> Valor que sai da empresa</label>
+      <label><input type="radio" name="q3" value="c"> Valor investido</label>
+      <label><input type="radio" name="q3" value="d"> Valor do estoque</label>
+    </div>
+
+    <div class="question">
+      <p>4. O que é despesa fixa?</p>
+      <label><input type="radio" name="q4" value="a"> Gastos que variam com a produção</label>
+      <label><input type="radio" name="q4" value="b"> Gastos que não mudam com o volume de vendas</label>
+      <label><input type="radio" name="q4" value="c"> Gastos com marketing</label>
+      <label><input type="radio" name="q4" value="d"> Gastos com matéria-prima</label>
+    </div>
+
+    <div class="question">
+      <p>5. O que é lucro líquido?</p>
+      <label><input type="radio" name="q5" value="a"> Receita total</label>
+      <label><input type="radio" name="q5" value="b"> Receita menos todas as despesas</label>
+      <label><input type="radio" name="q5" value="c"> Receita menos impostos</label>
+      <label><input type="radio" name="q5" value="d"> Receita menos custo fixo</label>
+    </div>
+
+    <div class="question">
+      <p>6. O que é investimento?</p>
+      <label><input type="radio" name="q6" value="a"> Gasto com publicidade</label>
+      <label><input type="radio" name="q6" value="b"> Aplicação de recursos visando retorno futuro</label>
+      <label><input type="radio" name="q6" value="c"> Pagamento de dívidas</label>
+      <label><input type="radio" name="q6" value="d"> Compra de estoque</label>
+    </div>
+
+    <div class="question">
+      <p>7. O que é rentabilidade?</p>
+      <label><input type="radio" name="q7" value="a"> Capacidade de gerar lucro sobre o investimento</label>
+      <label><input type="radio" name="q7" value="b"> Valor do estoque</label>
+      <label><input type="radio" name="q7" value="c"> Receita bruta</label>
+      <label><input type="radio" name="q7" value="d"> Custo fixo</label>
+    </div>
+
+    <div class="question">
+      <p>8. O que é orçamento empresarial?</p>
+      <label><input type="radio" name="q8" value="a"> Planejamento financeiro de receitas e despesas</label>
+      <label><input type="radio" name="q8" value="b"> Controle de estoque</label>
+      <label><input type="radio" name="q8" value="c"> Plano de marketing</label>
+      <label><input type="radio" name="q8" value="d"> Política de vendas</label>
+    </div>
+
+    <div class="question">
+      <p>9. O que é análise de viabilidade?</p>
+      <label><input type="radio" name="q9" value="a"> Estudo para avaliar se um projeto é financeiramente possível</label>
+      <label><input type="radio" name="q9" value="b"> Controle de produção</label>
+      <label><input type="radio" name="q9" value="c"> Planejamento de vendas</label>
+      <label><input type="radio" name="q9" value="d"> Controle de pessoal</label>
+    </div>
+
+    <div class="question">
+      <p>10. O que é ROI?</p>
+      <label><input type="radio" name="q10" value="a"> Receita operacional integrada</label>
+      <label><input type="radio" name="q10" value="b"> Retorno sobre investimento</label>
+      <label><input type="radio" name="q10" value="c"> Registro oficial de impostos</label>
+      <label><input type="radio" name="q10" value="d"> Relatório de operações internas</label>
+    </div>
+
+    <button type="button" onclick="verificarRespostas()">Enviar Avaliação</button>
+  </form>
+
+  <div id="resultado"></div>
+
+  <script>
+    let tentativas = 0;
+
+    function verificarRespostas() {
+      const nome = document.getElementById('nomeAluno').value.trim();
+      if (!nome) {
+        alert("Por favor, digite seu nome antes de enviar.");
+        return;
+      }
+
+      localStorage.setItem("nomeAluno", nome);
+      localStorage.setItem("cursoAluno", "Finanças");
+
+      const corretas = {
+        q1: 'b',
+        q2: 'b',
+        q3: 'a',
+        q4: 'b',
+        q5: 'b',
+        q6: 'b',
+        q7: 'a',
+        q8: 'a',
+        q9: 'a',
+        q10: 'b'
+      };
+
+      let acertos = 0;
+      for (let q in corretas) {
+        const resposta = document.querySelector(`input[name="${q}"]:checked`);
+        if (resposta && resposta.value === corretas[q]) {
+          acertos++;
+        }
+      }
+
+      tentativas++;
+      const resultado = document.getElementById('resultado');
+      resultado.innerHTML = `Tentativa ${tentativas} de 3<br>Você acertou ${acertos} de 10 perguntas.`;
+
+      if (acertos >= 7) {
+        resultado.innerHTML += `<br><br>✅ Parabéns, ${nome}! Você foi aprovado.<br>
+        <a href="certificado.html" target="_blank" style="display:inline-block;margin-top:15px;padding:10px 20px;background:#27ae60;color:#fff;border-radius:30px;text-decoration:none;font-weight:bold;">🎓 Gerar Certificado</a>`;
+        document.querySelector("button").disabled = true;
+      } else if (tentativas >= 3) {
+        resultado.innerHTML += `<br><br>❌ Você excedeu o número máximo de tentativas.`;
+        document.querySelector("button").disabled = true;
+      } else {
+        resultado.innerHTML += `<br><br>❌ Você não atingiu a nota mínima. Tente novamente.`;
+      }
+    }
+  </script>
+
+</body>
+</html>
