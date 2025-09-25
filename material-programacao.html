@@ -8,56 +8,93 @@
   <style>
     body {
       font-family: 'Roboto', sans-serif;
-      background: #f4f6f8;
+      background: linear-gradient(to right, #e0f7fa, #f1f8e9);
       color: #2c3e50;
       padding: 40px 20px;
-      max-width: 800px;
+      max-width: 900px;
       margin: auto;
     }
 
     h1 {
-      margin-bottom: 20px;
+      text-align: center;
+      font-size: 2.5em;
+      margin-bottom: 10px;
     }
 
     p {
-      margin-bottom: 30px;
+      text-align: center;
+      font-size: 1.2em;
+      margin-bottom: 40px;
     }
 
-    ul {
-      list-style: none;
-      padding: 0;
+    .material-card {
+      background: #ffffff;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      padding: 20px;
+      margin-bottom: 20px;
+      transition: transform 0.3s ease;
     }
 
-    li {
-      background: #ecf0f1;
-      padding: 15px;
-      margin-bottom: 15px;
-      border-radius: 10px;
+    .material-card:hover {
+      transform: translateY(-5px);
     }
 
-    a {
+    .material-card h2 {
+      font-size: 1.3em;
+      margin-bottom: 10px;
+    }
+
+    .material-card a {
+      display: inline-block;
+      background: #27ae60;
+      color: white;
+      padding: 10px 20px;
+      border-radius: 30px;
       text-decoration: none;
-      color: #2980b9;
       font-weight: bold;
+      transition: background 0.3s ease;
     }
 
-    a:hover {
-      text-decoration: underline;
+    .material-card a:hover {
+      background: #219150;
+    }
+
+    .icon {
+      font-size: 1.5em;
+      margin-right: 10px;
     }
   </style>
 </head>
 <body>
 
   <h1>📚 Materiais Didáticos</h1>
-  <p>Baixe os materiais complementares para acompanhar o curso e reforçar seus estudos:</p>
+  <p>Baixe os recursos essenciais para acompanhar o curso e reforçar seus estudos.</p>
 
-  <ul>
-    <li>📘 <a href="apostila-html.pdf" target="_blank">Apostila de HTML5</a></li>
-    <li>🎨 <a href="apostila-css.pdf" target="_blank">Apostila de CSS3</a></li>
-    <li>🧠 <a href="apostila-js.pdf" target="_blank">Apostila de JavaScript</a></li>
-    <li>📝 <a href="exercicios-programacao.pdf" target="_blank">Lista de Exercícios</a></li>
-    <li>🧾 <a href="cheatsheet-front-end.pdf" target="_blank">Cheat Sheet Front-End</a></li>
-  </ul>
+  <div class="material-card">
+    <h2><span class="icon">📘</span>Apostila de HTML5</h2>
+    <a href="apostila-html.pdf" target="_blank">Baixar PDF</a>
+  </div>
+
+  <div class="material-card">
+    <h2><span class="icon">🎨</span>Apostila de CSS3</h2>
+    <a href="apostila-css.pdf" target="_blank">Baixar PDF</a>
+  </div>
+
+  <div class="material-card">
+    <h2><span class="icon">🧠</span>Apostila de JavaScript</h2>
+    <a href="apostila-js.pdf" target="_blank">Baixar PDF</a>
+  </div>
+
+  <div class="material-card">
+    <h2><span class="icon">📝</span>Lista de Exercícios</h2>
+    <a href="exercicios-programacao.pdf" target="_blank">Baixar PDF</a>
+  </div>
+
+  <div class="material-card">
+    <h2><span class="icon">🧾</span>Cheat Sheet Front-End</h2>
+    <a href="cheatsheet-front-end.pdf" target="_blank">Baixar PDF</a>
+  </div>
 
 </body>
 </html>
