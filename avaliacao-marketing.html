@@ -168,49 +168,45 @@
 
   <div id="resultado"></div>
 
-  <script>
-    function verificarRespostas() {
-      const nome = document.getElementById('nomeAluno').value.trim();
-      if (!nome) {
-        alert("Por favor, digite seu nome antes de enviar.");
-        return;
-      }
+<script>
+  let tentativas = 0;
 
-      localStorage.setItem("nomeAluno", nome);
-      localStorage.setItem("cursoAluno", "Marketing");
+  function verificarRespostas() {
+    const nome = document.getElementById('nomeAluno').value.trim();
+    if (!nome) {
+      alert("Por favor, digite seu nome antes de enviar.");
+      return;
+    }
 
-      const corretas = {
-        q1: 'a',
-        q2: 'c',
-        q3: 'b',
-        q4: 'c',
-        q5: 'b',
-        q6: 'b',
-        q7: 'c',
-        q8: 'd',
-        q9: 'c',
-        q10: 'c'
-      };
+    localStorage.setItem("nomeAluno", nome);
+    localStorage.setItem("cursoAluno", "Marketing");
 
-      let acertos = 0;
-      for (let q in corretas) {
-        const resposta = document.querySelector(`input[name="${q}"]:checked`);
-        if (resposta && resposta.value === corretas[q]) {
-          acertos++;
-        }
-      }
+    const corretas = {
+      q1: 'a', q2: 'c', q3: 'b', q4: 'c', q5: 'b',
+      q6: 'b', q7: 'c', q8: 'd', q9: 'c', q10: 'c'
+    };
 
-      const resultado = document.getElementById('resultado');
-      resultado.innerHTML = `Você acertou ${acertos} de 10 perguntas.`;
-
-      if (acertos >= 7) {
-        resultado.innerHTML += `<br><br>✅ Parabéns, ${nome}! Você foi aprovado.<br>
-        <a href="certificado.html" target="_blank" style="display:inline-block;margin-top:15px;padding:10px 20px;background:#27ae60;color:#fff;border-radius:30px;text-decoration:none;font-weight:bold;">🎓 Gerar Certificado</a>`;
-      } else {
-        resultado.innerHTML += `<br><br>❌ Você não atingiu a nota mínima para gerar o certificado.`;
+    let acertos = 0;
+    for (let q in corretas) {
+      const resposta = document.querySelector(`input[name="${q}"]:checked`);
+      if (resposta && resposta.value === corretas[q]) {
+        acertos++;
       }
     }
-  </script>
 
-</body>
-</html>
+    tentativas++;
+    const resultado = document.getElementById('resultado');
+    resultado.innerHTML = `Tentativa ${tentativas} de 3<br>Você acertou ${acertos} de 10 perguntas.`;
+
+    if (acertos >= 7) {
+      resultado.innerHTML += `<br><br>✅ Parabéns, ${nome}! Você foi aprovado.<br>
+      <a href="certificado.html" target="_blank" style="display:inline-block;margin-top:15px;padding:10px 20px;background:#27ae60;color:#fff;border-radius:30px;text-decoration:none;font-weight:bold;">🎓 Gerar Certificado</a>`;
+      document.querySelector("button").disabled = true;
+    } else if (tentativas >= 3) {
+      resultado.innerHTML += `<br><br>❌ Você excedeu o número máximo de tentativas.`;
+      document.querySelector("button").disabled = true;
+    } else {
+      resultado.innerHTML += `<br><br>❌ Você não atingiu a nota mínima. Tente novamente.`;
+    }
+  }
+</script>
