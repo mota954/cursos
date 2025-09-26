@@ -30,6 +30,12 @@
       margin-bottom: 30px;
     }
 
+    .icone-carrinho {
+      font-size: 2.5em;
+      color: #007bff;
+      margin-bottom: 10px;
+    }
+
     .curso-lista {
       display: flex;
       flex-wrap: wrap;
@@ -96,10 +102,11 @@
       margin-top: 20px;
     }
 
-    .icone-carrinho {
-      font-size: 2em;
-      color: #007bff;
-      margin-bottom: 10px;
+    @media (max-width: 768px) {
+      .curso-lista {
+        flex-direction: column;
+        align-items: center;
+      }
     }
   </style>
 </head>
