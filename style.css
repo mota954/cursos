@@ -1,3 +1,4 @@
+/* Reset e base */
 * {
   box-sizing: border-box;
   margin: 0;
@@ -11,6 +12,7 @@ body {
   line-height: 1.6;
 }
 
+/* Cabeçalho */
 header {
   background: #007bff;
   color: white;
@@ -19,6 +21,14 @@ header {
   flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.logo {
+  font-weight: bold;
+  font-size: 1.2em;
 }
 
 nav {
@@ -31,6 +41,7 @@ nav a {
   color: white;
   text-decoration: none;
   font-weight: bold;
+  transition: color 0.3s ease;
 }
 
 nav a:hover {
@@ -52,13 +63,30 @@ nav a:hover {
   color: #212529;
   font-weight: bold;
   margin-left: 10px;
+  cursor: pointer;
+  transition: background 0.3s ease;
 }
 
+.busca button:hover {
+  background: #e0a800;
+}
+
+/* Banner */
 .banner {
   background: linear-gradient(135deg, #007bff, #0056b3);
   color: white;
   text-align: center;
   padding: 80px 20px;
+}
+
+.banner h1 {
+  font-size: 2.5em;
+  margin-bottom: 10px;
+}
+
+.banner p {
+  font-size: 1.2em;
+  margin-bottom: 20px;
 }
 
 .btn-transparent {
@@ -69,13 +97,27 @@ nav a:hover {
   color: white;
   font-weight: bold;
   text-decoration: none;
+  transition: background 0.3s ease, transform 0.3s ease;
 }
 
+.btn-transparent:hover {
+  background: white;
+  color: #007bff;
+  transform: scale(1.05);
+}
+
+/* Seções */
 .section {
   padding: 60px 20px;
   text-align: center;
 }
 
+.section h2 {
+  font-size: 2em;
+  margin-bottom: 30px;
+}
+
+/* Grid de cards */
 .grid {
   display: flex;
   flex-wrap: wrap;
@@ -83,34 +125,40 @@ nav a:hover {
   gap: 30px;
 }
 
+/* Cards de curso */
 .card {
   background: white;
   padding: 20px;
   border-radius: 12px;
   box-shadow: 0 6px 16px rgba(0,0,0,0.1);
   max-width: 300px;
-  transition: 0.3s ease;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
   opacity: 0;
-  animation: fadeUp 0.8s ease forwards;
+}
+
+.card[data-aos] {
+  opacity: 1 !important;
 }
 
 .card:hover {
-  transform: scale(1.02);
+  transform: scale(1.03);
   box-shadow: 0 0 20px rgba(0,123,255,0.3);
 }
 
 .card img {
   width: 100%;
   border-radius: 8px;
-  transition: transform 0.4s ease;
+  transition: transform 0.5s ease, box-shadow 0.5s ease;
 }
 
 .card:hover img {
   transform: scale(1.05);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.2);
 }
 
 .card h3 {
   margin: 10px 0;
+  font-size: 1.2em;
 }
 
 .card p {
@@ -140,6 +188,7 @@ nav a:hover {
   margin-bottom: 10px;
 }
 
+/* Botão Comprar */
 .btn-comprar {
   background: linear-gradient(135deg, #f39c12, #e67e22);
   color: white;
@@ -147,14 +196,14 @@ nav a:hover {
   border-radius: 30px;
   text-decoration: none;
   font-weight: bold;
-  box-shadow: 0 0 10px rgba(243, 156, 18, 0.5);
+  box-shadow: 0 0 15px rgba(243, 156, 18, 0.6);
   transition: all 0.4s ease;
   position: relative;
   overflow: hidden;
   display: inline-block;
 }
 
-.btn-comprar::before {
+.btn-comprar::after {
   content: "";
   position: absolute;
   top: 0;
@@ -167,16 +216,14 @@ nav a:hover {
 
 .btn-comprar:hover {
   transform: scale(1.05);
-  box-shadow: 0 0 20px
-  .btn-comprar:hover {
-  transform: scale(1.05);
-  box-shadow: 0 0 20px rgba(243, 156, 18, 0.7);
+  box-shadow: 0 0 25px rgba(243, 156, 18, 0.8);
 }
 
-.btn-comprar:hover::before {
+.btn-comprar:hover::after {
   left: 0;
 }
 
+/* Formulário */
 form input, form button {
   padding: 10px;
   border-radius: 8px;
@@ -199,6 +246,7 @@ form button:hover {
   transform: scale(1.05);
 }
 
+/* Rodapé */
 footer {
   background: #007bff;
   color: white;
@@ -217,14 +265,24 @@ footer a:hover {
   color: white;
 }
 
-@keyframes fadeUp {
-  from { opacity: 0; transform: translateY(30px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
+/* Responsividade */
 @media (max-width: 768px) {
-  header { flex-direction: column; align-items: flex-start; }
-  nav { flex-direction: column; align-items: flex-start; }
-  .busca { margin-top: 10px; }
-  .grid { flex-direction: column; align-items: center; }
+  header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  nav {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .busca {
+    margin-top: 10px;
+  }
+
+  .grid {
+    flex-direction: column;
+    align-items: center;
+  }
 }
