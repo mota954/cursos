@@ -92,7 +92,7 @@
         <span>22x R$ 19,99</span>
         <div class="rating">⭐⭐⭐⭐☆</div>
         <div class="badge">Certificado</div>
-        <a href="acesso.html?curso=programacao" class="btn-comprar">Comprar</a>
+        <a href="#" class="btn-comprar" onclick="adicionarAoCarrinho('programacao')">Adicionar ao carrinho</a>
       </div>
 
       <!-- Card: Marketing -->
@@ -170,13 +170,24 @@
   </footer>
 
   <!-- Scripts de animação -->
-  <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
-  <script>
-    AOS.init({
-      duration: 1000,
-      once: true
-    });
-  </script>
+<!-- Scripts de animação -->
+<script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+<script>
+  AOS.init({ duration: 1000, once: true });
+
+  // Script do carrinho
+  function adicionarAoCarrinho(curso) {
+    let carrinho = JSON.parse(localStorage.getItem("carrinhoCursos")) || [];
+    if (!carrinho.includes(curso)) {
+      carrinho.push(curso);
+      localStorage.setItem("carrinhoCursos", JSON.stringify(carrinho));
+      alert("Curso adicionado ao carrinho!");
+    } else {
+      alert("Este curso já está no carrinho.");
+    }
+  }
+</script>
 
 </body>
 </html>
+
