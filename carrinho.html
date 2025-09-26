@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Seu Carrinho</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+  <style>
+    body {
+      background: linear-gradient(135deg, #f0f8ff, #ffffff);
+    }
+
+    .carrinho-container {
+      max-width: 800px;
+      margin: 60px auto;
+      background: white;
+      padding: 40px;
+      border-radius: 16px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+      text-align: center;
+    }
+
+    .carrinho-container h2 {
+      color: #007bff;
+      font-size: 2em;
+      margin-bottom: 20px;
+    }
+
+    .curso-lista {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 30px;
+      margin-bottom: 30px;
+    }
+
+    .curso-card {
+      background: #f8f9fa;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 6px 16px rgba(0,0,0,0.1);
+      width: 240px;
+      transition: transform 0.3s ease;
+      position: relative;
+    }
+
+    .curso-card:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 25px rgba(0,123,255,0.3);
+    }
+
+    .curso-card h3 {
+      margin-bottom: 10px;
+      font-size: 1.1em;
+      color: #333;
+    }
+
+    .remover {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: #dc3545;
+      color: white;
+      border: none;
+      border-radius: 50%;
+      width: 25px;
+      height: 25px;
+      font-size: 0.9em;
+      cursor: pointer;
+    }
+
+    .finalizar {
+      padding: 12px 30px;
+      background: #28a745;
+      color: white;
+      border-radius: 30px;
+      font-weight: bold;
+      text-decoration: none;
+      transition: background 0.3s ease;
+      border: none;
+      cursor: pointer;
+    }
+
+    .finalizar:hover {
+      background: #218838;
+    }
+
+    .vazio {
+      color: #888;
+      font-size: 1em;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="carrinho-container" data-aos="fade-up">
+    <h2>🛒 Seu Carrinho</h2>
+    <div class="curso-lista" id="listaCarrinho"></div>
+    <p class="vazio" id="mensagemVazio">Nenhum curso no carrinho.</p>
+    <button class="finalizar" id="btnFinalizar">Finalizar compra</button>
+  </div>
+
+  <!-- Scripts -->
+  <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+  <script>
+    AOS.init({ duration: 1000, once: true });
+
+    const nomes = {
+      programacao: "💻 Programação",
+      marketing: "📢 Marketing",
+      economia: "📊 Economia",
+      contabilidade: "📘 Contabilidade",
+      administracao: "🏢 Administração",
+      vendas: "🛒 Gestão de Vendas",
+      pessoas: "👥 Gestão de Pessoas",
+      financas: "💰 Finanças"
+    };
+
+    const carrinho = JSON.parse(localStorage.getItem("carrinhoCursos")) || [];
+    const lista = document.getElementById("listaCarrinho");
+    const vazio = document.getElementById("mensagemVazio");
+    const btnFinalizar = document.getElementById("btnFinalizar");
+
+    function renderizarCarrinho() {
+      lista.innerHTML = "";
+      if (carrinho.length === 0) {
+        vazio.style.display = "block";
+        btnFinalizar.style.display = "none";
+        return;
+      }
+      vazio.style.display = "none";
+      btnFinalizar.style.display = "inline-block";
+
+      carrinho.forEach((curso, index) => {
+        const card = document.createElement("div");
+        card.className = "curso-card";
+        card.setAttribute("data-aos", "zoom-in");
+        card.innerHTML = `
+          <button class="remover" onclick="removerCurso(${index})">&times;</button>
+          <h3>${nomes[curso]}</h3>
+        `;
+        lista.appendChild(card);
+      });
+    }
+
+    function removerCurso(index) {
+      carrinho.splice(index, 1);
+      localStorage.setItem("carrinhoCursos", JSON.stringify(carrinho));
+      renderizarCarrinho();
+    }
+
+    btnFinalizar.addEventListener("click", () => {
+      let comprados = JSON.parse(localStorage.getItem("cursosComprados")) || [];
+      carrinho.forEach(curso => {
+        if (!comprados.includes(curso)) {
+          comprados.push(curso);
+        }
+      });
+      localStorage.setItem("cursosComprados", JSON.stringify(comprados));
+      localStorage.removeItem("carrinhoCursos");
+      alert("Compra finalizada com sucesso!");
+      window.location.href = "aluno.html";
+    });
+
+    renderizarCarrinho();
+  </script>
+
+</body>
+</html>
