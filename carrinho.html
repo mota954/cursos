@@ -126,6 +126,14 @@
 </head>
 <body>
 
+  <script>
+    const logado = localStorage.getItem("usuarioLogado");
+    if (!logado) {
+      alert("Você precisa estar cadastrado para acessar o carrinho.");
+      window.location.href = "acesso.html";
+    }
+  </script>
+
   <div class="carrinho-container" data-aos="fade-up">
     <div class="icone-carrinho"><i class="fas fa-shopping-cart"></i></div>
     <h2>Seu Carrinho de Compras</h2>
@@ -135,7 +143,6 @@
     <button class="finalizar" id="btnFinalizar">Finalizar compra</button>
   </div>
 
-  <!-- Scripts -->
   <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
   <script>
     AOS.init({ duration: 1000, once: true });
