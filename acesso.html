@@ -63,8 +63,16 @@
 
     document.getElementById("formCadastro").addEventListener("submit", function(e) {
       e.preventDefault();
-      localStorage.setItem("usuarioLogado", "true");
-      window.location.href = "aluno.html";
+localStorage.setItem("usuarioLogado", "true");
+
+let cursos = JSON.parse(localStorage.getItem("cursosComprados")) || [];
+if (!cursos.includes(curso)) {
+  cursos.push(curso);
+  localStorage.setItem("cursosComprados", JSON.stringify(cursos));
+}
+
+window.location.href = "aluno.html";
+
     });
   </script>
 
