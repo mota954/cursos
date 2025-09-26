@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Seu Carrinho</title>
+  <title>Carrinho de Compras</title>
   <link rel="stylesheet" href="style.css" />
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
@@ -11,10 +11,11 @@
   <style>
     body {
       background: linear-gradient(135deg, #f0f8ff, #ffffff);
+      font-family: 'Roboto', sans-serif;
     }
 
     .carrinho-container {
-      max-width: 800px;
+      max-width: 900px;
       margin: 60px auto;
       background: white;
       padding: 40px;
@@ -26,7 +27,7 @@
     .carrinho-container h2 {
       color: #007bff;
       font-size: 2em;
-      margin-bottom: 20px;
+      margin-bottom: 30px;
     }
 
     .curso-lista {
@@ -82,6 +83,7 @@
       transition: background 0.3s ease;
       border: none;
       cursor: pointer;
+      font-size: 1em;
     }
 
     .finalizar:hover {
@@ -93,12 +95,19 @@
       font-size: 1em;
       margin-top: 20px;
     }
+
+    .icone-carrinho {
+      font-size: 2em;
+      color: #007bff;
+      margin-bottom: 10px;
+    }
   </style>
 </head>
 <body>
 
   <div class="carrinho-container" data-aos="fade-up">
-    <h2>🛒 Seu Carrinho</h2>
+    <div class="icone-carrinho"><i class="fas fa-shopping-cart"></i></div>
+    <h2>Seu Carrinho de Compras</h2>
     <div class="curso-lista" id="listaCarrinho"></div>
     <p class="vazio" id="mensagemVazio">Nenhum curso no carrinho.</p>
     <button class="finalizar" id="btnFinalizar">Finalizar compra</button>
@@ -120,7 +129,7 @@
       financas: "💰 Finanças"
     };
 
-    const carrinho = JSON.parse(localStorage.getItem("carrinhoCursos")) || [];
+    let carrinho = JSON.parse(localStorage.getItem("carrinhoCursos")) || [];
     const lista = document.getElementById("listaCarrinho");
     const vazio = document.getElementById("mensagemVazio");
     const btnFinalizar = document.getElementById("btnFinalizar");
