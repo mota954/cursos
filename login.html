@@ -102,6 +102,7 @@
       // Simulação de login (sem verificação real de senha)
       if (email && senha) {
         localStorage.setItem("usuarioLogado", "true");
+        localStorage.setItem("nomeAluno", "Aluno");
         alert("Login realizado com sucesso!");
         window.location.href = "aluno.html";
       } else {
