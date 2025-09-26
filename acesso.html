@@ -9,26 +9,36 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
   <style>
+    body {
+      background: linear-gradient(135deg, #e0f7fa, #ffffff);
+      font-family: 'Roboto', sans-serif;
+    }
+
     .acesso-container {
       max-width: 400px;
-      margin: 60px auto;
+      margin: 80px auto;
       background: white;
-      padding: 30px;
-      border-radius: 12px;
-      box-shadow: 0 6px 16px rgba(0,0,0,0.1);
+      padding: 40px;
+      border-radius: 16px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
       text-align: center;
     }
+
     .acesso-container h2 {
       color: #007bff;
       margin-bottom: 20px;
+      font-size: 1.8em;
     }
+
     .acesso-container input {
       width: 100%;
       padding: 12px;
       margin-bottom: 15px;
       border-radius: 8px;
       border: 1px solid #ccc;
+      font-size: 1em;
     }
+
     .acesso-container button {
       width: 100%;
       padding: 12px;
@@ -38,10 +48,18 @@
       cursor: pointer;
       background: #007bff;
       color: white;
+      font-size: 1em;
       transition: background 0.3s ease;
     }
+
     .acesso-container button:hover {
       background: #0056b3;
+    }
+
+    .info {
+      font-size: 0.9em;
+      color: #555;
+      margin-top: 10px;
     }
   </style>
 </head>
@@ -50,29 +68,34 @@
   <div class="acesso-container" data-aos="fade-up">
     <h2>Cadastro do Aluno</h2>
     <form id="formCadastro">
-      <input type="text" placeholder="Nome completo" required>
-      <input type="email" placeholder="E-mail" required>
-      <input type="password" placeholder="Crie uma senha" required>
-      <button type="submit">Cadastrar e acessar área do aluno</button>
+      <input type="text" id="nome" placeholder="Nome completo" required>
+      <input type="email" id="email" placeholder="E-mail" required>
+      <input type="password" id="senha" placeholder="Crie uma senha" required>
+      <button type="submit">Cadastrar e acessar</button>
     </form>
+    <p class="info">Após o cadastro, você poderá acessar o carrinho e seus cursos.</p>
   </div>
 
+  <!-- Scripts -->
   <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
   <script>
     AOS.init({ duration: 1000, once: true });
 
     document.getElementById("formCadastro").addEventListener("submit", function(e) {
       e.preventDefault();
-localStorage.setItem("usuarioLogado", "true");
 
-let cursos = JSON.parse(localStorage.getItem("cursosComprados")) || [];
-if (!cursos.includes(curso)) {
-  cursos.push(curso);
-  localStorage.setItem("cursosComprados", JSON.stringify(cursos));
-}
+      const nome = document.getElementById("nome").value.trim();
+      const email = document.getElementById("email").value.trim();
+      const senha = document.getElementById("senha").value.trim();
 
-window.location.href = "aluno.html";
-
+      if (nome && email && senha) {
+        localStorage.setItem("usuarioLogado", "true");
+        localStorage.setItem("nomeAluno", nome);
+        alert("Cadastro realizado com sucesso!");
+        window.location.href = "aluno.html";
+      } else {
+        alert("Por favor, preencha todos os campos.");
+      }
     });
   </script>
 
