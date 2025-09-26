@@ -9,44 +9,63 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
   <style>
+    body {
+      background: linear-gradient(135deg, #e0f7fa, #ffffff);
+    }
+
     .aluno-container {
-      max-width: 900px;
+      max-width: 1000px;
       margin: 60px auto;
       background: white;
       padding: 40px;
-      border-radius: 12px;
-      box-shadow: 0 6px 16px rgba(0,0,0,0.1);
+      border-radius: 16px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
       text-align: center;
+      animation: fadeIn 1s ease forwards;
     }
+
     .aluno-container h2 {
       color: #007bff;
-      margin-bottom: 30px;
+      font-size: 2em;
+      margin-bottom: 10px;
     }
+
+    .aluno-container p {
+      font-size: 1.1em;
+      margin-bottom: 30px;
+      color: #555;
+    }
+
     .curso-lista {
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
       gap: 30px;
     }
+
     .curso-card {
-      background: #f8f9fa;
-      padding: 20px;
+      background: linear-gradient(135deg, #f8f9fa, #ffffff);
+      padding: 25px;
       border-radius: 12px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-      width: 250px;
-      transition: transform 0.3s ease;
+      box-shadow: 0 6px 16px rgba(0,0,0,0.1);
+      width: 260px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      position: relative;
     }
+
     .curso-card:hover {
       transform: scale(1.05);
-      box-shadow: 0 0 20px rgba(0,123,255,0.3);
+      box-shadow: 0 0 25px rgba(0,123,255,0.3);
     }
+
     .curso-card h3 {
-      margin-bottom: 10px;
+      margin-bottom: 15px;
+      font-size: 1.2em;
       color: #333;
     }
+
     .curso-card a {
       display: inline-block;
-      margin-top: 10px;
       padding: 10px 20px;
       background: #007bff;
       color: white;
@@ -55,13 +74,15 @@
       font-weight: bold;
       transition: background 0.3s ease;
     }
+
     .curso-card a:hover {
       background: #0056b3;
     }
+
     .logout {
-      margin-top: 40px;
+      margin-top: 50px;
       display: inline-block;
-      padding: 10px 25px;
+      padding: 12px 30px;
       background: #dc3545;
       color: white;
       border-radius: 30px;
@@ -69,8 +90,21 @@
       font-weight: bold;
       transition: background 0.3s ease;
     }
+
     .logout:hover {
       background: #c82333;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 768px) {
+      .curso-lista {
+        flex-direction: column;
+        align-items: center;
+      }
     }
   </style>
 </head>
@@ -78,42 +112,9 @@
 
   <div class="aluno-container" data-aos="fade-up">
     <h2>👋 Bem-vindo à sua área do aluno</h2>
-    <p>Aqui estão os cursos disponíveis para você:</p>
+    <p>Estes são os cursos que você comprou:</p>
 
-    <div class="curso-lista">
-      <div class="curso-card" data-aos="zoom-in">
-        <h3>💻 Programação</h3>
-        <a href="programacao.html">Acessar</a>
-      </div>
-      <div class="curso-card" data-aos="zoom-in">
-        <h3>📢 Marketing</h3>
-        <a href="marketing.html">Acessar</a>
-      </div>
-      <div class="curso-card" data-aos="zoom-in">
-        <h3>📊 Economia</h3>
-        <a href="economia.html">Acessar</a>
-      </div>
-      <div class="curso-card" data-aos="zoom-in">
-        <h3>📘 Contabilidade</h3>
-        <a href="contabilidade.html">Acessar</a>
-      </div>
-      <div class="curso-card" data-aos="zoom-in">
-        <h3>🏢 Administração</h3>
-        <a href="administracao.html">Acessar</a>
-      </div>
-      <div class="curso-card" data-aos="zoom-in">
-        <h3>🛒 Gestão de Vendas</h3>
-        <a href="vendas.html">Acessar</a>
-      </div>
-      <div class="curso-card" data-aos="zoom-in">
-        <h3>👥 Gestão de Pessoas</h3>
-        <a href="pessoas.html">Acessar</a>
-      </div>
-      <div class="curso-card" data-aos="zoom-in">
-        <h3>💰 Finanças</h3>
-        <a href="financas.html">Acessar</a>
-      </div>
-    </div>
+    <div class="curso-lista" id="listaCursos"></div>
 
     <a href="index.html" class="logout">Sair</a>
   </div>
@@ -126,6 +127,32 @@
     const logado = localStorage.getItem("usuarioLogado");
     if (!logado) {
       window.location.href = "acesso.html";
+    }
+
+    const cursos = JSON.parse(localStorage.getItem("cursosComprados")) || [];
+    const lista = document.getElementById("listaCursos");
+
+    const nomes = {
+      programacao: "💻 Programação",
+      marketing: "📢 Marketing",
+      economia: "📊 Economia",
+      contabilidade: "📘 Contabilidade",
+      administracao: "🏢 Administração",
+      vendas: "🛒 Gestão de Vendas",
+      pessoas: "👥 Gestão de Pessoas",
+      financas: "💰 Finanças"
+    };
+
+    if (cursos.length === 0) {
+      lista.innerHTML = "<p style='color:#888;'>Você ainda não comprou nenhum curso.</p>";
+    } else {
+      cursos.forEach(curso => {
+        const card = document.createElement("div");
+        card.className = "curso-card";
+        card.setAttribute("data-aos", "zoom-in");
+        card.innerHTML = `<h3>${nomes[curso]}</h3><a href="${curso}.html">Acessar</a>`;
+        lista.appendChild(card);
+      });
     }
   </script>
 
