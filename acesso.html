@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Comprar Curso</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+  <style>
+    .acesso-container {
+      max-width: 400px;
+      margin: 60px auto;
+      background: white;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 6px 16px rgba(0,0,0,0.1);
+      text-align: center;
+    }
+    .acesso-container h2 {
+      color: #007bff;
+      margin-bottom: 20px;
+    }
+    .acesso-container input {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 15px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+    }
+    .acesso-container button {
+      width: 100%;
+      padding: 12px;
+      border: none;
+      border-radius: 30px;
+      font-weight: bold;
+      cursor: pointer;
+      background: #f39c12;
+      color: white;
+      transition: background 0.3s ease;
+    }
+    .acesso-container button:hover {
+      background: #e67e22;
+    }
+    .cursoSelecionado {
+      font-weight: bold;
+      margin-bottom: 20px;
+      color: #333;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="acesso-container" data-aos="fade-up">
+    <h2>Comprar Curso</h2>
+    <p class="cursoSelecionado">Você está comprando o curso...</p>
+
+    <form id="formCompra">
+      <input type="text" placeholder="Nome completo" required>
+      <input type="email" placeholder="E-mail" required>
+      <input type="password" placeholder="Crie uma senha" required>
+      <button type="submit">Comprar e acessar</button>
+    </form>
+  </div>
+
+  <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+  <script>
+    AOS.init({ duration: 1000, once: true });
+
+    const params = new URLSearchParams(window.location.search);
+    const curso = params.get("curso");
+    if (curso) {
+      document.querySelector(".cursoSelecionado").innerText = `Você está comprando o curso de ${curso.charAt(0).toUpperCase() + curso.slice(1)}`;
+    }
+
+    document.getElementById("formCompra").addEventListener("submit", function(e) {
+      e.preventDefault();
+      localStorage.setItem("usuarioLogado", "true");
+      localStorage.setItem("cursoComprado", curso);
+      window.location.href = `${curso}.html`;
+    });
+  </script>
+
+</body>
+</html>
