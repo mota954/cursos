@@ -4,48 +4,15 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Instituto de Cursos Profissionais</title>
+  <link rel="stylesheet" href="style.css" />
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-  <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    body { font-family: 'Roboto', sans-serif; background: #f8f9fa; color: #212529; line-height: 1.6; }
-    header { background: #007bff; color: white; padding: 20px; position: sticky; top: 0; z-index: 1000; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; }
-    nav { display: flex; gap: 15px; flex-wrap: wrap; }
-    nav a { color: white; text-decoration: none; font-weight: bold; }
-    nav a:hover { color: #ffc107; }
-    .busca input { padding: 10px; border-radius: 30px; border: none; width: 200px; }
-    .busca button { padding: 10px 20px; border-radius: 30px; border: none; background: #ffc107; color: #212529; font-weight: bold; margin-left: 10px; }
-    .banner { background: linear-gradient(135deg, #007bff, #0056b3); color: white; text-align: center; padding: 80px 20px; }
-    .btn-transparent { background: transparent; border: 2px solid white; padding: 12px 30px; border-radius: 30px; color: white; font-weight: bold; text-decoration: none; }
-    .section { padding: 60px 20px; text-align: center; }
-    .grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 30px; }
-    .card { background: white; padding: 20px; border-radius: 12px; box-shadow: 0 6px 16px rgba(0,0,0,0.1); max-width: 300px; transition: 0.3s ease; }
-    .card:hover { transform: scale(1.02); box-shadow: 0 0 20px rgba(0,123,255,0.3); }
-    .card img { width: 100%; border-radius: 8px; }
-    .card h3 { margin: 10px 0; }
-    .card p { font-size: 0.95em; margin-bottom: 10px; }
-    .card span { display: block; font-weight: bold; color: #28a745; margin-bottom: 10px; }
-    .rating { color: #ffc107; margin-bottom: 10px; }
-    .badge { background: #28a745; color: white; padding: 5px 10px; border-radius: 20px; font-size: 0.8em; display: inline-block; margin-bottom: 10px; }
-    .card a { display: block; padding: 10px 20px; border-radius: 30px; text-decoration: none; margin: 5px 0; }
-    .card a:first-child { background: #f39c12; color: white; }
-    .card a:last-child { background: #007bff; color: white; }
-    form input, form button { padding: 10px; border-radius: 8px; margin: 10px 0; width: 100%; max-width: 300px; }
-    form button { background: #ffc107; border: none; font-weight: bold; }
-    footer { background: #007bff; color: white; text-align: center; padding: 30px 20px; }
-    footer a { color: #ffc107; text-decoration: none; }
-    @media (max-width: 768px) {
-      header { flex-direction: column; align-items: flex-start; }
-      nav { flex-direction: column; align-items: flex-start; }
-      .busca { margin-top: 10px; }
-      .grid { flex-direction: column; align-items: center; }
-    }
-  </style>
 </head>
 <body>
 
+  <!-- Cabeçalho -->
   <header>
-    <div><strong>Instituto de Cursos Profissionais</strong></div>
+    <div class="logo">Instituto de Cursos Profissionais</div>
     <nav>
       <a href="#home">Home</a>
       <a href="#cursos">Cursos</a>
@@ -60,17 +27,19 @@
     </form>
   </header>
 
+  <!-- Banner -->
   <section class="banner" id="home">
     <h1>Transforme sua carreira com nossos cursos</h1>
     <p>Certificados reconhecidos e professores experientes</p>
     <a href="#cursos" class="btn-transparent">Ver cursos</a>
   </section>
 
+  <!-- Cursos -->
   <section class="section" id="cursos">
     <h2>📚 Nossos Cursos</h2>
     <div class="grid">
 
-      <!-- Cursos -->
+      <!-- Curso: Administração -->
       <div class="card">
         <img src="https://img.youtube.com/vi/5ZJx0xYw3Zg/hqdefault.jpg" alt="Administração">
         <h3>🏢 Administração</h3>
@@ -78,10 +47,10 @@
         <span>22x R$ 19,99</span>
         <div class="rating">⭐⭐⭐⭐☆</div>
         <div class="badge">Certificado</div>
-        <a href="administracao.html">Ver conteúdo programático</a>
-        <a href="acesso.html?curso=administracao">Acessar</a>
+        <a href="administracao.html" class="btn-comprar">Comprar</a>
       </div>
 
+      <!-- Curso: Gestão de Vendas -->
       <div class="card">
         <img src="https://img.youtube.com/vi/3ZJx0xYw3Zg/hqdefault.jpg" alt="Gestão de Vendas">
         <h3>🛒 Gestão de Vendas</h3>
@@ -89,10 +58,10 @@
         <span>22x R$ 19,99</span>
         <div class="rating">⭐⭐⭐⭐☆</div>
         <div class="badge">Certificado</div>
-        <a href="vendas.html">Ver conteúdo programático</a>
-        <a href="acesso.html?curso=vendas">Acessar</a>
+        <a href="vendas.html" class="btn-comprar">Comprar</a>
       </div>
 
+      <!-- Curso: Gestão de Pessoas -->
       <div class="card">
         <img src="https://img.youtube.com/vi/4ZJx0xYw3Zg/hqdefault.jpg" alt="Gestão de Pessoas">
         <h3>👥 Gestão de Pessoas</h3>
@@ -100,10 +69,10 @@
         <span>22x R$ 19,99</span>
         <div class="rating">⭐⭐⭐⭐☆</div>
         <div class="badge">Certificado</div>
-        <a href="pessoas.html">Ver conteúdo programático</a>
-        <a href="acesso.html?curso=pessoas">Acessar</a>
+        <a href="pessoas.html" class="btn-comprar">Comprar</a>
       </div>
 
+      <!-- Curso: Finanças -->
       <div class="card">
         <img src="https://img.youtube.com/vi/6ZJx0xYw3Zg/hqdefault.jpg" alt="Finanças">
         <h3>💰 Finanças</h3>
@@ -111,10 +80,10 @@
         <span>22x R$ 19,99</span>
         <div class="rating">⭐⭐⭐⭐☆</div>
         <div class="badge">Certificado</div>
-        <a href="financas.html">Ver conteúdo programático</a>
-        <a href="acesso.html?curso=financas">Acessar</a>
+        <a href="financas.html" class="btn-comprar">Comprar</a>
       </div>
 
+      <!-- Curso: Programação -->
       <div class="card">
         <img src="https://copilot.microsoft.com/th/id/BCO.cd2e7e43-39d2-42c3-a412-7b93ef1ec1c4.png" alt="Programação">
         <h3>💻 Programação</h3>
@@ -122,21 +91,21 @@
         <span>22x R$ 19,99</span>
         <div class="rating">⭐⭐⭐⭐☆</div>
         <div class="badge">Certificado</div>
-        <a href="programacao.html">Ver conteúdo programático</a>
-        <a href="acesso.html?curso=programacao">Acessar</a>
+        <a href="programacao.html" class="btn-comprar">Comprar</a>
       </div>
 
+      <!-- Curso: Marketing -->
       <div class="card">
         <img src="https://copilot.microsoft.com/th/id/BCO.46be4580-d6ac-40a0-8848-45dedee82b98.png" alt="Marketing">
-        <h3>🛒 Marketing</h3>
+        <h3>📢 Marketing</h3>
         <p>Redes sociais, tráfego pago e estratégias digitais</p>
         <span>22x R$ 19,99</span>
         <div class="rating">⭐⭐⭐⭐☆</div>
         <div class="badge">Certificado</div>
-        <a href="marketing.html">Ver conteúdo programático</a>
-        <a href="acesso.html?curso=marketing">Acessar</a>
+        <a href="marketing.html" class="btn-comprar">Comprar</a>
       </div>
 
+      <!-- Curso: Economia -->
       <div class="card">
         <img src="https://copilot.microsoft.com/th/id/BCO.653dcfc4-0bc9-4ed9-b37c-388cdcd3fe8b.png" alt="Economia">
         <h3>📊 Economia</h3>
@@ -144,10 +113,10 @@
         <span>22x R$ 19,99</span>
         <div class="rating">⭐⭐⭐⭐☆</div>
         <div class="badge">Certificado</div>
-        <a href="economia.html">Ver conteúdo programático</a>
-        <a href="acesso.html?curso=economia">Acessar</a>
+        <a href="economia.html" class="btn-comprar">Comprar</a>
       </div>
 
+      <!-- Curso: Contabilidade -->
       <div class="card">
         <img src="https://copilot.microsoft.com/th/id/BCO.5ad0a00a-d6a2-4888-aa4f-cc893b548520.png" alt="Contabilidade">
         <h3>📘 Contabilidade</h3>
@@ -155,12 +124,13 @@
         <span>22x R$ 19,99</span>
         <div class="rating">⭐⭐⭐⭐☆</div>
         <div class="badge">Certificado</div>
-        <a href="contabilidade.html">Ver conteúdo programático</a>
-        <a href="acesso.html?curso=contabilidade">Acessar</a>
+        <a href="contabilidade.html" class="btn-comprar">Comprar</a>
       </div>
 
     </div>
   </section>
+
+  <!-- Depoimentos -->
   <section class="section" id="depoimentos">
     <h2>💬 Depoimentos</h2>
     <div class="grid">
@@ -176,7 +146,8 @@
       </div>
     </div>
   </section>
-  
+
+  <!-- Inscrição -->
   <section class="section" id="inscricao">
     <h2>📝 Inscreva-se</h2>
     <p>Receba novidades e promoções:</p>
@@ -187,7 +158,8 @@
     </form>
   </section>
 
-    <footer id="contato">
+  <!-- Rodapé -->
+  <footer id="contato">
     <p>&copy; 2025 Instituto de Cursos Profissionais</p>
     <p>contato@institutocursos.com.br | WhatsApp: (11) 99999-9999</p>
     <p>
@@ -195,6 +167,20 @@
       <a href="https://wa.me/5511999999999">WhatsApp</a>
     </p>
   </footer>
+
+    <!-- Script de animação para entrada dos cards -->
+  <script>
+    const cards = document.querySelectorAll('.card');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.opacity = '1';
+        }
+      });
+    }, { threshold: 0.1 });
+
+    cards.forEach(card => observer.observe(card));
+  </script>
 
 </body>
 </html>
