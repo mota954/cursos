@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Área do Aluno</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+  <style>
+    .aluno-container {
+      max-width: 900px;
+      margin: 60px auto;
+      background: white;
+      padding: 40px;
+      border-radius: 12px;
+      box-shadow: 0 6px 16px rgba(0,0,0,0.1);
+      text-align: center;
+    }
+    .aluno-container h2 {
+      color: #007bff;
+      margin-bottom: 30px;
+    }
+    .curso-lista {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 30px;
+    }
+    .curso-card {
+      background: #f8f9fa;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      width: 250px;
+      transition: transform 0.3s ease;
+    }
+    .curso-card:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 20px rgba(0,123,255,0.3);
+    }
+    .curso-card h3 {
+      margin-bottom: 10px;
+      color: #333;
+    }
+    .curso-card a {
+      display: inline-block;
+      margin-top: 10px;
+      padding: 10px 20px;
+      background: #007bff;
+      color: white;
+      border-radius: 30px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: background 0.3s ease;
+    }
+    .curso-card a:hover {
+      background: #0056b3;
+    }
+    .logout {
+      margin-top: 40px;
+      display: inline-block;
+      padding: 10px 25px;
+      background: #dc3545;
+      color: white;
+      border-radius: 30px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: background 0.3s ease;
+    }
+    .logout:hover {
+      background: #c82333;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="aluno-container" data-aos="fade-up">
+    <h2>👋 Bem-vindo à sua área do aluno</h2>
+    <p>Aqui estão os cursos disponíveis para você:</p>
+
+    <div class="curso-lista">
+      <div class="curso-card" data-aos="zoom-in">
+        <h3>💻 Programação</h3>
+        <a href="programacao.html">Acessar</a>
+      </div>
+      <div class="curso-card" data-aos="zoom-in">
+        <h3>📢 Marketing</h3>
+        <a href="marketing.html">Acessar</a>
+      </div>
+      <div class="curso-card" data-aos="zoom-in">
+        <h3>📊 Economia</h3>
+        <a href="economia.html">Acessar</a>
+      </div>
+      <div class="curso-card" data-aos="zoom-in">
+        <h3>📘 Contabilidade</h3>
+        <a href="contabilidade.html">Acessar</a>
+      </div>
+      <div class="curso-card" data-aos="zoom-in">
+        <h3>🏢 Administração</h3>
+        <a href="administracao.html">Acessar</a>
+      </div>
+      <div class="curso-card" data-aos="zoom-in">
+        <h3>🛒 Gestão de Vendas</h3>
+        <a href="vendas.html">Acessar</a>
+      </div>
+      <div class="curso-card" data-aos="zoom-in">
+        <h3>👥 Gestão de Pessoas</h3>
+        <a href="pessoas.html">Acessar</a>
+      </div>
+      <div class="curso-card" data-aos="zoom-in">
+        <h3>💰 Finanças</h3>
+        <a href="financas.html">Acessar</a>
+      </div>
+    </div>
+
+    <a href="index.html" class="logout">Sair</a>
+  </div>
+
+  <!-- Scripts -->
+  <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+  <script>
+    AOS.init({ duration: 1000, once: true });
+
+    const logado = localStorage.getItem("usuarioLogado");
+    if (!logado) {
+      window.location.href = "acesso.html";
+    }
+  </script>
+
+</body>
+</html>
