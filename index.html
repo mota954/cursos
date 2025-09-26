@@ -31,7 +31,16 @@
       top: 0;
       z-index: 1000;
       box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-      animation: fadeIn 1s ease-in;
+    }
+
+    .menu-toggle {
+      display: none;
+      font-size: 1.5em;
+      cursor: pointer;
+      color: white;
+      position: absolute;
+      right: 20px;
+      top: 20px;
     }
 
     nav {
@@ -53,16 +62,6 @@
       color: #ffc107;
     }
 
-    .menu-toggle {
-      display: none;
-      font-size: 1.5em;
-      cursor: pointer;
-      color: white;
-      position: absolute;
-      right: 20px;
-      top: 20px;
-    }
-
     .banner {
       background: linear-gradient(135deg, #007bff, #0056b3);
       color: white;
@@ -71,22 +70,39 @@
       animation: fadeIn 1.2s ease-in;
     }
 
-    .banner .btn {
-      background: #ffc107;
-      color: #212529;
-      padding: 14px 35px;
+    .btn-transparent {
+      background: transparent;
+      color: white;
+      padding: 12px 30px;
+      border: 2px solid white;
       border-radius: 30px;
-      text-decoration: none;
       font-weight: bold;
-      margin-top: 25px;
+      text-decoration: none;
+      transition: all 0.4s ease;
+      position: relative;
+      overflow: hidden;
       display: inline-block;
-      transition: background 0.3s ease, transform 0.3s ease;
-      box-shadow: 0 0 10px rgba(255, 193, 7, 0.5);
+      margin-top: 20px;
     }
 
-    .banner .btn:hover {
-      background: #e0a800;
-      transform: scale(1.05);
+    .btn-transparent::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: rgba(255, 255, 255, 0.2);
+      transition: left 0.4s ease;
+    }
+
+    .btn-transparent:hover {
+      color: #ffc107;
+      border-color: #ffc107;
+    }
+
+    .btn-transparent:hover::before {
+      left: 0;
     }
 
     .section {
@@ -128,8 +144,8 @@
     }
 
     .card:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+      box-shadow: 0 0 20px rgba(0, 123, 255, 0.3);
+      transform: translateY(-10px) scale(1.02);
     }
 
     .card img {
@@ -270,9 +286,8 @@
   <section class="banner" id="home">
     <h1>Excelência que transforma seu futuro</h1>
     <p>Estude com os melhores e conquiste seu certificado profissional</p>
-    <a href="#inscricao" class="btn">Inscreva-se já</a>
-  </section>
-
+    <a href="#inscricao" class="btn-transparent">Inscreva-se já</a>
+  
 <section class="section" id="cursos">
   <h2><i class="fas fa-graduation-cap"></i> Nossos Cursos</h2>
   <div class="grid">
@@ -399,23 +414,23 @@
     </form>
   </section>
 
-  <footer id="contato">
+ <footer id="contato">
     <p>&copy; 2025 Instituto de Cursos Profissionais</p>
     <p>Contato: contato@institutocursos.com.br | WhatsApp: (11) 99999-9999</p>
     <p>
-      <a href="https://www.instagram.com/seuusuario" target="_blank"><i class="fab fa-instagram"></i> Instagram</a> |
-      <a href="https://wa.me/5511999999999" target="_blank"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+      <a href="https://www.instagram.com/seuusuario" target="_blank"><i class="fab fa-instagram"></i>
+            <a href="https://wa.me/5511999999999" target="_blank"><i class="fab fa-whatsapp"></i> WhatsApp</a>
     </p>
-      </footer>
+  </footer>
 
-  <!-- Scripts para interatividade -->
+  <!-- Scripts para interatividade e animações -->
   <script>
     // Menu Mobile
     function toggleMenu() {
       document.querySelector('nav').classList.toggle('active');
     }
 
-    // Efeitos de rolagem
+    // Efeitos de rolagem com Intersection Observer
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
