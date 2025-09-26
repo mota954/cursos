@@ -65,6 +65,12 @@
       color: #333;
     }
 
+    .curso-card p {
+      font-size: 0.95em;
+      color: #555;
+      margin-bottom: 5px;
+    }
+
     .remover {
       position: absolute;
       top: 10px;
@@ -90,6 +96,7 @@
       border: none;
       cursor: pointer;
       font-size: 1em;
+      margin-top: 20px;
     }
 
     .finalizar:hover {
@@ -100,6 +107,13 @@
       color: #888;
       font-size: 1em;
       margin-top: 20px;
+    }
+
+    .total {
+      font-size: 1.2em;
+      font-weight: bold;
+      color: #333;
+      margin-top: 10px;
     }
 
     @media (max-width: 768px) {
@@ -117,6 +131,7 @@
     <h2>Seu Carrinho de Compras</h2>
     <div class="curso-lista" id="listaCarrinho"></div>
     <p class="vazio" id="mensagemVazio">Nenhum curso no carrinho.</p>
+    <p class="total" id="valorTotal"></p>
     <button class="finalizar" id="btnFinalizar">Finalizar compra</button>
   </div>
 
@@ -136,18 +151,34 @@
       financas: "💰 Finanças"
     };
 
+    const precos = {
+      programacao: 120,
+      marketing: 100,
+      economia: 90,
+      contabilidade: 95,
+      administracao: 110,
+      vendas: 85,
+      pessoas: 105,
+      financas: 115
+    };
+
     let carrinho = JSON.parse(localStorage.getItem("carrinhoCursos")) || [];
     const lista = document.getElementById("listaCarrinho");
     const vazio = document.getElementById("mensagemVazio");
     const btnFinalizar = document.getElementById("btnFinalizar");
+    const valorTotal = document.getElementById("valorTotal");
 
     function renderizarCarrinho() {
       lista.innerHTML = "";
+      let total = 0;
+
       if (carrinho.length === 0) {
         vazio.style.display = "block";
         btnFinalizar.style.display = "none";
+        valorTotal.innerText = "";
         return;
       }
+
       vazio.style.display = "none";
       btnFinalizar.style.display = "inline-block";
 
@@ -158,9 +189,13 @@
         card.innerHTML = `
           <button class="remover" onclick="removerCurso(${index})">&times;</button>
           <h3>${nomes[curso]}</h3>
+          <p>Valor: R$ ${precos[curso].toFixed(2)}</p>
         `;
         lista.appendChild(card);
+        total += precos[curso];
       });
+
+      valorTotal.innerText = `Valor total: R$ ${total.toFixed(2)}`;
     }
 
     function removerCurso(index) {
