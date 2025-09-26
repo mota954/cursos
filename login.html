@@ -3,90 +3,109 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Login</title>
+  <title>Login do Aluno</title>
+  <link rel="stylesheet" href="style.css" />
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
   <style>
     body {
+      background: linear-gradient(135deg, #e0f7fa, #ffffff);
       font-family: 'Roboto', sans-serif;
-      background: #f4f6f8;
-      color: #2c3e50;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      height: 100vh;
-      padding: 20px;
     }
 
-    .login-box {
-      background: white;
-      padding: 30px;
-      border-radius: 12px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-      width: 100%;
+    .login-container {
       max-width: 400px;
-    }
-
-    .login-box h2 {
+      margin: 80px auto;
+      background: white;
+      padding: 40px;
+      border-radius: 16px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
       text-align: center;
-      margin-bottom: 20px;
     }
 
-    .login-box input {
+    .login-container h2 {
+      color: #007bff;
+      margin-bottom: 20px;
+      font-size: 1.8em;
+    }
+
+    .login-container input {
       width: 100%;
       padding: 12px;
       margin-bottom: 15px;
-      border: 1px solid #ccc;
       border-radius: 8px;
+      border: 1px solid #ccc;
+      font-size: 1em;
     }
 
-    .login-box button {
+    .login-container button {
       width: 100%;
       padding: 12px;
-      background: #1a2b4c;
-      color: white;
       border: none;
-      border-radius: 8px;
+      border-radius: 30px;
       font-weight: bold;
       cursor: pointer;
+      background: #007bff;
+      color: white;
+      font-size: 1em;
+      transition: background 0.3s ease;
     }
 
-    .login-box button:hover {
-      background: #34495e;
+    .login-container button:hover {
+      background: #0056b3;
     }
 
-    .error {
-      color: red;
+    .info {
       font-size: 0.9em;
-      margin-bottom: 10px;
-      display: none;
+      color: #555;
+      margin-top: 10px;
+    }
+
+    .link-acesso {
+      display: block;
+      margin-top: 15px;
+      font-size: 0.9em;
+      color: #007bff;
+      text-decoration: none;
+    }
+
+    .link-acesso:hover {
+      text-decoration: underline;
     }
   </style>
 </head>
 <body>
 
-  <div class="login-box">
-    <h2>Login</h2>
-    <div class="error" id="error-msg">E-mail ou senha inválidos.</div>
-    <form id="login-form">
-      <input type="email" id="email" placeholder="Seu e-mail" required />
-      <input type="password" id="senha" placeholder="Sua senha" required />
+  <div class="login-container" data-aos="fade-up">
+    <h2>Login do Aluno</h2>
+    <form id="formLogin">
+      <input type="email" id="emailLogin" placeholder="E-mail" required>
+      <input type="password" id="senhaLogin" placeholder="Senha" required>
       <button type="submit">Entrar</button>
     </form>
+    <p class="info">Apenas alunos cadastrados podem acessar os cursos.</p>
+    <a href="acesso.html" class="link-acesso">Ainda não tem conta? Cadastre-se</a>
   </div>
 
+  <!-- Scripts -->
+  <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
   <script>
-    document.getElementById('login-form').addEventListener('submit', function(e) {
+    AOS.init({ duration: 1000, once: true });
+
+    document.getElementById("formLogin").addEventListener("submit", function(e) {
       e.preventDefault();
 
-      const email = document.getElementById('email').value;
-      const senha = document.getElementById('senha').value;
+      const email = document.getElementById("emailLogin").value.trim();
+      const senha = document.getElementById("senhaLogin").value.trim();
 
-      // Simulação de login válido
-      if (email === 'aluno@curso.com' && senha === '123456') {
-        window.location.href = 'materiais.html';
+      // Simulação de login (sem verificação real de senha)
+      if (email && senha) {
+        localStorage.setItem("usuarioLogado", "true");
+        alert("Login realizado com sucesso!");
+        window.location.href = "aluno.html";
       } else {
-        document.getElementById('error-msg').style.display = 'block';
+        alert("Preencha todos os campos corretamente.");
       }
     });
   </script>
