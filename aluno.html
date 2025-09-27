@@ -118,17 +118,19 @@
     AOS.init({ duration: 1000, once: true });
 
     // Proteção de acesso
-    const logado = localStorage.getItem("usuarioLogado");
-    if (!logado) {
+    const email = localStorage.getItem("usuarioLogado");
+    const usuarios = JSON.parse(localStorage.getItem("usuarios")) || {};
+    const aluno = usuarios[email];
+
+    if (!email || !aluno) {
       window.location.href = "acesso.html";
     }
 
     // Saudação personalizada
-    const nomeAluno = localStorage.getItem("nomeAluno") || "Aluno";
-    document.getElementById("saudacaoAluno").innerText = `👋 Bem-vindo, ${nomeAluno}!`;
+    document.getElementById("saudacaoAluno").innerText = `👋 Bem-vindo, ${aluno.nome}!`;
 
     // Lista de cursos comprados
-    const cursos = JSON.parse(localStorage.getItem("cursosComprados")) || [];
+    const cursos = aluno.cursosComprados || [];
     const lista = document.getElementById("listaCursos");
 
     const nomes = {
@@ -157,7 +159,6 @@
     // Função de logout
     function logout() {
       localStorage.removeItem("usuarioLogado");
-      localStorage.removeItem("nomeAluno");
       window.location.href = "index.html";
     }
   </script>
