@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cadastro - Instituto de Cursos Profissionais</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    body {
+      background: linear-gradient(135deg, #e0f7fa, #ffffff);
+      font-family: 'Roboto', sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .cadastro-container {
+      background: white;
+      padding: 40px;
+      border-radius: 16px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+      max-width: 400px;
+      width: 100%;
+      text-align: center;
+    }
+
+    .cadastro-container h2 {
+      color: #007bff;
+      margin-bottom: 20px;
+    }
+
+    .cadastro-container input {
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 1em;
+    }
+
+    .cadastro-container button {
+      width: 100%;
+      padding: 12px;
+      background: #007bff;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 1em;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    .cadastro-container button:hover {
+      background: #0056b3;
+    }
+
+    .cadastro-container p {
+      margin-top: 20px;
+      font-size: 0.9em;
+      color: #555;
+    }
+
+    .cadastro-container a {
+      color: #007bff;
+      text-decoration: none;
+    }
+
+    .cadastro-container a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="cadastro-container">
+    <h2><i class="fas fa-user-plus"></i> Cadastro de Aluno</h2>
+    <input type="text" id="nome" placeholder="Seu nome completo" />
+    <input type="email" id="email" placeholder="Seu e-mail" />
+    <button onclick="cadastrar()">Cadastrar</button>
+    <p>Já tem conta? <a href="login.html">Faça login</a></p>
+  </div>
+
+  <script>
+    function cadastrar() {
+      const nome = document.getElementById("nome").value.trim();
+      const email = document.getElementById("email").value.trim().toLowerCase();
+
+      if (!nome || !email) {
+        alert("Preencha todos os campos corretamente.");
+        return;
+      }
+
+      const usuarios = JSON.parse(localStorage.getItem("usuarios")) || {};
+
+      if (usuarios[email]) {
+        alert("Este e-mail já está cadastrado. Faça login.");
+        return;
+      }
+
+      usuarios[email] = {
+        nome,
+        cursosComprados: [],
+        carrinho: []
+      };
+
+      localStorage.setItem("usuarios", JSON.stringify(usuarios));
+      localStorage.setItem("usuarioLogado", email);
+      alert("Cadastro realizado com sucesso!");
+      window.location.href = "aluno.html";
+    }
+  </script>
+
+</body>
+</html>
