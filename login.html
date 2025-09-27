@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Login - Instituto de Cursos Profissionais</title>
+  <title>Login - Área do Aluno</title>
   <link rel="stylesheet" href="style.css" />
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
@@ -77,35 +77,38 @@
 <body>
 
   <div class="login-container">
-    <h2>Área do Aluno</h2>
+    <h2><i class="fas fa-sign-in-alt"></i> Login do Aluno</h2>
     <input type="email" id="email" placeholder="Seu e-mail" />
-    <input type="text" id="nome" placeholder="Seu nome completo" />
-    <button onclick="login()">Entrar</button>
-    <p>Ao entrar, você poderá acessar seus cursos comprados.</p>
+    <input type="password" id="senha" placeholder="Sua senha" />
+    <button onclick="login()">Entrar na Área do Aluno</button>
+    <p>Não tem conta? <a href="cadastro.html">Cadastre-se aqui</a></p>
   </div>
 
   <script>
     function login() {
       const email = document.getElementById("email").value.trim().toLowerCase();
-      const nome = document.getElementById("nome").value.trim();
+      const senha = document.getElementById("senha").value;
 
-      if (!email || !nome) {
-        alert("Preencha todos os campos corretamente.");
+      if (!email || !senha) {
+        alert("Preencha todos os campos.");
         return;
       }
 
       const usuarios = JSON.parse(localStorage.getItem("usuarios")) || {};
+      const aluno = usuarios[email];
 
-      if (!usuarios[email]) {
-        usuarios[email] = {
-          nome: nome,
-          cursosComprados: [],
-          carrinho: []
-        };
+      if (!aluno) {
+        alert("E-mail não cadastrado. Faça seu cadastro.");
+        return;
       }
 
-      localStorage.setItem("usuarios", JSON.stringify(usuarios));
+      if (aluno.senha !== senha) {
+        alert("Senha incorreta. Tente novamente.");
+        return;
+      }
+
       localStorage.setItem("usuarioLogado", email);
+      alert("Login realizado com sucesso!");
       window.location.href = "aluno.html";
     }
   </script>
