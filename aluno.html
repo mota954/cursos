@@ -79,24 +79,48 @@
       background: #0056b3;
     }
 
-    .logout {
+    .actions {
       margin-top: 50px;
-      display: inline-block;
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .actions a {
       padding: 12px 30px;
-      background: #dc3545;
-      color: white;
       border-radius: 30px;
-      text-decoration: none;
       font-weight: bold;
+      text-decoration: none;
+      font-size: 1em;
       transition: background 0.3s ease;
     }
 
-    .logout:hover {
+    .btn-voltar {
+      background: #17a2b8;
+      color: white;
+    }
+
+    .btn-voltar:hover {
+      background: #138496;
+    }
+
+    .btn-sair {
+      background: #dc3545;
+      color: white;
+    }
+
+    .btn-sair:hover {
       background: #c82333;
     }
 
     @media (max-width: 768px) {
       .curso-lista {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .actions {
         flex-direction: column;
         align-items: center;
       }
@@ -109,15 +133,17 @@
     <h2 id="saudacaoAluno">👋 Bem-vindo!</h2>
     <p>Estes são os cursos que você comprou:</p>
     <div class="curso-lista" id="listaCursos"></div>
-    <a href="#" class="logout" onclick="logout()">Sair da conta</a>
+
+    <div class="actions">
+      <a href="index.html#cursos" class="btn-voltar"><i class="fas fa-arrow-left"></i> Comprar mais cursos</a>
+      <a href="#" class="btn-sair" onclick="logout()"><i class="fas fa-sign-out-alt"></i> Sair da conta</a>
+    </div>
   </div>
 
-  <!-- Scripts -->
   <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
   <script>
     AOS.init({ duration: 1000, once: true });
 
-    // Proteção de acesso
     const email = localStorage.getItem("usuarioLogado");
     const usuarios = JSON.parse(localStorage.getItem("usuarios")) || {};
     const aluno = usuarios[email];
@@ -126,10 +152,8 @@
       window.location.href = "acesso.html";
     }
 
-    // Saudação personalizada
     document.getElementById("saudacaoAluno").innerText = `👋 Bem-vindo, ${aluno.nome}!`;
 
-    // Lista de cursos comprados
     const cursos = aluno.cursosComprados || [];
     const lista = document.getElementById("listaCursos");
 
@@ -156,7 +180,6 @@
       });
     }
 
-    // Função de logout
     function logout() {
       localStorage.removeItem("usuarioLogado");
       window.location.href = "index.html";
