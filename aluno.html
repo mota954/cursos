@@ -11,6 +11,7 @@
   <style>
     body {
       background: linear-gradient(135deg, #e0f7fa, #ffffff);
+      font-family: 'Roboto', sans-serif;
     }
 
     .aluno-container {
@@ -21,7 +22,6 @@
       border-radius: 16px;
       box-shadow: 0 10px 30px rgba(0,0,0,0.1);
       text-align: center;
-      animation: fadeIn 1s ease forwards;
     }
 
     .aluno-container h2 {
@@ -95,11 +95,6 @@
       background: #c82333;
     }
 
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(30px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
     @media (max-width: 768px) {
       .curso-lista {
         flex-direction: column;
@@ -111,12 +106,10 @@
 <body>
 
   <div class="aluno-container" data-aos="fade-up">
-    <h2>👋 Bem-vindo à sua área do aluno</h2>
+    <h2 id="saudacaoAluno">👋 Bem-vindo!</h2>
     <p>Estes são os cursos que você comprou:</p>
-
     <div class="curso-lista" id="listaCursos"></div>
-
-    <a href="index.html" class="logout">Sair</a>
+    <a href="#" class="logout" onclick="logout()">Sair da conta</a>
   </div>
 
   <!-- Scripts -->
@@ -124,11 +117,17 @@
   <script>
     AOS.init({ duration: 1000, once: true });
 
+    // Proteção de acesso
     const logado = localStorage.getItem("usuarioLogado");
     if (!logado) {
       window.location.href = "acesso.html";
     }
 
+    // Saudação personalizada
+    const nomeAluno = localStorage.getItem("nomeAluno") || "Aluno";
+    document.getElementById("saudacaoAluno").innerText = `👋 Bem-vindo, ${nomeAluno}!`;
+
+    // Lista de cursos comprados
     const cursos = JSON.parse(localStorage.getItem("cursosComprados")) || [];
     const lista = document.getElementById("listaCursos");
 
@@ -153,6 +152,13 @@
         card.innerHTML = `<h3>${nomes[curso]}</h3><a href="${curso}.html">Acessar</a>`;
         lista.appendChild(card);
       });
+    }
+
+    // Função de logout
+    function logout() {
+      localStorage.removeItem("usuarioLogado");
+      localStorage.removeItem("nomeAluno");
+      window.location.href = "index.html";
     }
   </script>
 
