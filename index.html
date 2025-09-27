@@ -8,6 +8,105 @@
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Roboto', sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    .perfil-container {
+      position: relative;
+      display: inline-block;
+      margin-left: 20px;
+    }
+
+    .perfil-btn {
+      background: none;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: bold;
+      color: #007bff;
+      font-size: 1em;
+    }
+
+    .perfil-btn img {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid #007bff;
+    }
+
+    .perfil-dropdown {
+      display: none;
+      position: absolute;
+      right: 0;
+      background-color: white;
+      min-width: 160px;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+      z-index: 1;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .perfil-dropdown a {
+      color: #333;
+      padding: 12px 16px;
+      text-decoration: none;
+      display: block;
+      font-size: 0.95em;
+    }
+
+    .perfil-dropdown a:hover {
+      background-color: #f1f1f1;
+    }
+
+    .grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 30px;
+      justify-content: center;
+    }
+
+    .card {
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 6px 16px rgba(0,0,0,0.1);
+      padding: 20px;
+      width: 280px;
+      text-align: center;
+      transition: transform 0.3s ease;
+    }
+
+    .card:hover {
+      transform: scale(1.05);
+    }
+
+    .card img {
+      width: 100%;
+      border-radius: 8px;
+      margin-bottom: 15px;
+    }
+
+    .btn-comprar {
+      display: inline-block;
+      margin-top: 10px;
+      padding: 10px 20px;
+      background: #007bff;
+      color: white;
+      border-radius: 30px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .btn-comprar:hover {
+      background: #0056b3;
+    }
+  </style>
 </head>
 <body>
 
@@ -20,14 +119,20 @@
       <a href="#depoimentos">Depoimentos</a>
       <a href="#inscricao">Inscreva-se</a>
       <a href="#contato">Contato</a>
-      <a href="acesso.html">Área do Aluno</a>
-                <a href="carrinho.html">
-      <i class="fas fa-shopping-cart"></i> Carrinho
-    </a>
-      <a href="login.html" class="btn-login">
-  <i class="fas fa-sign-in-alt"></i> Login
-</a>
-      <div id="boasVindas" class="boas-vindas"></div>
+      <a href="carrinho.html"><i class="fas fa-shopping-cart"></i> Carrinho</a>
+      <a href="login.html" class="btn-login"><i class="fas fa-sign-in-alt"></i> Login</a>
+
+      <!-- Botão de perfil com foto -->
+      <div class="perfil-container" id="perfilContainer" style="display:none;">
+        <button class="perfil-btn" onclick="togglePerfil()">
+          <img src="https://via.placeholder.com/32x32.png?text=👤" alt="Foto do aluno" id="fotoAluno">
+          <span id="nomeAluno"></span>
+        </button>
+        <div class="perfil-dropdown" id="perfilDropdown">
+          <a href="aluno.html">Área do Aluno</a>
+          <a href="#" onclick="logout()">Sair</a>
+        </div>
+      </div>
     </nav>
     <form class="busca">
       <input type="text" placeholder="Buscar cursos...">
@@ -46,97 +151,63 @@
   <section class="section" id="cursos" data-aos="fade-up">
     <h2>📚 Nossos Cursos</h2>
     <div class="grid">
-
-      <!-- Card: Administração -->
+      <!-- Lista de cursos com botão de carrinho -->
       <div class="card" data-aos="zoom-in">
         <img src="https://img.youtube.com/vi/5ZJx0xYw3Zg/hqdefault.jpg" alt="Administração">
         <h3>🏢 Administração</h3>
         <p>Planejamento estratégico e gestão de equipes</p>
-        <span>22x R$ 19,99</span>
-        <div class="rating">⭐⭐⭐⭐☆</div>
-        <div class="badge">Certificado</div>
-        <a href="administracao.html" class="btn-comprar">Comprar</a>
+        <a href="#" class="btn-comprar" onclick="adicionarAoCarrinho('administracao')">Adicionar ao carrinho</a>
       </div>
 
-      <!-- Card: Gestão de Vendas -->
       <div class="card" data-aos="zoom-in">
         <img src="https://img.youtube.com/vi/3ZJx0xYw3Zg/hqdefault.jpg" alt="Gestão de Vendas">
         <h3>🛒 Gestão de Vendas</h3>
         <p>Técnicas de negociação e fechamento de vendas</p>
-        <span>22x R$ 19,99</span>
-        <div class="rating">⭐⭐⭐⭐☆</div>
-        <div class="badge">Certificado</div>
-        <a href="vendas.html" class="btn-comprar">Comprar</a>
+        <a href="#" class="btn-comprar" onclick="adicionarAoCarrinho('vendas')">Adicionar ao carrinho</a>
       </div>
 
-      <!-- Card: Gestão de Pessoas -->
       <div class="card" data-aos="zoom-in">
         <img src="https://img.youtube.com/vi/4ZJx0xYw3Zg/hqdefault.jpg" alt="Gestão de Pessoas">
         <h3>👥 Gestão de Pessoas</h3>
         <p>Desenvolvimento de equipes e liderança eficaz</p>
-        <span>22x R$ 19,99</span>
-        <div class="rating">⭐⭐⭐⭐☆</div>
-        <div class="badge">Certificado</div>
-        <a href="pessoas.html" class="btn-comprar">Comprar</a>
+        <a href="#" class="btn-comprar" onclick="adicionarAoCarrinho('pessoas')">Adicionar ao carrinho</a>
       </div>
 
-      <!-- Card: Finanças -->
       <div class="card" data-aos="zoom-in">
         <img src="https://img.youtube.com/vi/6ZJx0xYw3Zg/hqdefault.jpg" alt="Finanças">
         <h3>💰 Finanças</h3>
         <p>Orçamento pessoal, investimentos e controle financeiro</p>
-        <span>22x R$ 19,99</span>
-        <div class="rating">⭐⭐⭐⭐☆</div>
-        <div class="badge">Certificado</div>
-        <a href="financas.html" class="btn-comprar">Comprar</a>
+        <a href="#" class="btn-comprar" onclick="adicionarAoCarrinho('financas')">Adicionar ao carrinho</a>
       </div>
 
-      <!-- Card: Programação -->
       <div class="card" data-aos="zoom-in">
         <img src="https://copilot.microsoft.com/th/id/BCO.cd2e7e43-39d2-42c3-a412-7b93ef1ec1c4.png" alt="Programação">
         <h3>💻 Programação</h3>
         <p>HTML, CSS e JavaScript do zero</p>
-        <span>22x R$ 19,99</span>
-        <div class="rating">⭐⭐⭐⭐☆</div>
-        <div class="badge">Certificado</div>
-        <a href="#" class="btn-comprar" onclick="adicionarAoCarrinho('programacao')">
-  <i class="fas fa-shopping-cart"></i> Adicionar ao carrinho
-</a>
+        <a href="#" class="btn-comprar" onclick="adicionarAoCarrinho('programacao')">Adicionar ao carrinho</a>
       </div>
 
-      <!-- Card: Marketing -->
       <div class="card" data-aos="zoom-in">
         <img src="https://copilot.microsoft.com/th/id/BCO.46be4580-d6ac-40a0-8848-45dedee82b98.png" alt="Marketing">
         <h3>📢 Marketing</h3>
         <p>Redes sociais, tráfego pago e estratégias digitais</p>
-        <span>22x R$ 19,99</span>
-        <div class="rating">⭐⭐⭐⭐☆</div>
-        <div class="badge">Certificado</div>
-           <a href="#" class="btn-comprar" onclick="adicionarAoCarrinho('marketing')">
-  <i class="fas fa-shopping-cart"></i> Adicionar ao carrinho
-</a>     
+        <a href="#" class="btn-comprar" onclick="adicionarAoCarrinho('marketing')">Adicionar ao carrinho</a>
       </div>
 
-      <!-- Card: Economia -->
+      <!-- Economia -->
       <div class="card" data-aos="zoom-in">
         <img src="https://copilot.microsoft.com/th/id/BCO.653dcfc4-0bc9-4ed9-b37c-388cdcd3fe8b.png" alt="Economia">
         <h3>📊 Economia</h3>
         <p>Fundamentos econômicos e análise de mercado</p>
-        <span>22x R$ 19,99</span>
-        <div class="rating">⭐⭐⭐⭐☆</div>
-        <div class="badge">Certificado</div>
-        <a href="economia.html" class="btn-comprar">Comprar</a>
+        <a href="#" class="btn-comprar" onclick="adicionarAoCarrinho('economia')">Adicionar ao carrinho</a>
       </div>
 
-      <!-- Card: Contabilidade -->
+      <!-- Contabilidade -->
       <div class="card" data-aos="zoom-in">
         <img src="https://copilot.microsoft.com/th/id/BCO.5ad0a00a-d6a2-4888-aa4f-cc893b548520.png" alt="Contabilidade">
         <h3>📘 Contabilidade</h3>
         <p>Gestão financeira e escrituração contábil</p>
-        <span>22x R$ 19,99</span>
-        <div class="rating">⭐⭐⭐⭐☆</div>
-        <div class="badge">Certificado</div>
-        <a href="contabilidade.html" class="btn-comprar">Comprar</a>
+        <a href="#" class="btn-comprar" onclick="adicionarAoCarrinho('contabilidade')">Adicionar ao carrinho</a>
       </div>
 
     </div>
@@ -167,7 +238,7 @@
       <input type="text" placeholder="Seu nome">
       <input type="email" placeholder="Seu e-mail">
       <button type="submit">Cadastrar</button>
-       </form>
+    </form>
   </section>
 
   <!-- Rodapé -->
@@ -180,48 +251,52 @@
     </p>
   </footer>
 
-  <!-- Scripts de animação -->
-<!-- Scripts de animação -->
-<script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
-<script>
-  AOS.init({ duration: 1000, once: true });
-
-  // Script do carrinho
-function adicionarAoCarrinho(curso) {
-  const email = localStorage.getItem("usuarioLogado");
-  if (!email) {
-    alert("Você precisa estar logado para adicionar ao carrinho.");
-    window.location.href = "login.html";
-    return;
-  }
-
-  const usuarios = JSON.parse(localStorage.getItem("usuarios")) || {};
-  if (!usuarios[email]) {
-    usuarios[email] = { nome: "Aluno", cursosComprados: [], carrinho: [] };
-  }
-
-  const carrinho = usuarios[email].carrinho || [];
-
-  if (!carrinho.includes(curso)) {
-    carrinho.push(curso);
-    usuarios[email].carrinho = carrinho;
-    localStorage.setItem("usuarios", JSON.stringify(usuarios));
-    alert("Curso adicionado ao carrinho!");
-  } else {
-    alert("Este curso já está no carrinho.");
-  }
-}
+  <!-- Scripts -->
+  <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
   <script>
-  const email = localStorage.getItem("usuarioLogado");
-  const usuarios = JSON.parse(localStorage.getItem("usuarios")) || {};
-  const aluno = usuarios[email];
+    AOS.init({ duration: 1000, once: true });
 
-  if (email && aluno) {
-    const boasVindas = document.getElementById("boasVindas");
-    boasVindas.innerHTML = `<p style="text-align:center; font-size:1.1em; color:#007bff;">👋 Olá, <strong>${aluno.nome}</strong>! Bem-vindo de volta.</p>`;
-  }
-</script>
+    // Mostrar nome e foto do aluno logado
+    const email = localStorage.getItem("usuarioLogado");
+    const usuarios = JSON.parse(localStorage.getItem("usuarios")) || {};
+    const aluno = usuarios[email];
+
+    if (email && aluno) {
+      document.getElementById("perfilContainer").style.display = "inline-block";
+      document.getElementById("nomeAluno").innerText = aluno.nome;
+      document.getElementById("fotoAluno").src = aluno.foto || "https://via.placeholder.com/32x32.png?text=👤";
+    }
+
+    function togglePerfil() {
+      const dropdown = document.getElementById("perfilDropdown");
+      dropdown.style.display = dropdown.style.display === "block" ? "none" : "block";
+    }
+
+    function logout() {
+      localStorage.removeItem("usuarioLogado");
+      window.location.href = "index.html";
+    }
+
+    function adicionarAoCarrinho(curso) {
+      if (!email || !aluno) {
+        alert("Você precisa estar logado para adicionar ao carrinho.");
+        window.location.href = "login.html";
+        return;
+      }
+
+      const carrinho = aluno.carrinho || [];
+
+      if (!carrinho.includes(curso)) {
+        carrinho.push(curso);
+        aluno.carrinho = carrinho;
+        usuarios[email] = aluno;
+        localStorage.setItem("usuarios", JSON.stringify(usuarios));
+        alert("Curso adicionado ao carrinho!");
+      } else {
+        alert("Este curso já está no carrinho.");
+      }
+    }
+  </script>
 
 </body>
 </html>
-
