@@ -186,16 +186,30 @@
   AOS.init({ duration: 1000, once: true });
 
   // Script do carrinho
-  function adicionarAoCarrinho(curso) {
-    let carrinho = JSON.parse(localStorage.getItem("carrinhoCursos")) || [];
-    if (!carrinho.includes(curso)) {
-      carrinho.push(curso);
-      localStorage.setItem("carrinhoCursos", JSON.stringify(carrinho));
-      alert("Curso adicionado ao carrinho!");
-    } else {
-      alert("Este curso já está no carrinho.");
-    }
+function adicionarAoCarrinho(curso) {
+  const email = localStorage.getItem("usuarioLogado");
+  if (!email) {
+    alert("Você precisa estar logado para adicionar ao carrinho.");
+    window.location.href = "login.html";
+    return;
   }
+
+  const usuarios = JSON.parse(localStorage.getItem("usuarios")) || {};
+  if (!usuarios[email]) {
+    usuarios[email] = { nome: "Aluno", cursosComprados: [], carrinho: [] };
+  }
+
+  const carrinho = usuarios[email].carrinho || [];
+
+  if (!carrinho.includes(curso)) {
+    carrinho.push(curso);
+    usuarios[email].carrinho = carrinho;
+    localStorage.setItem("usuarios", JSON.stringify(usuarios));
+    alert("Curso adicionado ao carrinho!");
+  } else {
+    alert("Este curso já está no carrinho.");
+  }
+}
 </script>
 
 </body>
