@@ -24,16 +24,16 @@
       text-align: center;
     }
 
-    .carrinho-container h2 {
-      color: #007bff;
-      font-size: 2em;
-      margin-bottom: 30px;
-    }
-
     .icone-carrinho {
       font-size: 2.5em;
       color: #007bff;
       margin-bottom: 10px;
+    }
+
+    .carrinho-container h2 {
+      color: #007bff;
+      font-size: 2em;
+      margin-bottom: 30px;
     }
 
     .curso-lista {
@@ -126,14 +126,6 @@
 </head>
 <body>
 
-  <script>
-    const logado = localStorage.getItem("usuarioLogado");
-    if (!logado) {
-      alert("Você precisa estar cadastrado para acessar o carrinho.");
-      window.location.href = "acesso.html";
-    }
-  </script>
-
   <div class="carrinho-container" data-aos="fade-up">
     <div class="icone-carrinho"><i class="fas fa-shopping-cart"></i></div>
     <h2>Seu Carrinho de Compras</h2>
@@ -169,7 +161,19 @@
       financas: 115
     };
 
-    let carrinho = JSON.parse(localStorage.getItem("carrinhoCursos")) || [];
+    const email = localStorage.getItem("usuarioLogado");
+    if (!email) {
+      alert("Você precisa estar cadastrado para acessar o carrinho.");
+      window.location.href = "acesso.html";
+    }
+
+    const usuarios = JSON.parse(localStorage.getItem("usuarios")) || {};
+    if (!usuarios[email]) {
+      usuarios[email] = { nome: "Aluno", cursosComprados: [], carrinho: [] };
+    }
+
+    let carrinho = usuarios[email].carrinho || [];
+
     const lista = document.getElementById("listaCarrinho");
     const vazio = document.getElementById("mensagemVazio");
     const btnFinalizar = document.getElementById("btnFinalizar");
@@ -207,19 +211,24 @@
 
     function removerCurso(index) {
       carrinho.splice(index, 1);
-      localStorage.setItem("carrinhoCursos", JSON.stringify(carrinho));
+      usuarios[email].carrinho = carrinho;
+      localStorage.setItem("usuarios", JSON.stringify(usuarios));
       renderizarCarrinho();
     }
 
     btnFinalizar.addEventListener("click", () => {
-      let comprados = JSON.parse(localStorage.getItem("cursosComprados")) || [];
+      const comprados = usuarios[email].cursosComprados || [];
+
       carrinho.forEach(curso => {
         if (!comprados.includes(curso)) {
           comprados.push(curso);
         }
       });
-      localStorage.setItem("cursosComprados", JSON.stringify(comprados));
-      localStorage.removeItem("carrinhoCursos");
+
+      usuarios[email].cursosComprados = comprados;
+      usuarios[email].carrinho = [];
+      localStorage.setItem("usuarios", JSON.stringify(usuarios));
+
       alert("Compra finalizada com sucesso!");
       window.location.href = "aluno.html";
     });
