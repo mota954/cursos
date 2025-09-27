@@ -80,6 +80,7 @@
     <h2><i class="fas fa-user-plus"></i> Cadastro de Aluno</h2>
     <input type="text" id="nome" placeholder="Seu nome completo" />
     <input type="email" id="email" placeholder="Seu e-mail" />
+    <input type="password" id="senha" placeholder="Crie uma senha" />
     <button onclick="cadastrar()">Cadastrar</button>
     <p>Já tem conta? <a href="login.html">Faça login</a></p>
   </div>
@@ -88,8 +89,9 @@
     function cadastrar() {
       const nome = document.getElementById("nome").value.trim();
       const email = document.getElementById("email").value.trim().toLowerCase();
+      const senha = document.getElementById("senha").value;
 
-      if (!nome || !email) {
+      if (!nome || !email || !senha) {
         alert("Preencha todos os campos corretamente.");
         return;
       }
@@ -103,6 +105,7 @@
 
       usuarios[email] = {
         nome,
+        senha,
         cursosComprados: [],
         carrinho: []
       };
@@ -110,7 +113,7 @@
       localStorage.setItem("usuarios", JSON.stringify(usuarios));
       localStorage.setItem("usuarioLogado", email);
       alert("Cadastro realizado com sucesso!");
-      window.location.href = "aluno.html";
+      window.location.href = "index.html";
     }
   </script>
 
