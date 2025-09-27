@@ -27,6 +27,7 @@
       <a href="login.html" class="btn-login">
   <i class="fas fa-sign-in-alt"></i> Login
 </a>
+      <div id="boasVindas" class="boas-vindas"></div>
     </nav>
     <form class="busca">
       <input type="text" placeholder="Buscar cursos...">
@@ -210,6 +211,15 @@ function adicionarAoCarrinho(curso) {
     alert("Este curso já está no carrinho.");
   }
 }
+  <script>
+  const email = localStorage.getItem("usuarioLogado");
+  const usuarios = JSON.parse(localStorage.getItem("usuarios")) || {};
+  const aluno = usuarios[email];
+
+  if (email && aluno) {
+    const boasVindas = document.getElementById("boasVindas");
+    boasVindas.innerHTML = `<p style="text-align:center; font-size:1.1em; color:#007bff;">👋 Olá, <strong>${aluno.nome}</strong>! Bem-vindo de volta.</p>`;
+  }
 </script>
 
 </body>
