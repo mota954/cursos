@@ -1,118 +1,106 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Instituto de Cursos Profissionais</title>
-  <link rel="stylesheet" href="style.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-  <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+  <title>Instituto de Cursos Online Profissionais</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&display=swap" rel="stylesheet" />
   <style>
-    body {
-      font-family: 'Roboto', sans-serif;
+    * {
       margin: 0;
       padding: 0;
+      box-sizing: border-box;
     }
 
-    .perfil-container {
-      position: relative;
-      display: inline-block;
-      margin-left: 20px;
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #f4f4f4;
     }
 
-    .perfil-btn {
-      background: none;
-      border: none;
-      cursor: pointer;
+    header {
       display: flex;
+      justify-content: space-between;
       align-items: center;
-      gap: 8px;
-      font-weight: bold;
-      color: #007bff;
-      font-size: 1em;
+      padding: 20px 40px;
+      background: linear-gradient(90deg, #1e1e2f, #2c3e50);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
     }
 
-    .perfil-btn img {
-      width: 32px;
-      height: 32px;
-      border-radius: 50%;
-      object-fit: cover;
-      border: 2px solid #007bff;
+    .logo {
+      width: 250px;
+      height: auto;
     }
 
-    .perfil-dropdown {
-      display: none;
-      position: absolute;
-      right: 0;
-      background-color: white;
-      min-width: 160px;
-      box-shadow: 0 8px 16px rgba(0,0,0,0.2);
-      z-index: 1;
-      border-radius: 8px;
-      overflow: hidden;
-    }
-
-    .perfil-dropdown a {
-      color: #333;
-      padding: 12px 16px;
-      text-decoration: none;
-      display: block;
-      font-size: 0.95em;
-    }
-
-    .perfil-dropdown a:hover {
-      background-color: #f1f1f1;
-    }
-
-    .grid {
+    nav {
       display: flex;
-      flex-wrap: wrap;
-      gap: 30px;
-      justify-content: center;
+      gap: 25px;
     }
 
-    .card {
-      background: white;
-      border-radius: 12px;
-      box-shadow: 0 6px 16px rgba(0,0,0,0.1);
-      padding: 20px;
-      width: 280px;
-      text-align: center;
-      transition: transform 0.3s ease;
-    }
-
-    .card:hover {
-      transform: scale(1.05);
-    }
-
-    .card img {
-      width: 100%;
-      border-radius: 8px;
-      margin-bottom: 15px;
-    }
-
-    .btn-comprar {
-      display: inline-block;
-      margin-top: 10px;
-      padding: 10px 20px;
-      background: #007bff;
-      color: white;
-      border-radius: 30px;
+    nav a {
+      color: #ffffff;
+      font-size: 18px;
+      font-weight: 600;
       text-decoration: none;
-      font-weight: bold;
+      position: relative;
+      transition: color 0.3s ease;
     }
 
-    .btn-comprar:hover {
-      background: #0056b3;
+    nav a::after {
+      content: '';
+      position: absolute;
+      width: 0%;
+      height: 2px;
+      bottom: -4px;
+      left: 0;
+      background-color: #00d8ff;
+      transition: width 0.3s ease;
+    }
+
+    nav a:hover {
+      color: #00d8ff;
+    }
+
+    nav a:hover::after {
+      width: 100%;
+    }
+
+    .btn-login {
+      background-color: #00d8ff;
+      padding: 8px 16px;
+      border-radius: 6px;
+      color: #1e1e2f !important;
+      font-weight: bold;
+      transition: background 0.3s ease, color 0.3s ease;
+    }
+
+    .btn-login:hover {
+      background-color: #ffffff;
+      color: #00d8ff !important;
+    }
+
+    @media (max-width: 768px) {
+      header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      nav {
+        flex-wrap: wrap;
+        gap: 15px;
+        margin-top: 15px;
+      }
+
+      nav a {
+        font-size: 16px;
+      }
     }
   </style>
 </head>
 <body>
 
-  <!-- Cabeçalho -->
   <header>
-    <img src="logo-instituto.png" alt="Logo Instituto" style="width: 250px; height: auto;" />
+    <img src="logo-instituto.png" alt="Logo Instituto" class="logo" />
     <nav>
       <a href="#home">Home</a>
       <a href="#cursos">Cursos</a>
@@ -121,6 +109,11 @@
       <a href="#contato">Contato</a>
       <a href="carrinho.html"><i class="fas fa-shopping-cart"></i> Carrinho</a>
       <a href="login.html" class="btn-login"><i class="fas fa-sign-in-alt"></i> Login</a>
+    </nav>
+  </header>
+
+</body>
+</html>
 
       <!-- Botão de perfil com foto -->
       <div class="perfil-container" id="perfilContainer" style="display:none;">
