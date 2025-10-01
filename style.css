@@ -16,7 +16,7 @@ body {
 header {
   background: #007bff;
   color: white;
-  padding: 20px;
+  padding: 20px 40px;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
@@ -24,16 +24,24 @@ header {
   position: sticky;
   top: 0;
   z-index: 1000;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
 .logo {
+  font-size: 1.8em;
   font-weight: bold;
-  font-size: 1.2em;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  transition: transform 0.3s ease;
+}
+
+.logo:hover {
+  transform: scale(1.05);
 }
 
 nav {
   display: flex;
-  gap: 15px;
+  gap: 20px;
   flex-wrap: wrap;
 }
 
@@ -41,13 +49,45 @@ nav a {
   color: white;
   text-decoration: none;
   font-weight: bold;
+  font-size: 1.1em;
+  position: relative;
   transition: color 0.3s ease;
+}
+
+nav a::after {
+  content: '';
+  position: absolute;
+  width: 0%;
+  height: 2px;
+  bottom: -4px;
+  left: 0;
+  background-color: #ffc107;
+  transition: width 0.3s ease;
 }
 
 nav a:hover {
   color: #ffc107;
 }
 
+nav a:hover::after {
+  width: 100%;
+}
+
+.btn-login {
+  background-color: #ffc107;
+  padding: 8px 16px;
+  border-radius: 30px;
+  color: #212529 !important;
+  font-weight: bold;
+  transition: background 0.3s ease, transform 0.3s ease;
+}
+
+.btn-login:hover {
+  background-color: #e0a800;
+  transform: scale(1.05);
+}
+
+/* Busca */
 .busca input {
   padding: 10px;
   border-radius: 30px;
@@ -270,11 +310,18 @@ footer a:hover {
   header {
     flex-direction: column;
     align-items: flex-start;
+    padding: 20px;
   }
 
   nav {
     flex-direction: column;
     align-items: flex-start;
+    gap: 10px;
+    margin-top: 10px;
+  }
+
+  nav a {
+    font-size: 1em;
   }
 
   .busca {
