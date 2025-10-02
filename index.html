@@ -142,6 +142,8 @@
 
   <!-- Scripts -->
   <script>
+    const email = localStorage.getItem("usuarioLogado");
+    const usuarios = JSON.parse(localStorage.getItem("usuarios")) || {};
     const aluno = usuarios[email];
 
     if (email && aluno) {
