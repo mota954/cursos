@@ -9,11 +9,27 @@
   <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <style>
+    :root {
+      --bg-light: #f0f8ff;
+      --bg-dark: #1c1c1c;
+      --text-light: #333;
+      --text-dark: #eee;
+      --card-light: #fff;
+      --card-dark: #2c2c2c;
+      --accent: #007bff;
+    }
+
     body {
-      background: linear-gradient(135deg, #e0f7fa, #ffffff);
-      font-family: 'Roboto', sans-serif;
       margin: 0;
-      padding: 0;
+      font-family: 'Roboto', sans-serif;
+      background: var(--bg-light);
+      color: var(--text-light);
+      transition: all 0.3s ease;
+    }
+
+    body.dark {
+      background: var(--bg-dark);
+      color: var(--text-dark);
     }
 
     .sidebar {
@@ -22,7 +38,7 @@
       left: 0;
       width: 220px;
       height: 100%;
-      background: #007bff;
+      background: var(--accent);
       padding-top: 60px;
       box-shadow: 2px 0 10px rgba(0,0,0,0.1);
       z-index: 1000;
@@ -41,26 +57,40 @@
       background: #0056b3;
     }
 
+    .header {
+      position: fixed;
+      top: 0;
+      left: 220px;
+      right: 0;
+      height: 60px;
+      background: var(--card-light);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 30px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      z-index: 999;
+    }
+
+    body.dark .header {
+      background: var(--card-dark);
+    }
+
     .aluno-container {
       margin-left: 240px;
+      margin-top: 80px;
       padding: 40px;
       max-width: 1000px;
     }
 
     h2 {
-      color: #007bff;
       font-size: 2em;
       margin-bottom: 10px;
     }
 
-    p, li {
-      font-size: 1.1em;
-      color: #555;
-    }
-
     .painel-topicos {
       margin-bottom: 50px;
-      border-bottom: 1px solid #eee;
+      border-bottom: 1px solid #ccc;
       padding-bottom: 30px;
     }
 
@@ -71,13 +101,17 @@
     }
 
     .curso-card {
-      background: linear-gradient(135deg, #f8f9fa, #ffffff);
+      background: var(--card-light);
       padding: 25px;
       border-radius: 12px;
       box-shadow: 0 6px 16px rgba(0,0,0,0.1);
       width: 260px;
       transition: transform 0.3s ease, box-shadow 0.3s ease;
       text-align: center;
+    }
+
+    body.dark .curso-card {
+      background: var(--card-dark);
     }
 
     .curso-card:hover {
@@ -88,13 +122,12 @@
     .curso-card h3 {
       margin-bottom: 15px;
       font-size: 1.2em;
-      color: #333;
     }
 
     .curso-card a {
       display: inline-block;
       padding: 10px 20px;
-      background: #007bff;
+      background: var(--accent);
       color: white;
       border-radius: 30px;
       text-decoration: none;
@@ -129,18 +162,18 @@
       margin-top: 40px;
     }
 
-    .actions a {
+    .btn-voltar, .btn-sair {
       padding: 12px 30px;
       border-radius: 30px;
       font-weight: bold;
       text-decoration: none;
       font-size: 1em;
       transition: background 0.3s ease;
+      color: white;
     }
 
     .btn-voltar {
       background: #17a2b8;
-      color: white;
     }
 
     .btn-voltar:hover {
@@ -149,11 +182,24 @@
 
     .btn-sair {
       background: #dc3545;
-      color: white;
     }
 
     .btn-sair:hover {
       background: #c82333;
+    }
+
+    .notificacoes {
+      background: #fff3cd;
+      color: #856404;
+      padding: 15px;
+      border-radius: 8px;
+      margin-bottom: 20px;
+      animation: fadeIn 1s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-10px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
     @media (max-width: 768px) {
@@ -166,8 +212,13 @@
         justify-content: space-around;
       }
 
+      .header {
+        left: 0;
+      }
+
       .aluno-container {
         margin-left: 0;
+        margin-top: 100px;
         padding: 20px;
       }
 
@@ -184,184 +235,213 @@
   </style>
 </head>
 <body>
-
   <div class="sidebar">
     <a href="#notasCursos"><i class="fas fa-clipboard-check"></i> Notas</a>
     <a href="#historicoAluno"><i class="fas fa-history"></i> Histórico</a>
     <a href="#financeiroInfo"><i class="fas fa-wallet"></i> Financeiro</a>
+    <a href="#perfilAluno"><i class="fas fa-user"></i> Perfil</a>
+    <a href="#notificacoes"><i class="fas fa-bell"></i> Notificações</a>
+  </div>
+
+  <div class="header">
+    <div id="nomeAlunoHeader">Bem-vindo!</div>
+    <button onclick="alternarTema()" style="padding:8px 16px; border:none; border-radius:20px; background:#007bff; color:white; font-weight:bold;">Alternar Tema</button>
   </div>
 
   <div class="aluno-container" data-aos="fade-up">
-    <h2 id="saudacaoAluno">👋 Bem-vindo!</h2>
+    <div id="notificacoes" class="notificacoes" style="display:none;"></div>
 
     <div class="painel-topicos" data-aos="fade-up">
-      <h2>📚 Seus Cursos</h2>
+      <h2>Seus Cursos</h2>
       <div class="curso-lista" id="listaCursos"></div>
     </div>
 
     <div class="painel-topicos" data-aos="fade-up" id="notasCursos">
-      <h2>📝 Notas de Cada Curso</h2>
+      <h2>Notas</h2>
       <div id="notasCursos"></div>
     </div>
 
     <div class="painel-topicos" data-aos="fade-up" id="historicoAluno">
-      <h2>📜 Histórico de Acesso</h2>
+      <h2>Histórico</h2>
       <ul id="historicoAluno"></ul>
     </div>
 
     <div class="painel-topicos" data-aos="fade-up">
-      <h2>📊 Progresso do Aluno</h2>
+      <h2>Progresso</h2>
       <canvas id="graficoProgresso"></canvas>
     </div>
 
     <div class="painel-topicos" data-aos="fade-up" id="financeiroInfo">
-      <h2>💰 Financeiro</h2>
+      <h2>Financeiro</h2>
       <p id="financeiroInfo"></p>
     </div>
 
     <div class="painel-topicos" data-aos="fade-up">
-      <h2>📅 Calendário</h2>
+      <h2>Calendário</h2>
       <ul id="calendarioAluno"></ul>
     </div>
 
+    <div class="painel-topicos" data-aos="fade-up" id="perfilAluno">
+      <h2>Perfil do Aluno</h2>
+      <p><strong>Nome:</strong> <span id="perfilNome"></span></p>
+      <p><strong>Email:</strong> <span id="perfilEmail"></span></p>
+      <p><strong>Telefone:</strong> <span id="perfilTelefone"></span></p>
+      <button onclick="editarPerfil()">Editar Perfil</button>
+    </div>
+
     <div class="painel-topicos" data-aos="fade-up">
-      <h2>💬 Sala de Bate-Papo</h2>
+      <h2>Bate-Papo</h2>
       <div id="chat-box"></div>
-      <input type="text" id="chat-input" class="form-control mt-2" placeholder="Digite sua mensagem...">
-      <button onclick="enviarMensagem()" class="btn btn-primary mt-2">Enviar</button>
+      <input type="text" id="chat-input" placeholder="Digite sua mensagem...">
+      <button onclick="enviarMensagem()">Enviar</button>
     </div>
 
     <div class="actions">
-      <a href="index.html#cursos" class="btn-voltar"><i class="fas fa-arrow-left"></i> Comprar mais cursos</a>
-      <a href="#" class="btn-sair" onclick="logout()"><i class="fas fa-sign-out-alt"></i> Sair da conta</a>
+      <a href="index.html#cursos" class="btn-voltar">Comprar mais cursos</a>
+      <a href="#" class="btn-sair" onclick="logout()">Sair da conta</a>
     </div>
   </div>
+<script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+<script>
+  AOS.init({ duration: 1000, once: true });
 
-  <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
-  <script>
-    AOS.init({ duration: 1000, once: true });
+  const email = localStorage.getItem("usuarioLogado");
+  const usuarios = JSON.parse(localStorage.getItem("usuarios")) || {};
+  const aluno = usuarios[email];
 
-    const email = localStorage.getItem("usuarioLogado");
-    const usuarios = JSON.parse(localStorage.getItem("usuarios")) || {};
-    const aluno = usuarios[email];
+  if (!email || !aluno) window.location.href = "acesso.html";
 
-    if (!email || !aluno) {
-      window.location.href = "acesso.html";
-    }
+  document.getElementById("nomeAlunoHeader").innerText = `Bem-vindo, ${aluno.nome}!`;
+  document.getElementById("perfilNome").innerText = aluno.nome;
+  document.getElementById("perfilEmail").innerText = email;
+  document.getElementById("perfilTelefone").innerText = aluno.telefone || "Não informado";
 
-    document.getElementById("saudacaoAluno").innerText = `👋 Bem-vindo, ${aluno.nome}!`;
+  const nomes = {
+    programacao: "Programação",
+    marketing: "Marketing",
+    economia: "Economia",
+    contabilidade: "Contabilidade",
+    administracao: "Administração",
+    vendas: "Gestão de Vendas",
+    pessoas: "Gestão de Pessoas",
+    financas: "Finanças"
+  };
 
-    const nomes = {
-      programacao: "💻 Programação",
-      marketing: "📢 Marketing",
-      economia: "📊 Economia",
-      contabilidade: "📘 Contabilidade",
-      administracao: "🏢 Administração",
-      vendas: "🛒 Gestão de Vendas",
-      pessoas: "👥 Gestão de Pessoas",
-      financas: "💰 Finanças"
-    };
+  const lista = document.getElementById("listaCursos");
+  const cursos = aluno.cursosComprados || [];
 
-    const lista = document.getElementById("listaCursos");
-    const cursos = aluno.cursosComprados || [];
-
-        if (cursos.length === 0) {
-      lista.innerHTML = "<p style='color:#888;'>Você ainda não comprou nenhum curso.</p>";
-    } else {
-      cursos.forEach(curso => {
-        const card = document.createElement("div");
-        card.className = "curso-card";
-        card.setAttribute("data-aos", "zoom-in");
-        card.innerHTML = `<h3>${nomes[curso]}</h3><a href="${curso}.html">Acessar</a>`;
-        lista.appendChild(card);
-      });
-    }
-
-    // Notas
-    const notasDiv = document.getElementById("notasCursos");
-    for (const curso in aluno.notas) {
-      notasDiv.innerHTML += `<p>${nomes[curso]}: <strong>${aluno.notas[curso]}</strong></p>`;
-    }
-
-    // Histórico
-    const historicoUl = document.getElementById("historicoAluno");
-    aluno.historico.forEach(item => {
-      const li = document.createElement("li");
-      li.textContent = item;
-      historicoUl.appendChild(li);
+  if (cursos.length === 0) {
+    lista.innerHTML = "<p style='color:#888;'>Você ainda não comprou nenhum curso.</p>";
+  } else {
+    cursos.forEach(curso => {
+      const card = document.createElement("div");
+      card.className = "curso-card";
+      card.setAttribute("data-aos", "zoom-in");
+      card.innerHTML = `<h3>${nomes[curso]}</h3><a href="${curso}.html">Acessar</a>`;
+      lista.appendChild(card);
     });
+  }
 
-    // Progresso do aluno (Chart.js)
-    const ctx = document.getElementById('graficoProgresso').getContext('2d');
-    const progressoTotal = cursos.reduce((acc, curso) => acc + (aluno.progresso?.[curso] || 0), 0);
-    const progressoMedia = cursos.length ? Math.round(progressoTotal / cursos.length) : 0;
+  const notasDiv = document.getElementById("notasCursos");
+  for (const curso in aluno.notas) {
+    notasDiv.innerHTML += `<p>${nomes[curso]}: <strong>${aluno.notas[curso]}</strong></p>`;
+  }
 
-    new Chart(ctx, {
-      type: 'doughnut',
-      data: {
-        labels: ['Concluído', 'Restante'],
-        datasets: [{
-          data: [progressoMedia, 100 - progressoMedia],
-          backgroundColor: ['#4caf50', '#e0e0e0'],
-          borderWidth: 1
-        }]
-      },
-      options: {
-        plugins: {
-          legend: {
-            position: 'bottom'
-          }
-        }
-      }
-    });
+  const historicoUl = document.getElementById("historicoAluno");
+  aluno.historico.forEach(item => {
+    const li = document.createElement("li");
+    li.textContent = item;
+    historicoUl.appendChild(li);
+  });
 
-    // Financeiro
-    const financeiro = aluno.financeiro;
-    document.getElementById("financeiroInfo").innerHTML = `
-      Último pagamento: <strong>${financeiro.ultimoPagamento}</strong><br>
-      Status: <span style="color:${financeiro.status === 'Em dia' ? 'green' : 'red'};">${financeiro.status}</span>
-    `;
+  const ctx = document.getElementById('graficoProgresso').getContext('2d');
+  const progressoTotal = cursos.reduce((acc, curso) => acc + (aluno.progresso?.[curso] || 0), 0);
+  const progressoMedia = cursos.length ? Math.round(progressoTotal / cursos.length) : 0;
 
-    // Calendário
-    const calendarioUl = document.getElementById("calendarioAluno");
-    aluno.calendario.forEach(evento => {
-      const li = document.createElement("li");
-      li.textContent = evento;
-      calendarioUl.appendChild(li);
-    });
-
-    // Sala de bate-papo
-    function enviarMensagem() {
-      const input = document.getElementById('chat-input');
-      const mensagem = input.value.trim();
-      if (mensagem) {
-        const msgElement = document.createElement('div');
-        msgElement.textContent = `Você: ${mensagem}`;
-        document.getElementById('chat-box').appendChild(msgElement);
-        input.value = '';
-        document.getElementById('chat-box').scrollTop = document.getElementById('chat-box').scrollHeight;
+  new Chart(ctx, {
+    type: 'doughnut',
+    data: {
+      labels: ['Concluído', 'Restante'],
+      datasets: [{
+        data: [progressoMedia, 100 - progressoMedia],
+        backgroundColor: ['#4caf50', '#e0e0e0'],
+        borderWidth: 1
+      }]
+    },
+    options: {
+      plugins: {
+        legend: { position: 'bottom' }
       }
     }
+  });
 
-    // Logout
-    function logout() {
-      localStorage.removeItem("usuarioLogado");
-      window.location.href = "index.html";
+  const financeiro = aluno.financeiro;
+  document.getElementById("financeiroInfo").innerHTML = `
+    Último pagamento: <strong>${financeiro.ultimoPagamento}</strong><br>
+    Status: <span style="color:${financeiro.status === 'Em dia' ? 'green' : 'red'};">${financeiro.status}</span>
+  `;
+
+  const calendarioUl = document.getElementById("calendarioAluno");
+  aluno.calendario.forEach(evento => {
+    const li = document.createElement("li");
+    li.textContent = evento;
+    calendarioUl.appendChild(li);
+  });
+
+  function enviarMensagem() {
+    const input = document.getElementById('chat-input');
+    const mensagem = input.value.trim();
+    if (mensagem) {
+      const msgElement = document.createElement('div');
+      msgElement.textContent = `Você: ${mensagem}`;
+      document.getElementById('chat-box').appendChild(msgElement);
+      input.value = '';
+      document.getElementById('chat-box').scrollTop = document.getElementById('chat-box').scrollHeight;
     }
+  }
 
-    // Rolagem suave para os botões da barra lateral
+  function logout() {
+    localStorage.removeItem("usuarioLogado");
+    window.location.href = "index.html";
+  }
+
+  function alternarTema() {
+    document.body.classList.toggle("dark");
+    localStorage.setItem("tema", document.body.classList.contains("dark") ? "dark" : "light");
+  }
+
+  if (localStorage.getItem("tema") === "dark") {
+    document.body.classList.add("dark");
+  }
+
+  function editarPerfil() {
+    const novoNome = prompt("Digite seu novo nome:", aluno.nome);
+    const novoTelefone = prompt("Digite seu telefone:", aluno.telefone || "");
+    if (novoNome) aluno.nome = novoNome;
+    if (novoTelefone) aluno.telefone = novoTelefone;
+    usuarios[email] = aluno;
+    localStorage.setItem("usuarios", JSON.stringify(usuarios));
+    location.reload();
+  }
+
+  setTimeout(() => {
+    const notificacoes = document.getElementById("notificacoes");
+    notificacoes.innerHTML = "📢 Novo curso disponível: Inteligência Artificial!";
+    notificacoes.style.display = "block";
+  }, 3000);
+
     document.querySelectorAll('.sidebar a').forEach(link => {
-      link.addEventListener('click', function(e) {
-        e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
-        if (target) {
-          window.scrollTo({
-            top: target.offsetTop - 40,
-            behavior: 'smooth'
-          });
-        }
-      });
+    link.addEventListener('click', function(e) {
+      e.preventDefault();
+      const target = document.querySelector(this.getAttribute('href'));
+      if (target) {
+        window.scrollTo({
+          top: target.offsetTop - 60,
+          behavior: 'smooth'
+        });
+      }
     });
-  </script>
+  });
+</script>
 </body>
 </html>
