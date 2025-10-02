@@ -1,55 +1,48 @@
 /* Reset e base */
 * {
-  box-sizing: border-box;
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
 }
 
 body {
-  font-family: 'Roboto', sans-serif;
-  background: #f8f9fa;
+  font-family: 'Poppins', sans-serif;
+  background-color: #f4f4f4;
   color: #212529;
   line-height: 1.6;
 }
 
 /* Cabeçalho */
 header {
-  background: #007bff;
+  background: linear-gradient(90deg, #1e1e2f, #2c3e50);
   color: white;
   padding: 20px 40px;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  align-items: center;
-  position: sticky;
-  top: 0;
-  z-index: 1000;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
-.logo {
-  font-size: 1.8em;
-  font-weight: bold;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  transition: transform 0.3s ease;
+.topo {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
 }
 
-.logo:hover {
-  transform: scale(1.05);
+.logo {
+  width: 250px;
+  height: auto;
 }
 
 nav {
   display: flex;
-  gap: 20px;
+  gap: 25px;
   flex-wrap: wrap;
 }
 
 nav a {
-  color: white;
+  color: #ffffff;
+  font-size: 18px;
+  font-weight: 600;
   text-decoration: none;
-  font-weight: bold;
-  font-size: 1.1em;
   position: relative;
   transition: color 0.3s ease;
 }
@@ -61,12 +54,12 @@ nav a::after {
   height: 2px;
   bottom: -4px;
   left: 0;
-  background-color: #ffc107;
+  background-color: #00d8ff;
   transition: width 0.3s ease;
 }
 
 nav a:hover {
-  color: #ffc107;
+  color: #00d8ff;
 }
 
 nav a:hover::after {
@@ -74,20 +67,75 @@ nav a:hover::after {
 }
 
 .btn-login {
-  background-color: #ffc107;
+  background-color: #00d8ff;
   padding: 8px 16px;
-  border-radius: 30px;
-  color: #212529 !important;
+  border-radius: 6px;
+  color: #1e1e2f !important;
   font-weight: bold;
-  transition: background 0.3s ease, transform 0.3s ease;
+  transition: background 0.3s ease, color 0.3s ease;
 }
 
 .btn-login:hover {
-  background-color: #e0a800;
-  transform: scale(1.05);
+  background-color: #ffffff;
+  color: #00d8ff !important;
+}
+
+/* Perfil */
+.perfil-container {
+  position: relative;
+  margin-left: 20px;
+}
+
+.perfil-btn {
+  background: none;
+  border: none;
+  color: white;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+}
+
+.perfil-btn img {
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+}
+
+.perfil-dropdown {
+  position: absolute;
+  top: 40px;
+  right: 0;
+  background: white;
+  color: #212529;
+  border-radius: 6px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  display: none;
+  flex-direction: column;
+  min-width: 150px;
+  z-index: 1000;
+}
+
+.perfil-dropdown a {
+  padding: 10px;
+  text-decoration: none;
+  color: #212529;
+  border-bottom: 1px solid #eee;
+  transition: background 0.3s ease;
+}
+
+.perfil-dropdown a:hover {
+  background: #f4f4f4;
 }
 
 /* Busca */
+.busca {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
 .busca input {
   padding: 10px;
   border-radius: 30px;
@@ -99,8 +147,8 @@ nav a:hover::after {
   padding: 10px 20px;
   border-radius: 30px;
   border: none;
-  background: #ffc107;
-  color: #212529;
+  background: #00d8ff;
+  color: #1e1e2f;
   font-weight: bold;
   margin-left: 10px;
   cursor: pointer;
@@ -108,7 +156,7 @@ nav a:hover::after {
 }
 
 .busca button:hover {
-  background: #e0a800;
+  background: #00b8d8;
 }
 
 /* Banner */
@@ -165,7 +213,7 @@ nav a:hover::after {
   gap: 30px;
 }
 
-/* Cards de curso */
+/* Cards */
 .card {
   background: white;
   padding: 20px;
@@ -173,11 +221,6 @@ nav a:hover::after {
   box-shadow: 0 6px 16px rgba(0,0,0,0.1);
   max-width: 300px;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
-  opacity: 0;
-}
-
-.card[data-aos] {
-  opacity: 1 !important;
 }
 
 .card:hover {
@@ -264,31 +307,32 @@ nav a:hover::after {
 }
 
 /* Formulário */
-form input, form button {
+form input, form button, form select {
   padding: 10px;
   border-radius: 8px;
   margin: 10px 0;
   width: 100%;
   max-width: 300px;
+  border: none;
 }
 
 form button {
-  background: #ffc107;
-  border: none;
+  background: #00d8ff;
+  color: #1e1e2f;
   font-weight: bold;
   cursor: pointer;
   transition: background 0.3s ease, transform 0.3s ease;
-  box-shadow: 0 0 10px rgba(255, 193, 7, 0.5);
+  box-shadow: 0 0 10px rgba(0, 216, 255, 0.5);
 }
 
 form button:hover {
-  background: #e0a800;
+  background: #00b8d8;
   transform: scale(1.05);
 }
 
 /* Rodapé */
 footer {
-  background: #007bff;
+  background: #1e1e2f;
   color: white;
   text-align: center;
   padding: 30px 20px;
@@ -296,40 +340,64 @@ footer {
 }
 
 footer a {
-  color: #ffc107;
+  color: #00d8ff;
   text-decoration: none;
   transition: color 0.3s ease;
 }
 
 footer a:hover {
-  color: white;
+  color: #ffffff;
 }
 
 /* Responsividade */
 @media (max-width: 768px) {
-  header {
+  .topo {
     flex-direction: column;
     align-items: flex-start;
-    padding: 20px;
+    gap: 15px;
   }
 
   nav {
     flex-direction: column;
     align-items: flex-start;
     gap: 10px;
-    margin-top: 10px;
-  }
-
-  nav a {
-    font-size: 1em;
   }
 
   .busca {
-    margin-top: 10px;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-top: 20px;
+  }
+
+  .busca input {
+    width: 100%;
+    margin-bottom: 10px;
   }
 
   .grid {
     flex-direction: column;
     align-items: center;
+  }
+
+  .card {
+    width: 100%;
+    max-width: 90%;
+  }
+
+  .banner h1 {
+    font-size: 2em;
+  }
+
+  .banner p {
+    font-size: 1em;
+  }
+
+  .btn-transparent {
+    padding: 10px 20px;
+    font-size: 0.9em;
+  }
+
+  form input, form button, form select {
+    max-width: 100%;
   }
 }
