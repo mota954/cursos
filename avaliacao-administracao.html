@@ -201,6 +201,18 @@
           acertos++;
         }
       }
+      
+  // ✅ Salvar nota no perfil do aluno
+  const usuarios = JSON.parse(localStorage.getItem("usuarios")) || {};
+  const email = localStorage.getItem("usuarioLogado");
+  const aluno = usuarios[email];
+
+  if (aluno) {
+    aluno.notas = aluno.notas || {};
+    aluno.notas["administracao"] = acertos;
+    usuarios[email] = aluno;
+    localStorage.setItem("usuarios", JSON.stringify(usuarios));
+  }
 
       tentativas++;
       const resultado = document.getElementById('resultado');
