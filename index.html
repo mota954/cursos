@@ -14,7 +14,6 @@
   <header>
     <div class="topo">
       <img src="logo-instituto.png" alt="Logo Instituto" class="logo" />
-
       <nav>
         <a href="#home">Home</a>
         <a href="#cursos">Cursos</a>
@@ -24,7 +23,6 @@
         <a href="carrinho.html"><i class="fas fa-shopping-cart"></i> Carrinho</a>
         <a href="login.html" class="btn-login"><i class="fas fa-sign-in-alt"></i> Login</a>
       </nav>
-
       <div class="perfil-container" id="perfilContainer" style="display:none;">
         <button class="perfil-btn" onclick="togglePerfil()">
           <img src="https://via.placeholder.com/32x32.png?text=👤" alt="Foto do aluno" id="fotoAluno">
@@ -36,7 +34,6 @@
         </div>
       </div>
     </div>
-
     <form class="busca">
       <input type="text" placeholder="Buscar cursos...">
       <button type="submit">Buscar</button>
@@ -54,14 +51,54 @@
   <section class="section" id="cursos">
     <h2>📚 Nossos Cursos</h2>
     <div class="grid">
-      <!-- Exemplo de card -->
+      <div class="card">
+        <img src="https://copilot.microsoft.com/th/id/BCO.2fd9c193-654b-45f9-bd23-1909f2fb4728.png" alt="Administração">
+        <h3>🏢 Administração</h3>
+        <p>Planejamento estratégico e gestão de equipes</p>
+        <a href="#" class="btn-comprar" onclick="adicionarAoCarrinho('administracao')">Adicionar ao carrinho</a>
+      </div>
       <div class="card">
         <img src="https://copilot.microsoft.com/th/id/BCO.baaae459-1eb2-48d1-80bb-ca22b2ed20a1.png" alt="Gestão de Vendas">
         <h3>🛒 Gestão de Vendas</h3>
         <p>Técnicas de negociação e fechamento de vendas</p>
         <a href="#" class="btn-comprar" onclick="adicionarAoCarrinho('vendas')">Adicionar ao carrinho</a>
       </div>
-      <!-- Adicione os demais cards conforme necessário -->
+      <div class="card">
+        <img src="https://copilot.microsoft.com/th/id/BCO.529c0621-3583-479b-bb7f-8b136eceefbc.png" alt="Gestão de Pessoas">
+        <h3>👥 Gestão de Pessoas</h3>
+        <p>Desenvolvimento de equipes e liderança eficaz</p>
+        <a href="#" class="btn-comprar" onclick="adicionarAoCarrinho('pessoas')">Adicionar ao carrinho</a>
+      </div>
+      <div class="card">
+        <img src="https://copilot.microsoft.com/th/id/BCO.f750782a-e543-4389-b074-946c444b2ac6.png" alt="Finanças">
+        <h3>💰 Finanças</h3>
+        <p>Orçamento pessoal, investimentos e controle financeiro</p>
+        <a href="#" class="btn-comprar" onclick="adicionarAoCarrinho('financas')">Adicionar ao carrinho</a>
+      </div>
+      <div class="card">
+        <img src="https://copilot.microsoft.com/th/id/BCO.cd2e7e43-39d2-42c3-a412-7b93ef1ec1c4.png" alt="Programação">
+        <h3>💻 Programação</h3>
+        <p>HTML, CSS e JavaScript do zero</p>
+        <a href="#" class="btn-comprar" onclick="adicionarAoCarrinho('programacao')">Adicionar ao carrinho</a>
+      </div>
+      <div class="card">
+        <img src="https://copilot.microsoft.com/th/id/BCO.46be4580-d6ac-40a0-8848-45dedee82b98.png" alt="Marketing">
+        <h3>📢 Marketing</h3>
+        <p>Redes sociais, tráfego pago e estratégias digitais</p>
+        <a href="#" class="btn-comprar" onclick="adicionarAoCarrinho('marketing')">Adicionar ao carrinho</a>
+      </div>
+      <div class="card">
+        <img src="https://copilot.microsoft.com/th/id/BCO.653dcfc4-0bc9-4ed9-b37c-388cdcd3fe8b.png" alt="Economia">
+        <h3>📊 Economia</h3>
+        <p>Fundamentos econômicos e análise de mercado</p>
+        <a href="#" class="btn-comprar" onclick="adicionarAoCarrinho('economia')">Adicionar ao carrinho</a>
+      </div>
+      <div class="card">
+        <img src="https://copilot.microsoft.com/th/id/BCO.5ad0a00a-d6a2-4888-aa4f-cc893b548520.png" alt="Contabilidade">
+        <h3>📘 Contabilidade</h3>
+        <p>Gestão financeira e escrituração contábil</p>
+        <a href="#" class="btn-comprar" onclick="adicionarAoCarrinho('contabilidade')">Adicionar ao carrinho</a>
+      </div>
     </div>
   </section>
 
@@ -107,9 +144,8 @@
   <script>
     const email = localStorage.getItem("usuarioLogado");
     const usuarios = JSON.parse(localStorage.getItem("usuarios")) || {};
-    const aluno = usuarios[email];
-
-    if (email && aluno) {
+    const aluno =    
+      if (email && aluno) {
       document.getElementById("perfilContainer").style.display = "inline-block";
       document.getElementById("nomeAluno").innerText = aluno.nome;
       document.getElementById("fotoAluno").src = aluno.foto || "https://via.placeholder.com/32x32.png?text=👤";
