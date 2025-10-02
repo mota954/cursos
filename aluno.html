@@ -4,14 +4,16 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Área do Aluno</title>
-  <link rel="stylesheet" href="style.css" />
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <style>
     body {
       background: linear-gradient(135deg, #e0f7fa, #ffffff);
       font-family: 'Roboto', sans-serif;
+      margin: 0;
+      padding: 0;
     }
 
     .aluno-container {
@@ -21,19 +23,22 @@
       padding: 40px;
       border-radius: 16px;
       box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-      text-align: center;
     }
 
-    .aluno-container h2 {
+    h2 {
       color: #007bff;
       font-size: 2em;
       margin-bottom: 10px;
+      text-align: center;
     }
 
-    .aluno-container p {
+    p, li {
       font-size: 1.1em;
-      margin-bottom: 30px;
       color: #555;
+    }
+
+    .painel-topicos {
+      margin-bottom: 40px;
     }
 
     .curso-lista {
@@ -50,7 +55,7 @@
       box-shadow: 0 6px 16px rgba(0,0,0,0.1);
       width: 260px;
       transition: transform 0.3s ease, box-shadow 0.3s ease;
-      position: relative;
+      text-align: center;
     }
 
     .curso-card:hover {
@@ -79,12 +84,27 @@
       background: #0056b3;
     }
 
+    canvas {
+      max-width: 400px;
+      margin: auto;
+      display: block;
+    }
+
+    #chat-box {
+      height: 200px;
+      overflow-y: auto;
+      border: 1px solid #ccc;
+      padding: 10px;
+      background: #f9f9f9;
+      border-radius: 8px;
+    }
+
     .actions {
-      margin-top: 50px;
       display: flex;
       justify-content: center;
       gap: 20px;
       flex-wrap: wrap;
+      margin-top: 40px;
     }
 
     .actions a {
@@ -131,8 +151,43 @@
 
   <div class="aluno-container" data-aos="fade-up">
     <h2 id="saudacaoAluno">👋 Bem-vindo!</h2>
-    <p>Estes são os cursos que você comprou:</p>
-    <div class="curso-lista" id="listaCursos"></div>
+
+    <div class="painel-topicos" data-aos="fade-up">
+      <h2>📚 Seus Cursos</h2>
+      <div class="curso-lista" id="listaCursos"></div>
+    </div>
+
+    <div class="painel-topicos" data-aos="fade-up">
+      <h2>📝 Notas de Cada Curso</h2>
+      <div id="notasCursos"></div>
+    </div>
+
+    <div class="painel-topicos" data-aos="fade-up">
+      <h2>📜 Histórico de Acesso</h2>
+      <ul id="historicoAluno"></ul>
+    </div>
+
+    <div class="painel-topicos" data-aos="fade-up">
+      <h2>📊 Progresso do Aluno</h2>
+      <canvas id="graficoProgresso"></canvas>
+    </div>
+
+    <div class="painel-topicos" data-aos="fade-up">
+      <h2>💰 Financeiro</h2>
+      <p id="financeiroInfo"></p>
+    </div>
+
+    <div class="painel-topicos" data-aos="fade-up">
+      <h2>📅 Calendário</h2>
+      <ul id="calendarioAluno"></ul>
+    </div>
+
+    <div class="painel-topicos" data-aos="fade-up">
+      <h2>💬 Sala de Bate-Papo</h2>
+      <div id="chat-box"></div>
+      <input type="text" id="chat-input" class="form-control mt-2" placeholder="Digite sua mensagem...">
+      <button onclick="enviarMensagem()" class="btn btn-primary mt-2">Enviar</button>
+    </div>
 
     <div class="actions">
       <a href="index.html#cursos" class="btn-voltar"><i class="fas fa-arrow-left"></i> Comprar mais cursos</a>
@@ -154,9 +209,6 @@
 
     document.getElementById("saudacaoAluno").innerText = `👋 Bem-vindo, ${aluno.nome}!`;
 
-    const cursos = aluno.cursosComprados || [];
-    const lista = document.getElementById("listaCursos");
-
     const nomes = {
       programacao: "💻 Programação",
       marketing: "📢 Marketing",
@@ -167,6 +219,9 @@
       pessoas: "👥 Gestão de Pessoas",
       financas: "💰 Finanças"
     };
+
+    const lista = document.getElementById("listaCursos");
+    const cursos = aluno.cursosComprados || [];
 
     if (cursos.length === 0) {
       lista.innerHTML = "<p style='color:#888;'>Você ainda não comprou nenhum curso.</p>";
@@ -180,11 +235,80 @@
       });
     }
 
-    function logout() {
-      localStorage.removeItem("usuarioLogado");
-      window.location.href = "index.html";
+    // Notas
+    const notasDiv = document.getElementById("notasCursos");
+    for (const curso in aluno.notas) {
+      notasDiv.innerHTML += `<p>${nomes[curso]}: <strong>${aluno.notas[curso]}</strong></p>`;
     }
-  </script>
 
+    // Histórico
+    const historicoUl = document.getElementById("historicoAluno");
+    aluno.historico.forEach(item => {
+      const li = document.createElement("li");
+      li.textContent = item;
+      historicoUl.appendChild(li);
+    });
+
+    // Progresso
+    const ctx = document.getElementById('// Progresso do aluno (Chart.js)
+const ctx = document.getElementById('graficoProgresso').getContext('2d');
+const progressoTotal = cursos.reduce((acc, curso) => acc + (aluno.progresso[curso] || 0), 0);
+const progressoMedia = cursos.length ? Math.round(progressoTotal / cursos.length) : 0;
+
+new Chart(ctx, {
+  type: 'doughnut',
+  data: {
+    labels: ['Concluído', 'Restante'],
+    datasets: [{
+      data: [progressoMedia, 100 - progressoMedia],
+      backgroundColor: ['#4caf50', '#e0e0e0'],
+      borderWidth: 1
+    }]
+  },
+  options: {
+    plugins: {
+      legend: {
+        position: 'bottom'
+      }
+    }
+  }
+});
+
+// Financeiro
+const financeiro = aluno.financeiro;
+document.getElementById("financeiroInfo").innerHTML = `
+  Último pagamento: <strong>${financeiro.ultimoPagamento}</strong><br>
+  Status: <span style="color:${financeiro.status === 'Em dia' ? 'green' : 'red'};">${financeiro.status}</span>
+`;
+
+// Calendário
+const calendarioUl = document.getElementById("calendarioAluno");
+aluno.calendario.forEach(evento => {
+  const li = document.createElement("li");
+  li.textContent = evento;
+  calendarioUl.appendChild(li);
+});
+
+// Sala de bate-papo
+function enviarMensagem() {
+  const input = document.getElementById('chat-input');
+  const mensagem = input.value.trim();
+  if (mensagem) {
+    const msgElement = document.createElement('div');
+    msgElement.textContent = `Você: ${mensagem}`;
+    document.getElementById('chat-box').appendChild(msgElement);
+    input.value = '';
+    document.getElementById('chat-box').scrollTop = chatBox.scrollHeight;
+  }
+}
+
+// Logout
+function logout() {
+  localStorage.removeItem("usuarioLogado");
+  window.location.href = "index.html";
+}
+  </script>
 </body>
 </html>
+
+                                      
