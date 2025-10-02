@@ -15,6 +15,16 @@
     <div class="topo">
       <img src="logo-instituto.png" alt="Logo Instituto" class="logo" />
       <nav>
+        <div class="perfil-container" id="perfilContainer" style="display:none;">
+  <button class="perfil-btn" onclick="togglePerfil()">
+    <img src="https://via.placeholder.com/32x32.png?text=👤" alt="Foto do aluno" id="fotoAluno">
+    <span id="nomeAluno"></span>
+  </button>
+  <div class="perfil-dropdown" id="perfilDropdown">
+    <a href="aluno.html">Área do Aluno</a>
+    <a href="#" onclick="logout()">Sair</a>
+  </div>
+</div>
         <a href="#home">Home</a>
         <a href="#cursos">Cursos</a>
         <a href="#depoimentos">Depoimentos</a>
@@ -23,16 +33,6 @@
         <a href="carrinho.html"><i class="fas fa-shopping-cart"></i> Carrinho</a>
         <a href="login.html" class="btn-login"><i class="fas fa-sign-in-alt"></i> Login</a>
       </nav>
-      <div class="perfil-container" id="perfilContainer" style="display:none;">
-        <button class="perfil-btn" onclick="togglePerfil()">
-          <img src="https://via.placeholder.com/32x32.png?text=👤" alt="Foto do aluno" id="fotoAluno">
-          <span id="nomeAluno"></span>
-        </button>
-        <div class="perfil-dropdown" id="perfilDropdown">
-          <a href="aluno.html">Área do Aluno</a>
-          <a href="#" onclick="logout()">Sair</a>
-        </div>
-      </div>
     </div>
     <form class="busca">
       <input type="text" placeholder="Buscar cursos...">
