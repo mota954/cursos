@@ -250,9 +250,10 @@
     });
 
     // Progresso
-    const ctx = document.getElementById('// Progresso do aluno (Chart.js)
+const ctx = document.getElementById('// Progresso do aluno (Chart.js)
+// Progresso do aluno (Chart.js)
 const ctx = document.getElementById('graficoProgresso').getContext('2d');
-const progressoTotal = cursos.reduce((acc, curso) => acc + (aluno.progresso[curso] || 0), 0);
+const progressoTotal = cursos.reduce((acc, curso) => acc + (aluno.progresso?.[curso] || 0), 0);
 const progressoMedia = cursos.length ? Math.round(progressoTotal / cursos.length) : 0;
 
 new Chart(ctx, {
