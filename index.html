@@ -4,218 +4,77 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Instituto de Cursos Online Profissionais</title>
+  <link rel="stylesheet" href="style.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&display=swap" rel="stylesheet" />
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    body {
-      font-family: 'Poppins', sans-serif;
-      background-color: #f4f4f4;
-    }
-
-    header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 20px 40px;
-      background: linear-gradient(90deg, #1e1e2f, #2c3e50);
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-    }
-
-    .logo {
-      width: 250px;
-      height: auto;
-    }
-
-    nav {
-      display: flex;
-      gap: 25px;
-    }
-
-    nav a {
-      color: #ffffff;
-      font-size: 18px;
-      font-weight: 600;
-      text-decoration: none;
-      position: relative;
-      transition: color 0.3s ease;
-    }
-
-    nav a::after {
-      content: '';
-      position: absolute;
-      width: 0%;
-      height: 2px;
-      bottom: -4px;
-      left: 0;
-      background-color: #00d8ff;
-      transition: width 0.3s ease;
-    }
-
-    nav a:hover {
-      color: #00d8ff;
-    }
-
-    nav a:hover::after {
-      width: 100%;
-    }
-
-    .btn-login {
-      background-color: #00d8ff;
-      padding: 8px 16px;
-      border-radius: 6px;
-      color: #1e1e2f !important;
-      font-weight: bold;
-      transition: background 0.3s ease, color 0.3s ease;
-    }
-
-    .btn-login:hover {
-      background-color: #ffffff;
-      color: #00d8ff !important;
-    }
-
-    @media (max-width: 768px) {
-      header {
-        flex-direction: column;
-        align-items: flex-start;
-      }
-
-      nav {
-        flex-wrap: wrap;
-        gap: 15px;
-        margin-top: 15px;
-      }
-
-      nav a {
-        font-size: 16px;
-      }
-    }
-  </style>
 </head>
 <body>
 
-<header>
-  <div class="topo">
-    <img src="logo-instituto.png" alt="Logo Instituto" class="logo" />
+  <!-- Cabeçalho -->
+  <header>
+    <div class="topo">
+      <img src="logo-instituto.png" alt="Logo Instituto" class="logo" />
 
-    <nav>
-      <a href="#home">Home</a>
-      <a href="#cursos">Cursos</a>
-      <a href="#depoimentos">Depoimentos</a>
-      <a href="#inscricao">Inscreva-se</a>
-      <a href="#contato">Contato</a>
-      <a href="carrinho.html"><i class="fas fa-shopping-cart"></i> Carrinho</a>
-      <a href="login.html" class="btn-login"><i class="fas fa-sign-in-alt"></i> Login</a>
-    </nav>
+      <nav>
+        <a href="#home">Home</a>
+        <a href="#cursos">Cursos</a>
+        <a href="#depoimentos">Depoimentos</a>
+        <a href="#inscricao">Inscreva-se</a>
+        <a href="#contato">Contato</a>
+        <a href="carrinho.html"><i class="fas fa-shopping-cart"></i> Carrinho</a>
+        <a href="login.html" class="btn-login"><i class="fas fa-sign-in-alt"></i> Login</a>
+      </nav>
 
-    <!-- Botão de perfil com foto -->
-    <div class="perfil-container" id="perfilContainer" style="display:none;">
-      <button class="perfil-btn" onclick="togglePerfil()">
-        <img src="https://via.placeholder.com/32x32.png?text=👤" alt="Foto do aluno" id="fotoAluno">
-        <span id="nomeAluno"></span>
-      </button>
-      <div class="perfil-dropdown" id="perfilDropdown">
-        <a href="aluno.html">Área do Aluno</a>
-        <a href="#" onclick="logout()">Sair</a>
+      <div class="perfil-container" id="perfilContainer" style="display:none;">
+        <button class="perfil-btn" onclick="togglePerfil()">
+          <img src="https://via.placeholder.com/32x32.png?text=👤" alt="Foto do aluno" id="fotoAluno">
+          <span id="nomeAluno"></span>
+        </button>
+        <div class="perfil-dropdown" id="perfilDropdown">
+          <a href="aluno.html">Área do Aluno</a>
+          <a href="#" onclick="logout()">Sair</a>
+        </div>
       </div>
     </div>
-  </div>
 
-  <!-- Campo de busca -->
-  <form class="busca">
-    <input type="text" placeholder="Buscar cursos...">
-    <button type="submit">Buscar</button>
-  </form>
-</header>
+    <form class="busca">
+      <input type="text" placeholder="Buscar cursos...">
+      <button type="submit">Buscar</button>
+    </form>
+  </header>
 
   <!-- Banner -->
-  <section class="banner" id="home" data-aos="fade-down">
+  <section class="banner" id="home">
     <h1>Transforme sua carreira com nossos cursos</h1>
     <p>Certificados reconhecidos e professores experientes</p>
     <a href="#cursos" class="btn-transparent">Ver cursos</a>
   </section>
 
   <!-- Cursos -->
-  <section class="section" id="cursos" data-aos="fade-up">
+  <section class="section" id="cursos">
     <h2>📚 Nossos Cursos</h2>
     <div class="grid">
-      <!-- Lista de cursos com botão de carrinho -->
-      <div class="card" data-aos="zoom-in">
-        <img src="https://copilot.microsoft.com/th/id/BCO.2fd9c193-654b-45f9-bd23-1909f2fb4728.png" alt="Administração">
-        <h3>🏢 Administração</h3>
-        <p>Planejamento estratégico e gestão de equipes</p>
-        <a href="#" class="btn-comprar" onclick="adicionarAoCarrinho('administracao')">Adicionar ao carrinho</a>
-      </div>
-
-      <div class="card" data-aos="zoom-in">
-       <img src="https://copilot.microsoft.com/th/id/BCO.baaae459-1eb2-48d1-80bb-ca22b2ed20a1.png" alt="Gestão de Vendas" style="width:100%; max-width:600px; border-radius:10px;">
+      <!-- Exemplo de card -->
+      <div class="card">
+        <img src="https://copilot.microsoft.com/th/id/BCO.baaae459-1eb2-48d1-80bb-ca22b2ed20a1.png" alt="Gestão de Vendas">
         <h3>🛒 Gestão de Vendas</h3>
         <p>Técnicas de negociação e fechamento de vendas</p>
         <a href="#" class="btn-comprar" onclick="adicionarAoCarrinho('vendas')">Adicionar ao carrinho</a>
       </div>
-
-      <div class="card" data-aos="zoom-in">
-        <img src="https://copilot.microsoft.com/th/id/BCO.529c0621-3583-479b-bb7f-8b136eceefbc.png" alt="Gestão de Pessoas - Estilo Faculdade" style="width:100%; max-width:600px; border-radius:10px;">
-        <h3>👥 Gestão de Pessoas</h3>
-        <p>Desenvolvimento de equipes e liderança eficaz</p>
-        <a href="#" class="btn-comprar" onclick="adicionarAoCarrinho('pessoas')">Adicionar ao carrinho</a>
-      </div>
-
-      <div class="card" data-aos="zoom-in">
-        <img src="https://copilot.microsoft.com/th/id/BCO.f750782a-e543-4389-b074-946c444b2ac6.png" alt="Gestão de Finanças" style="width:100%; max-width:600px; border-radius:10px;">
-        <h3>💰 Finanças</h3>
-        <p>Orçamento pessoal, investimentos e controle financeiro</p>
-        <a href="#" class="btn-comprar" onclick="adicionarAoCarrinho('financas')">Adicionar ao carrinho</a>
-      </div>
-
-      <div class="card" data-aos="zoom-in">
-        <img src="https://copilot.microsoft.com/th/id/BCO.cd2e7e43-39d2-42c3-a412-7b93ef1ec1c4.png" alt="Programação">
-        <h3>💻 Programação</h3>
-        <p>HTML, CSS e JavaScript do zero</p>
-        <a href="#" class="btn-comprar" onclick="adicionarAoCarrinho('programacao')">Adicionar ao carrinho</a>
-      </div>
-
-      <div class="card" data-aos="zoom-in">
-        <img src="https://copilot.microsoft.com/th/id/BCO.46be4580-d6ac-40a0-8848-45dedee82b98.png" alt="Marketing">
-        <h3>📢 Marketing</h3>
-        <p>Redes sociais, tráfego pago e estratégias digitais</p>
-        <a href="#" class="btn-comprar" onclick="adicionarAoCarrinho('marketing')">Adicionar ao carrinho</a>
-      </div>
-
-      <!-- Economia -->
-      <div class="card" data-aos="zoom-in">
-        <img src="https://copilot.microsoft.com/th/id/BCO.653dcfc4-0bc9-4ed9-b37c-388cdcd3fe8b.png" alt="Economia">
-        <h3>📊 Economia</h3>
-        <p>Fundamentos econômicos e análise de mercado</p>
-        <a href="#" class="btn-comprar" onclick="adicionarAoCarrinho('economia')">Adicionar ao carrinho</a>
-      </div>
-
-      <!-- Contabilidade -->
-      <div class="card" data-aos="zoom-in">
-        <img src="https://copilot.microsoft.com/th/id/BCO.5ad0a00a-d6a2-4888-aa4f-cc893b548520.png" alt="Contabilidade">
-        <h3>📘 Contabilidade</h3>
-        <p>Gestão financeira e escrituração contábil</p>
-        <a href="#" class="btn-comprar" onclick="adicionarAoCarrinho('contabilidade')">Adicionar ao carrinho</a>
-      </div>
-
+      <!-- Adicione os demais cards conforme necessário -->
     </div>
   </section>
 
   <!-- Depoimentos -->
-  <section class="section" id="depoimentos" data-aos="fade-up">
+  <section class="section" id="depoimentos">
     <h2>💬 Depoimentos</h2>
     <div class="grid">
-      <div class="card" data-aos="fade-right">
+      <div class="card">
         <img src="https://via.placeholder.com/300x200" alt="Ana Souza">
         <p>“O curso mudou minha carreira. Hoje trabalho com programação e ganho o dobro.”</p>
         <span>— Ana Souza</span>
       </div>
-      <div class="card" data-aos="fade-left">
+      <div class="card">
         <img src="https://via.placeholder.com/300x200" alt="Carlos Lima">
         <p>“Aprendi mais em 3 meses do que em 4 anos de faculdade. Recomendo demais!”</p>
         <span>— Carlos Lima</span>
@@ -224,18 +83,18 @@
   </section>
 
   <!-- Inscrição -->
-  <section class="section" id="inscricao" data-aos="fade-up">
+  <section class="section" id="inscricao">
     <h2>📝 Inscreva-se</h2>
     <p>Receba novidades e promoções:</p>
     <form>
-      <input type="text" placeholder="Seu nome">
-      <input type="email" placeholder="Seu e-mail">
+      <input type="text" placeholder="Seu nome" required>
+      <input type="email" placeholder="Seu e-mail" required>
       <button type="submit">Cadastrar</button>
     </form>
   </section>
 
   <!-- Rodapé -->
-  <footer id="contato" data-aos="fade-up">
+  <footer id="contato">
     <p>&copy; 2025 Instituto de Cursos Profissionais</p>
     <p>contato@institutocursos.com.br | WhatsApp: (11) 99999-9999</p>
     <p>
@@ -245,11 +104,7 @@
   </footer>
 
   <!-- Scripts -->
-  <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
   <script>
-    AOS.init({ duration: 1000, once: true });
-
-    // Mostrar nome e foto do aluno logado
     const email = localStorage.getItem("usuarioLogado");
     const usuarios = JSON.parse(localStorage.getItem("usuarios")) || {};
     const aluno = usuarios[email];
