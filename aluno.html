@@ -61,10 +61,14 @@
     section {
       margin-bottom: 40px;
     }
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+    }
     .curso-card {
       background: #fff;
       padding: 20px;
-      margin-bottom: 20px;
       border-radius: 12px;
       box-shadow: 0 4px 12px rgba(0,0,0,0.1);
       transition: transform 0.3s;
@@ -89,6 +93,24 @@
     .curso-card button:hover {
       background: #e65100;
     }
+    .info-box, .perfil-box {
+      background: #fff;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+    body.dark .info-box, body.dark .perfil-box {
+      background: #2c2c2c;
+    }
+    .calendar-list li {
+      margin-bottom: 10px;
+      padding: 10px;
+      background: #e3f2fd;
+      border-radius: 8px;
+    }
+    body.dark .calendar-list li {
+      background: #424242;
+    }
     canvas {
       max-width: 400px;
       margin: auto;
@@ -107,11 +129,9 @@
   </style>
 </head>
 <body>
-<div class="sidebar">
+  <div class="sidebar">
     <a href="#cursos">📘 Cursos</a>
     <a href="#notas">📝 Notas</a>
-    <a href="#historico">📚 Histórico</a>
-    <a href="#financeiro">💳 Financeiro</a>
     <a href="#calendario">📅 Calendário</a>
     <a href="#progresso">📊 Progresso</a>
     <a href="#perfil">👤 Perfil</a>
@@ -124,18 +144,34 @@
   </div>
 
   <main class="container">
-    <section id="cursos" data-aos="fade-up"><h2>Cursos</h2><div id="listaCursos"></div></section>
-    <section id="notas" data-aos="fade-up"><h2>Notas</h2><div id="notasCursos"></div></section>
-    <section id="historico" data-aos="fade-up"><h2>Histórico</h2><ul id="historicoAluno"></ul></section>
-    <section id="financeiro" data-aos="fade-up"><h2>Financeiro</h2><div id="financeiroInfo"></div></section>
-    <section id="calendario" data-aos="fade-up"><h2>Calendário</h2><ul id="calendarioAluno"></ul></section>
-    <section id="progresso" data-aos="fade-up"><h2>Progresso</h2><canvas id="graficoProgresso"></canvas></section>
+    <section id="cursos" data-aos="fade-up">
+      <h2>📘 Meus Cursos</h2>
+      <div id="listaCursos" class="card-grid"></div>
+    </section>
+
+    <section id="notas" data-aos="fade-up">
+      <h2>📝 Minhas Notas</h2>
+      <div id="notasCursos" class="info-box"></div>
+    </section>
+
+    <section id="calendario" data-aos="fade-up">
+      <h2>📅 Calendário</h2>
+      <ul id="calendarioAluno" class="calendar-list"></ul>
+    </section>
+
+    <section id="progresso" data-aos="fade-up">
+      <h2>📊 Progresso</h2>
+      <canvas id="graficoProgresso"></canvas>
+    </section>
+
     <section id="perfil" data-aos="fade-up">
-      <h2>Perfil</h2>
-      <p><strong>Nome:</strong> <span id="perfilNome"></span></p>
-      <p><strong>Email:</strong> <span id="perfilEmail"></span></p>
-      <p><strong>Telefone:</strong> <span id="perfilTelefone"></span></p>
-      <button onclick="editarPerfil()">Editar</button>
+      <h2>👤 Meu Perfil</h2>
+      <div class="perfil-box">
+        <p><strong>Nome:</strong> <span id="perfilNome"></span></p>
+        <p><strong>Email:</strong> <span id="perfilEmail"></span></p>
+        <p><strong>Telefone:</strong> <span id="perfilTelefone"></span></p>
+        <button onclick="editarPerfil()">✏️ Editar</button>
+      </div>
     </section>
   </main>
 
@@ -181,29 +217,6 @@
       }
     }
 
-    const historicoUl = document.getElementById("historicoAluno");
-    if (Array.isArray(aluno.historico)) {
-      aluno.historico.forEach(item => {
-        const li = document.createElement("li");
-        li.textContent = item;
-        historicoUl.appendChild(li);
-      });
-    }
-
-    const painelFinanceiro = document.getElementById("financeiroInfo");
-    if (aluno.financeiro) {
-      painelFinanceiro.innerHTML = `
-        Último pagamento: <strong>${aluno.financeiro.ultimoPagamento}</strong><br>
-        Status: <span style="color:${aluno.financeiro.status === 'Em dia' ? 'green' : 'red'};">${aluno.financeiro.status}</span>
-      `;
-    }
-    if (aluno.pagamentos) {
-      cursos.forEach(curso => {
-        const pago = aluno.pagamentos[curso];
-        painelFinanceiro.innerHTML += `<p>${nomes[curso] || curso}: ${pago ? "✅ Pago" : "❌ Não pago"}</p>`;
-      });
-    }
-
     const calendarioUl = document.getElementById("calendarioAluno");
     const hoje = new Date().toLocaleDateString('pt-BR', {
       weekday: 'long',
@@ -211,7 +224,7 @@
       month: 'long',
       year: 'numeric'
     });
-    calendarioUl.innerHTML += `<li><strong>Hoje:</strong> ${hoje}</li>`;
+        calendarioUl.innerHTML += `<li><strong>Hoje:</strong> ${hoje}</li>`;
     if (Array.isArray(aluno.calendario)) {
       aluno.calendario.forEach(evento => {
         const li = document.createElement("li");
@@ -265,14 +278,10 @@
       location.reload();
     }
 
-function sair() {
-  localStorage.removeItem("usuarioLogado");
-  window.location.href = "acesso.html";
-}
-
-if ('serviceWorker' in navigator) {
-  navigator.serviceWorker.register('service-worker.js');
-}
+    function sair() {
+      localStorage.removeItem("usuarioLogado");
+      window.location.href = "acesso.html";
+    }
 
     if ('serviceWorker' in navigator) {
       navigator.serviceWorker.register('service-worker.js');
@@ -280,4 +289,3 @@ if ('serviceWorker' in navigator) {
   </script>
 </body>
 </html>
-
