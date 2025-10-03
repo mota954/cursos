@@ -4,467 +4,271 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Área do Aluno</title>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-  <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+  <link rel="manifest" href="manifest.json" />
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;700&display=swap" rel="stylesheet" />
+  <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet" />
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <style>
-    :root {
-      --bg-light: #f0f8ff;
-      --bg-dark: #1c1c1c;
-      --text-light: #333;
-      --text-dark: #eee;
-      --card-light: #fff;
-      --card-dark: #2c2c2c;
-      --accent: #007bff;
-    }
-
+    /* Estilo visual profissional */
     body {
       margin: 0;
       font-family: 'Roboto', sans-serif;
-      background: var(--bg-light);
-      color: var(--text-light);
-      transition: all 0.3s ease;
+      background: #f4f4f4;
+      color: #333;
+      transition: background 0.3s ease;
     }
-
     body.dark {
-      background: var(--bg-dark);
-      color: var(--text-dark);
+      background: #1c1c1c;
+      color: #eee;
     }
-
     .sidebar {
       position: fixed;
       top: 0;
       left: 0;
       width: 220px;
       height: 100%;
-      background: var(--accent);
+      background: #007bff;
       padding-top: 60px;
-      box-shadow: 2px 0 10px rgba(0,0,0,0.1);
-      z-index: 1000;
     }
-
     .sidebar a {
       display: block;
       padding: 15px 20px;
       color: white;
       text-decoration: none;
       font-weight: bold;
-      transition: background 0.3s ease;
     }
-
-    .sidebar a:hover {
-      background: #0056b3;
-    }
-
     .header {
-      position: fixed;
-      top: 0;
-      left: 220px;
-      right: 0;
+      margin-left: 220px;
       height: 60px;
-      background: var(--card-light);
+      background: #fff;
       display: flex;
-      align-items: center;
       justify-content: space-between;
+      align-items: center;
       padding: 0 30px;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-      z-index: 999;
     }
-
     body.dark .header {
-      background: var(--card-dark);
+      background: #2c2c2c;
     }
-
-    .aluno-container {
+    .container {
       margin-left: 240px;
-      margin-top: 80px;
-      padding: 40px;
-      max-width: 1000px;
+      padding: 30px;
     }
-
-    h2 {
-      font-size: 2em;
-      margin-bottom: 10px;
+    section {
+      margin-bottom: 40px;
+      animation: fadeIn 1s ease;
     }
-
-    .painel-topicos {
-      margin-bottom: 50px;
-      border-bottom: 1px solid #ccc;
-      padding-bottom: 30px;
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
     }
-
-    .curso-lista {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 30px;
+    #chat-box {
+      height: 200px;
+      overflow-y: auto;
+      background: #eee;
+      padding: 10px;
+      border-radius: 8px;
     }
-
-    .curso-card {
-      background: var(--card-light);
-      padding: 25px;
-      border-radius: 12px;
-      box-shadow: 0 6px 16px rgba(0,0,0,0.1);
-      width: 260px;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-      text-align: center;
-    }
-
-    body.dark .curso-card {
-      background: var(--card-dark);
-    }
-
-    .curso-card:hover {
-      transform: scale(1.05);
-      box-shadow: 0 0 25px rgba(0,123,255,0.3);
-    }
-
-    .curso-card h3 {
-      margin-bottom: 15px;
-      font-size: 1.2em;
-    }
-
-    .curso-card a {
-      display: inline-block;
-      padding: 10px 20px;
-      background: var(--accent);
-      color: white;
-      border-radius: 30px;
-      text-decoration: none;
-      font-weight: bold;
-      transition: background 0.3s ease;
-    }
-
-    .curso-card a:hover {
-      background: #0056b3;
-    }
-
     canvas {
       max-width: 400px;
       margin: auto;
       display: block;
     }
-
-    #chat-box {
-      height: 200px;
-      overflow-y: auto;
-      border: 1px solid #ccc;
-      padding: 10px;
-      background: #f9f9f9;
-      border-radius: 8px;
-    }
-
-    .actions {
-      display: flex;
-      justify-content: center;
-      gap: 20px;
-      flex-wrap: wrap;
-      margin-top: 40px;
-    }
-
-    .btn-voltar, .btn-sair {
-      padding: 12px 30px;
-      border-radius: 30px;
-      font-weight: bold;
-      text-decoration: none;
-      font-size: 1em;
-      transition: background 0.3s ease;
+    button {
+      padding: 10px 20px;
+      border: none;
+      border-radius: 20px;
+      background: #007bff;
       color: white;
-    }
-
-    .btn-voltar {
-      background: #17a2b8;
-    }
-
-    .btn-voltar:hover {
-      background: #138496;
-    }
-
-    .btn-sair {
-      background: #dc3545;
-    }
-
-    .btn-sair:hover {
-      background: #c82333;
-    }
-
-    .notificacoes {
-      background: #fff3cd;
-      color: #856404;
-      padding: 15px;
-      border-radius: 8px;
-      margin-bottom: 20px;
-      animation: fadeIn 1s ease;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(-10px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    @media (max-width: 768px) {
-      .sidebar {
-        position: relative;
-        width: 100%;
-        height: auto;
-        display: flex;
-        flex-direction: row;
-        justify-content: space-around;
-      }
-
-      .header {
-        left: 0;
-      }
-
-      .aluno-container {
-        margin-left: 0;
-        margin-top: 100px;
-        padding: 20px;
-      }
-
-      .curso-lista {
-        flex-direction: column;
-        align-items: center;
-      }
-
-      .actions {
-        flex-direction: column;
-        align-items: center;
-      }
+      font-weight: bold;
+      cursor: pointer;
     }
   </style>
 </head>
 <body>
   <div class="sidebar">
-    <a href="#notasCursos"><i class="fas fa-clipboard-check"></i> Notas</a>
-    <a href="#historicoAluno"><i class="fas fa-history"></i> Histórico</a>
-    <a href="#financeiroInfo"><i class="fas fa-wallet"></i> Financeiro</a>
-    <a href="#perfilAluno"><i class="fas fa-user"></i> Perfil</a>
-    <a href="#notificacoes"><i class="fas fa-bell"></i> Notificações</a>
+    <a href="#cursos">Cursos</a>
+    <a href="#notas">Notas</a>
+    <a href="#historico">Histórico</a>
+    <a href="#financeiro">Financeiro</a>
+    <a href="#calendario">Calendário</a>
+    <a href="#desempenho">Desempenho</a>
+    <a href="#perfil">Perfil</a>
+    <a href="#chat">Mensagens</a>
   </div>
 
   <div class="header">
-    <div id="nomeAlunoHeader">Bem-vindo!</div>
-    <button onclick="alternarTema()" style="padding:8px 16px; border:none; border-radius:20px; background:#007bff; color:white; font-weight:bold;">Alternar Tema</button>
+    <h2 id="nomeAlunoHeader">Bem-vindo!</h2>
+    <button onclick="alternarTema()">🌙</button>
   </div>
 
-   <div class="aluno-container" data-aos="fade-up">
-    <div id="notificacoes" class="notificacoes" style="display:none;"></div>
-
-    <div class="painel-topicos">
-      <h2>Seus Cursos</h2>
-      <div class="curso-lista" id="listaCursos"></div>
-    </div>
-
-    <div class="painel-topicos" id="notasCursos">
-      <h2>Notas</h2>
-      <div id="notasCursos"></div>
-    </div>
-
-    <div class="painel-topicos" id="historicoAluno">
-      <h2>Histórico</h2>
-      <ul id="historicoAluno"></ul>
-    </div>
-
-    <div class="painel-topicos">
-      <h2>Progresso</h2>
-      <canvas id="graficoProgresso"></canvas>
-    </div>
-
-    <div class="painel-topicos">
-      <h2>Financeiro</h2>
-      <div id="financeiroInfo"></div>
-    </div>
-
-    <div class="painel-topicos">
-      <h2>Calendário</h2>
-      <ul id="calendarioAluno"></ul>
-    </div>
-
-    <div class="painel-topicos" id="perfilAluno">
-      <h2>Perfil do Aluno</h2>
+  <main class="container">
+    <section id="cursos"><h2>Cursos</h2><div id="listaCursos"></div></section>
+    <section id="notas"><h2>Notas</h2><div id="notasCursos"></div></section>
+    <section id="historico"><h2>Histórico</h2><ul id="historicoAluno"></ul></section>
+    <section id="financeiro"><h2>Financeiro</h2><div id="financeiroInfo"></div></section>
+    <section id="calendario"><h2>Calendário</h2><ul id="calendarioAluno"></ul></section>
+    <section id="desempenho"><h2>Desempenho</h2><canvas id="graficoProgresso"></canvas></section>
+    <section id="perfil">
+      <h2>Perfil</h2>
       <p><strong>Nome:</strong> <span id="perfilNome"></span></p>
       <p><strong>Email:</strong> <span id="perfilEmail"></span></p>
       <p><strong>Telefone:</strong> <span id="perfilTelefone"></span></p>
-      <button onclick="editarPerfil()">Editar Perfil</button>
-    </div>
-
-    <div class="painel-topicos">
-      <h2>Bate-Papo</h2>
+      <button onclick="editarPerfil()">Editar</button>
+    </section>
+    <section id="chat">
+      <h2>Mensagens</h2>
+      <select id="destinatario"></select>
       <div id="chat-box"></div>
-      <input type="text" id="chat-input" placeholder="Digite sua mensagem...">
+      <input type="text" id="chat-input" placeholder="Digite sua mensagem..." />
       <button onclick="enviarMensagem()">Enviar</button>
-    </div>
+    </section>
+  </main>
 
-    <div class="actions">
-      <a href="index.html#cursos" class="btn-voltar">Comprar mais cursos</a>
-      <a href="#" class="btn-sair" onclick="logout()">Sair da conta</a>
-    </div>
-  </div>
+  <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+  <script>
+    AOS.init();
+    const email = localStorage.getItem("usuarioLogado");
+    const usuarios = JSON.parse(localStorage.getItem("usuarios")) || {};
+    const aluno = usuarios[email];
+    if (!email || !aluno) location.href = "acesso.html";
 
-<script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
-<script>
-  AOS.init({ duration: 1000, once: true });
+    document.getElementById("nomeAlunoHeader").innerText = `Bem-vindo, ${aluno.nome}`;
+    document.getElementById("perfilNome").innerText = aluno.nome;
+    document.getElementById("perfilEmail").innerText = email;
+    document.getElementById("perfilTelefone").innerText = aluno.telefone || "Não informado";
 
-  const email = localStorage.getItem("usuarioLogado");
-  const usuarios = JSON.parse(localStorage.getItem("usuarios")) || {};
-  const aluno = usuarios[email];
+    const nomes = {
+      programacao: "Programação", marketing: "Marketing", economia: "Economia",
+      contabilidade: "Contabilidade", administracao: "Administração",
+      vendas: "Gestão de Vendas", pessoas: "Gestão de Pessoas", financas: "Finanças"
+    };
 
-  if (!email || !aluno) window.location.href = "acesso.html";
-
-  document.getElementById("nomeAlunoHeader").innerText = `Bem-vindo, ${aluno.nome}!`;
-  document.getElementById("perfilNome").innerText = aluno.nome;
-  document.getElementById("perfilEmail").innerText = email;
-  document.getElementById("perfilTelefone").innerText = aluno.telefone || "Não informado";
-
-  const nomes = {
-    programacao: "Programação",
-    marketing: "Marketing",
-    economia: "Economia",
-    contabilidade: "Contabilidade",
-    administracao: "Administração",
-    vendas: "Gestão de Vendas",
-    pessoas: "Gestão de Pessoas",
-    financas: "Finanças"
-  };
-
-  const lista = document.getElementById("listaCursos");
-  const cursos = aluno.cursosComprados || [];
-
-  if (cursos.length === 0) {
-    lista.innerHTML = "<p style='color:#888;'>Você ainda não comprou nenhum curso.</p>";
-  } else {
+    const cursos = aluno.cursosComprados || [];
+    const lista = document.getElementById("listaCursos");
     cursos.forEach(curso => {
       const card = document.createElement("div");
-      card.className = "curso-card";
-      card.setAttribute("data-aos", "zoom-in");
-      card.innerHTML = `<h3>${nomes[curso]}</h3><a href="${curso}.html">Acessar</a>`;
+      card.innerHTML = `<h3>${nomes[curso]}</h3><button onclick="registrarLeitura('${curso}')">Ler módulo</button>`;
       lista.appendChild(card);
     });
-  }
 
-  const notasDiv = document.getElementById("notasCursos");
-  for (const curso in aluno.notas) {
-    notasDiv.innerHTML += `<p>${nomes[curso]}: <strong>${aluno.notas[curso]}</strong></p>`;
-  }
-
-  const historicoUl = document.getElementById("historicoAluno");
-  aluno.historico.forEach(item => {
-    const li = document.createElement("li");
-    li.textContent = item;
-    historicoUl.appendChild(li);
-  });
-
-  const ctx = document.getElementById('graficoProgresso').getContext('2d');
-  const progressoTotal = cursos.reduce((acc, curso) => acc + (aluno.progresso?.[curso] || 0), 0);
-  const progressoMedia = cursos.length ? Math.round(progressoTotal / cursos.length) : 0;
-
-  new Chart(ctx, {
-    type: 'doughnut',
-    data: {
-      labels: ['Concluído', 'Restante'],
-      datasets: [{
-        data: [progressoMedia, 100 - progressoMedia],
-        backgroundColor: ['#4caf50', '#e0e0e0'],
-        borderWidth: 1
-      }]
-    },
-    options: {
-      plugins: {
-        legend: { position: 'bottom' }
-      }
+    const notasDiv = document.getElementById("notasCursos");
+    for (const curso in aluno.notas) {
+      notasDiv.innerHTML += `<p>${nomes[curso]}: <strong>${aluno.notas[curso]}</strong></p>`;
     }
-  });
 
-  // Painel Financeiro
-  const financeiro = aluno.financeiro;
-  const painelFinanceiro = document.getElementById("financeiroInfo");
-  painelFinanceiro.innerHTML = `
-    Último pagamento: <strong>${financeiro.ultimoPagamento}</strong><br>
-    Status: <span style="color:${financeiro.status === 'Em dia' ? 'green' : 'red'};">${financeiro.status}</span>
-  `;
-  if (aluno.pagamentos) {
-    const statusCursos = cursos.map(curso => {
-      const nomeCurso = nomes[curso];
-      const pago = aluno.pagamentos[curso];
-      const status = pago ? "✅ Pago" : "❌ Não pago";
-      return `<p><strong>${nomeCurso}:</strong> ${status}</p>`;
-    }).join("");
-    painelFinanceiro.innerHTML += `<br><br>${statusCursos}`;
-  }
+    const historicoUl = document.getElementById("historicoAluno");
+    aluno.historico.forEach(item => {
+      const li = document.createElement("li");
+      li.textContent = item;
+      historicoUl.appendChild(li);
+    });
 
-  // Calendário
-  const calendarioUl = document.getElementById("calendarioAluno");
-  const hoje = new Date();
-  const opcoes = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-  const dataFormatada = hoje.toLocaleDateString('pt-BR', opcoes);
-  const liHoje = document.createElement("li");
-  liHoje.innerHTML = `<strong>Hoje:</strong> ${dataFormatada}`;
-  calendarioUl.appendChild(liHoje);
-  if (Array.isArray(aluno.calendario)) {
+    const painelFinanceiro = document.getElementById("financeiroInfo");
+    painelFinanceiro.innerHTML = `
+      Último pagamento: <strong>${aluno.financeiro.ultimoPagamento}</strong><br>
+      Status: <span style="color:${aluno.financeiro.status === 'Em dia' ? 'green' : 'red'};">${aluno.financeiro.status}</span>
+    `;
+    if (aluno.pagamentos) {
+      cursos.forEach(curso => {
+        const pago = aluno.pagamentos[curso];
+        painelFinanceiro.innerHTML += `<p>${nomes[curso]}: ${pago ? "✅ Pago" : "❌ Não pago"}</p>`;
+      });
+    }
+
+    const calendarioUl = document.getElementById("calendarioAluno");
+    const hoje = new Date().toLocaleDateString('pt-BR', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
+    calendarioUl.innerHTML += `<li><strong>Hoje:</strong> ${hoje}</li>`;
     aluno.calendario.forEach(evento => {
       const li = document.createElement("li");
-      li.textContent = evento;
+      li.innerHTML = `${evento} <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(evento)}" target="_blank">📅</a>`;
       calendarioUl.appendChild(li);
     });
-  }
 
-  function enviarMensagem() {
-    const input = document.getElementById('chat-input');
-    const mensagem = input.value.trim();
-    if (mensagem) {
-      const msgElement = document.createElement('div');
-      msgElement.textContent = `Você: ${mensagem}`;
-      document.getElementById('chat-box').appendChild(msgElement);
-      input.value = '';
-            document.getElementById('chat-box').appendChild(msgElement);
-      input.value = '';
-      document.getElementById('chat-box').scrollTop = document.getElementById('chat-box').scrollHeight;
+    function registrarLeitura(curso) {
+      if (!aluno.progresso) aluno.progresso = {};
+      aluno.progresso[curso] = Math.min(100, (aluno.progresso[curso] || 0) + 10);
+      usuarios[email] = aluno;
+      localStorage.setItem("usuarios", JSON.stringify(usuarios));
+      atualizarGrafico();
     }
-  }
 
-  function logout() {
-    localStorage.removeItem("usuarioLogado");
-    window.location.href = "index.html";
-  }
+    function atualizarGrafico() {
+      const ctx = document.getElementById('graficoProgresso').getContext('2d');
+      const progressoTotal = cursos.reduce((acc, curso) => acc + (aluno.progresso?.[curso] || 0), 0);
+            const media = cursos.length ? Math.round(progressoTotal / cursos.length) : 0;
+      if (window.grafico) window.grafico.destroy();
+      window.grafico = new Chart(ctx, {
+        type: 'doughnut',
+        data: {
+          labels: ['Concluído', 'Restante'],
+          datasets: [{
+            data: [media, 100 - media],
+            backgroundColor: ['#4caf50', '#ccc'],
+            borderWidth: 1
+          }]
+        },
+        options: {
+          plugins: {
+            legend: { position: 'bottom' }
+          }
+        }
+      });
+    }
+    atualizarGrafico();
 
-  function alternarTema() {
-    document.body.classList.toggle("dark");
-    localStorage.setItem("tema", document.body.classList.contains("dark") ? "dark" : "light");
-  }
+    function enviarMensagem() {
+      const destinatario = document.getElementById("destinatario").value;
+      const input = document.getElementById("chat-input");
+      const mensagem = input.value.trim();
+      if (!mensagem || !destinatario) return;
 
-  if (localStorage.getItem("tema") === "dark") {
-    document.body.classList.add("dark");
-  }
+      const hora = new Date().toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
+      const msgElement = document.createElement("div");
+      msgElement.innerHTML = `<strong>Você</strong> (${hora}): ${mensagem}`;
+      document.getElementById("chat-box").appendChild(msgElement);
 
-  function editarPerfil() {
-    const novoNome = prompt("Digite seu novo nome:", aluno.nome);
-    const novoTelefone = prompt("Digite seu telefone:", aluno.telefone || "");
-    if (novoNome) aluno.nome = novoNome;
-    if (novoTelefone) aluno.telefone = novoTelefone;
-    usuarios[email] = aluno;
-    localStorage.setItem("usuarios", JSON.stringify(usuarios));
-    location.reload();
-  }
+      if (!aluno.mensagens) aluno.mensagens = {};
+      if (!aluno.mensagens[destinatario]) aluno.mensagens[destinatario] = [];
+      aluno.mensagens[destinatario].push({ de: email, texto: mensagem, hora });
 
-  setTimeout(() => {
-    const notificacoes = document.getElementById("notificacoes");
-    notificacoes.innerHTML = "📢 Novo curso disponível: Inteligência Artificial!";
-    notificacoes.style.display = "block";
-  }, 3000);
+      usuarios[email] = aluno;
+      localStorage.setItem("usuarios", JSON.stringify(usuarios));
 
-  document.querySelectorAll('.sidebar a').forEach(link => {
-    link.addEventListener('click', function(e) {
-      e.preventDefault();
-      const target = document.querySelector(this.getAttribute('href'));
-      if (target) {
-        window.scrollTo({
-          top: target.offsetTop - 60,
-          behavior: 'smooth'
-        });
+      input.value = '';
+      document.getElementById("chat-box").scrollTop = document.getElementById("chat-box").scrollHeight;
+    }
+
+    const destinatarioSelect = document.getElementById("destinatario");
+    Object.keys(usuarios).forEach(userEmail => {
+      if (userEmail !== email) {
+        const option = document.createElement("option");
+        option.value = userEmail;
+        option.textContent = userEmail;
+        destinatarioSelect.appendChild(option);
       }
     });
-  });
-</script>
+
+    function alternarTema() {
+      document.body.classList.toggle("dark");
+      localStorage.setItem("tema", document.body.classList.contains("dark") ? "dark" : "light");
+    }
+    if (localStorage.getItem("tema") === "dark") {
+      document.body.classList.add("dark");
+    }
+
+    function editarPerfil() {
+      const novoNome = prompt("Digite seu novo nome:", aluno.nome);
+      const novoTelefone = prompt("Digite seu telefone:", aluno.telefone || "");
+      if (novoNome) aluno.nome = novoNome;
+      if (novoTelefone) aluno.telefone = novoTelefone;
+      usuarios[email] = aluno;
+      localStorage.setItem("usuarios", JSON.stringify(usuarios));
+      location.reload();
+    }
+
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('service-worker.js');
+    }
+  </script>
 </body>
 </html>
