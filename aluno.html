@@ -4,21 +4,20 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Área do Aluno</title>
-  <link rel="manifest" href="manifest.json" />
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;700&display=swap" rel="stylesheet" />
-  <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet" />
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+  <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet" />
   <style>
-    /* Estilo visual profissional */
     body {
       margin: 0;
       font-family: 'Roboto', sans-serif;
-      background: #f4f4f4;
+      background: linear-gradient(to right, #f4f4f4, #e0f7fa);
       color: #333;
       transition: background 0.3s ease;
     }
     body.dark {
-      background: #1c1c1c;
+      background: linear-gradient(to right, #1c1c1c, #2c2c2c);
       color: #eee;
     }
     .sidebar {
@@ -27,8 +26,9 @@
       left: 0;
       width: 220px;
       height: 100%;
-      background: #007bff;
+      background: #673ab7;
       padding-top: 60px;
+      box-shadow: 2px 0 10px rgba(0,0,0,0.2);
     }
     .sidebar a {
       display: block;
@@ -36,6 +36,10 @@
       color: white;
       text-decoration: none;
       font-weight: bold;
+      transition: background 0.3s;
+    }
+    .sidebar a:hover {
+      background: rgba(255,255,255,0.2);
     }
     .header {
       margin-left: 220px;
@@ -45,6 +49,7 @@
       justify-content: space-between;
       align-items: center;
       padding: 0 30px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
     }
     body.dark .header {
       background: #2c2c2c;
@@ -61,12 +66,33 @@
       from { opacity: 0; transform: translateY(10px); }
       to { opacity: 1; transform: translateY(0); }
     }
-    #chat-box {
-      height: 200px;
-      overflow-y: auto;
-      background: #eee;
-      padding: 10px;
-      border-radius: 8px;
+    .curso-card {
+      background: #fff;
+      padding: 20px;
+      margin-bottom: 20px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      transition: transform 0.3s;
+    }
+    .curso-card:hover {
+      transform: translateY(-5px);
+    }
+    body.dark .curso-card {
+      background: #2c2c2c;
+    }
+    .curso-card button {
+      margin-top: 10px;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 20px;
+      background: #ff9800;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    .curso-card button:hover {
+      background: #e65100;
     }
     canvas {
       max-width: 400px;
@@ -86,14 +112,13 @@
 </head>
 <body>
   <div class="sidebar">
-    <a href="#cursos">Cursos</a>
-    <a href="#notas">Notas</a>
-    <a href="#historico">Histórico</a>
-    <a href="#financeiro">Financeiro</a>
-    <a href="#calendario">Calendário</a>
-    <a href="#desempenho">Desempenho</a>
-    <a href="#perfil">Perfil</a>
-    <a href="#chat">Mensagens</a>
+    <a href="#cursos">📘 Cursos</a>
+    <a href="#notas">📝 Notas</a>
+    <a href="#historico">📚 Histórico</a>
+    <a href="#financeiro">💳 Financeiro</a>
+    <a href="#calendario">📅 Calendário</a>
+    <a href="#progresso">📊 Progresso</a>
+    <a href="#perfil">👤 Perfil</a>
   </div>
 
   <div class="header">
@@ -102,29 +127,21 @@
   </div>
 
   <main class="container">
-    <section id="cursos"><h2>Cursos</h2><div id="listaCursos"></div></section>
-    <section id="notas"><h2>Notas</h2><div id="notasCursos"></div></section>
-    <section id="historico"><h2>Histórico</h2><ul id="historicoAluno"></ul></section>
-    <section id="financeiro"><h2>Financeiro</h2><div id="financeiroInfo"></div></section>
-    <section id="calendario"><h2>Calendário</h2><ul id="calendarioAluno"></ul></section>
-    <section id="desempenho"><h2>Desempenho</h2><canvas id="graficoProgresso"></canvas></section>
-    <section id="perfil">
+    <section id="cursos" data-aos="fade-up"><h2>Cursos</h2><div id="listaCursos"></div></section>
+    <section id="notas" data-aos="fade-up"><h2>Notas</h2><div id="notasCursos"></div></section>
+    <section id="historico" data-aos="fade-up"><h2>Histórico</h2><ul id="historicoAluno"></ul></section>
+    <section id="financeiro" data-aos="fade-up"><h2>Financeiro</h2><div id="financeiroInfo"></div></section>
+    <section id="calendario" data-aos="fade-up"><h2>Calendário</h2><ul id="calendarioAluno"></ul></section>
+    <section id="progresso" data-aos="fade-up"><h2>Progresso</h2><canvas id="graficoProgresso"></canvas></section>
+    <section id="perfil" data-aos="fade-up">
       <h2>Perfil</h2>
       <p><strong>Nome:</strong> <span id="perfilNome"></span></p>
       <p><strong>Email:</strong> <span id="perfilEmail"></span></p>
       <p><strong>Telefone:</strong> <span id="perfilTelefone"></span></p>
       <button onclick="editarPerfil()">Editar</button>
     </section>
-    <section id="chat">
-      <h2>Mensagens</h2>
-      <select id="destinatario"></select>
-      <div id="chat-box"></div>
-      <input type="text" id="chat-input" placeholder="Digite sua mensagem..." />
-      <button onclick="enviarMensagem()">Enviar</button>
-    </section>
   </main>
 
-  <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
   <script>
     AOS.init();
     const email = localStorage.getItem("usuarioLogado");
@@ -145,11 +162,19 @@
 
     const cursos = aluno.cursosComprados || [];
     const lista = document.getElementById("listaCursos");
-    cursos.forEach(curso => {
-      const card = document.createElement("div");
-      card.innerHTML = `<h3>${nomes[curso]}</h3><button onclick="registrarLeitura('${curso}')">Ler módulo</button>`;
-      lista.appendChild(card);
-    });
+    if (cursos.length === 0) {
+      lista.innerHTML = "<p>Você ainda não comprou nenhum curso.</p>";
+    } else {
+      cursos.forEach(curso => {
+        const card = document.createElement("div");
+        card.className = "curso-card";
+        card.innerHTML = `
+          <h3>${nomes[curso]}</h3>
+          <button onclick="window.location.href='${curso}.html'">Acessar material</button>
+        `;
+        lista.appendChild(card);
+      });
+    }
 
     const notasDiv = document.getElementById("notasCursos");
     for (const curso in aluno.notas) {
@@ -176,7 +201,12 @@
     }
 
     const calendarioUl = document.getElementById("calendarioAluno");
-    const hoje = new Date().toLocaleDateString('pt-BR', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
+    const hoje = new Date().toLocaleDateString('pt-BR', { weekday: 'long', day: 'numeric', month: 'long', year
+      weekday: 'long',
+      day: 'numeric',
+      month: 'long',
+      year: 'numeric'
+    });
     calendarioUl.innerHTML += `<li><strong>Hoje:</strong> ${hoje}</li>`;
     aluno.calendario.forEach(evento => {
       const li = document.createElement("li");
@@ -184,18 +214,10 @@
       calendarioUl.appendChild(li);
     });
 
-    function registrarLeitura(curso) {
-      if (!aluno.progresso) aluno.progresso = {};
-      aluno.progresso[curso] = Math.min(100, (aluno.progresso[curso] || 0) + 10);
-      usuarios[email] = aluno;
-      localStorage.setItem("usuarios", JSON.stringify(usuarios));
-      atualizarGrafico();
-    }
-
     function atualizarGrafico() {
       const ctx = document.getElementById('graficoProgresso').getContext('2d');
       const progressoTotal = cursos.reduce((acc, curso) => acc + (aluno.progresso?.[curso] || 0), 0);
-            const media = cursos.length ? Math.round(progressoTotal / cursos.length) : 0;
+      const media = cursos.length ? Math.round(progressoTotal / cursos.length) : 0;
       if (window.grafico) window.grafico.destroy();
       window.grafico = new Chart(ctx, {
         type: 'doughnut',
@@ -216,42 +238,11 @@
     }
     atualizarGrafico();
 
-    function enviarMensagem() {
-      const destinatario = document.getElementById("destinatario").value;
-      const input = document.getElementById("chat-input");
-      const mensagem = input.value.trim();
-      if (!mensagem || !destinatario) return;
-
-      const hora = new Date().toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
-      const msgElement = document.createElement("div");
-      msgElement.innerHTML = `<strong>Você</strong> (${hora}): ${mensagem}`;
-      document.getElementById("chat-box").appendChild(msgElement);
-
-      if (!aluno.mensagens) aluno.mensagens = {};
-      if (!aluno.mensagens[destinatario]) aluno.mensagens[destinatario] = [];
-      aluno.mensagens[destinatario].push({ de: email, texto: mensagem, hora });
-
-      usuarios[email] = aluno;
-      localStorage.setItem("usuarios", JSON.stringify(usuarios));
-
-      input.value = '';
-      document.getElementById("chat-box").scrollTop = document.getElementById("chat-box").scrollHeight;
-    }
-
-    const destinatarioSelect = document.getElementById("destinatario");
-    Object.keys(usuarios).forEach(userEmail => {
-      if (userEmail !== email) {
-        const option = document.createElement("option");
-        option.value = userEmail;
-        option.textContent = userEmail;
-        destinatarioSelect.appendChild(option);
-      }
-    });
-
     function alternarTema() {
       document.body.classList.toggle("dark");
       localStorage.setItem("tema", document.body.classList.contains("dark") ? "dark" : "light");
     }
+
     if (localStorage.getItem("tema") === "dark") {
       document.body.classList.add("dark");
     }
@@ -272,3 +263,4 @@
   </script>
 </body>
 </html>
+                                                     
