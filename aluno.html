@@ -107,7 +107,7 @@
   </style>
 </head>
 <body>
- <div class="sidebar">
+<div class="sidebar">
     <a href="#cursos">📘 Cursos</a>
     <a href="#notas">📝 Notas</a>
     <a href="#historico">📚 Histórico</a>
@@ -182,7 +182,7 @@
     }
 
     const historicoUl = document.getElementById("historicoAluno");
-    if (aluno.historico) {
+    if (Array.isArray(aluno.historico)) {
       aluno.historico.forEach(item => {
         const li = document.createElement("li");
         li.textContent = item;
@@ -212,7 +212,7 @@
       year: 'numeric'
     });
     calendarioUl.innerHTML += `<li><strong>Hoje:</strong> ${hoje}</li>`;
-    if (aluno.calendario) {
+    if (Array.isArray(aluno.calendario)) {
       aluno.calendario.forEach(evento => {
         const li = document.createElement("li");
         li.innerHTML = `${evento} <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(evento)}" target="_blank">📅</a>`;
@@ -222,7 +222,7 @@
 
     function atualizarGrafico() {
       const canvas = document.getElementById('graficoProgresso');
-      if (!canvas) return;
+      if (!canvas || !aluno.progresso) return;
       const ctx = canvas.getContext('2d');
       const progressoTotal = cursos.reduce((acc, curso) => acc + (aluno.progresso?.[curso] || 0), 0);
       const media = cursos.length ? Math.round(progressoTotal / cursos.length) : 0;
@@ -244,7 +244,7 @@
         }
       });
     }
-    if (aluno.progresso) atualizarGrafico();
+    atualizarGrafico();
 
     function alternarTema() {
       document.body.classList.toggle("dark");
@@ -267,6 +267,8 @@
 
     function sair() {
       localStorage.removeItem("usuarioLogado");
+      window.location.href = "    function sair() {
+      localStorage.removeItem("usuarioLogado");
       window.location.href = "acesso.html";
     }
 
@@ -276,3 +278,4 @@
   </script>
 </body>
 </html>
+
