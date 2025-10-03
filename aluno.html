@@ -375,18 +375,46 @@
     }
   });
 
-  const financeiro = aluno.financeiro;
-  document.getElementById("financeiroInfo").innerHTML = `
-    Último pagamento: <strong>${financeiro.ultimoPagamento}</strong><br>
-    Status: <span style="color:${financeiro.status === 'Em dia' ? 'green' : 'red'};">${financeiro.status}</span>
-  `;
+// ✅ Painel Financeiro: último pagamento, status geral e por curso
+const financeiro = aluno.financeiro;
+const painelFinanceiro = document.getElementById("financeiroInfo");
 
-  const calendarioUl = document.getElementById("calendarioAluno");
+// Status geral
+painelFinanceiro.innerHTML = `
+  Último pagamento: <strong>${financeiro.ultimoPagamento}</strong><br>
+  Status: <span style="color:${financeiro.status === 'Em dia' ? 'green' : 'red'};">${financeiro.status}</span>
+`;
+
+// Status por curso (se houver pagamentos registrados)
+if (aluno.pagamentos) {
+  const statusCursos = cursos.map(curso => {
+    const nomeCurso = nomes[curso];
+    const pago = aluno.pagamentos[curso];
+    const status = pago ? "✅ Pago" : "❌ Não pago";
+    return `<p><strong>${nomeCurso}:</strong> ${status}</p>`;
+  }).join("");
+  painelFinanceiro.innerHTML += `<br><br>${statusCursos}`;
+}
+
+// ✅ Calendário: data atual + eventos
+const calendarioUl = document.getElementById("calendarioAluno");
+
+// Data de hoje
+const hoje = new Date();
+const opcoes = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+const dataFormatada = hoje.toLocaleDateString('pt-BR', opcoes);
+const liHoje = document.createElement("li");
+liHoje.innerHTML = `<strong>Hoje:</strong> ${dataFormatada}`;
+calendarioUl.appendChild(liHoje);
+
+// Eventos do aluno
+if (Array.isArray(aluno.calendario)) {
   aluno.calendario.forEach(evento => {
     const li = document.createElement("li");
     li.textContent = evento;
     calendarioUl.appendChild(li);
   });
+}
 
   function enviarMensagem() {
     const input = document.getElementById('chat-input');
