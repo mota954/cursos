@@ -265,12 +265,14 @@
       location.reload();
     }
 
-    function sair() {
-      localStorage.removeItem("usuarioLogado");
-      window.location.href = "    function sair() {
-      localStorage.removeItem("usuarioLogado");
-      window.location.href = "acesso.html";
-    }
+function sair() {
+  localStorage.removeItem("usuarioLogado");
+  window.location.href = "acesso.html";
+}
+
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('service-worker.js');
+}
 
     if ('serviceWorker' in navigator) {
       navigator.serviceWorker.register('service-worker.js');
