@@ -4,13 +4,14 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Login - Área do Aluno</title>
-  <link rel="stylesheet" href="style.css" />
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
   <style>
     body {
-      background: linear-gradient(135deg, #e0f7fa, #ffffff);
+      margin: 0;
+      padding: 0;
       font-family: 'Roboto', sans-serif;
+      background: linear-gradient(135deg, #74ebd5, #9face6);
       display: flex;
       justify-content: center;
       align-items: center;
@@ -18,59 +19,94 @@
     }
 
     .login-container {
-      background: white;
-      padding: 40px;
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(10px);
       border-radius: 16px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-      max-width: 400px;
+      padding: 40px;
       width: 100%;
+      max-width: 400px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.2);
       text-align: center;
+      color: #fff;
     }
 
     .login-container h2 {
-      color: #007bff;
+      margin-bottom: 30px;
+      font-size: 1.8em;
+      font-weight: bold;
+    }
+
+    .input-group {
+      position: relative;
       margin-bottom: 20px;
     }
 
-    .login-container input {
+    .input-group input {
       width: 100%;
-      padding: 12px;
-      margin: 10px 0;
-      border: 1px solid #ccc;
+      padding: 12px 40px 12px 12px;
+      border: none;
       border-radius: 8px;
       font-size: 1em;
+      background: rgba(255,255,255,0.2);
+      color: #fff;
+      outline: none;
+    }
+
+    .input-group i {
+      position: absolute;
+      right: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #fff;
     }
 
     .login-container button {
       width: 100%;
       padding: 12px;
-      background: #007bff;
+      background: linear-gradient(to right, #007bff, #00c6ff);
       color: white;
       border: none;
       border-radius: 8px;
       font-size: 1em;
       font-weight: bold;
       cursor: pointer;
-      transition: background 0.3s ease;
+      transition: transform 0.2s ease;
     }
 
     .login-container button:hover {
-      background: #0056b3;
+      transform: scale(1.03);
     }
 
     .login-container p {
       margin-top: 20px;
       font-size: 0.9em;
-      color: #555;
     }
 
     .login-container a {
-      color: #007bff;
-      text-decoration: none;
+      color: #fff;
+      text-decoration: underline;
     }
 
-    .login-container a:hover {
-      text-decoration: underline;
+    .back-button {
+      margin-top: 10px;
+      display: inline-block;
+      padding: 10px 20px;
+      background: rgba(255,255,255,0.2);
+      border-radius: 8px;
+      color: #fff;
+      font-weight: bold;
+      text-decoration: none;
+      transition: background 0.3s ease;
+    }
+
+    .back-button:hover {
+      background: rgba(255,255,255,0.4);
+    }
+
+    @media (max-width: 480px) {
+      .login-container {
+        padding: 30px 20px;
+      }
     }
   </style>
 </head>
@@ -78,10 +114,21 @@
 
   <div class="login-container">
     <h2><i class="fas fa-sign-in-alt"></i> Login do Aluno</h2>
-    <input type="email" id="email" placeholder="Seu e-mail" />
-    <input type="password" id="senha" placeholder="Sua senha" />
+
+    <div class="input-group">
+      <input type="email" id="email" placeholder="Seu e-mail" />
+      <i class="fas fa-envelope"></i>
+    </div>
+
+    <div class="input-group">
+      <input type="password" id="senha" placeholder="Sua senha" />
+      <i class="fas fa-lock"></i>
+    </div>
+
     <button onclick="login()">Entrar na Área do Aluno</button>
+
     <p>Não tem conta? <a href="cadastro.html">Cadastre-se aqui</a></p>
+    <a href="index.html" class="back-button"><i class="fas fa-home"></i> Página Inicial</a>
   </div>
 
   <script>
