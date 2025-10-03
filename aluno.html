@@ -248,40 +248,40 @@
     <button onclick="alternarTema()" style="padding:8px 16px; border:none; border-radius:20px; background:#007bff; color:white; font-weight:bold;">Alternar Tema</button>
   </div>
 
-  <div class="aluno-container" data-aos="fade-up">
+   <div class="aluno-container" data-aos="fade-up">
     <div id="notificacoes" class="notificacoes" style="display:none;"></div>
 
-    <div class="painel-topicos" data-aos="fade-up">
+    <div class="painel-topicos">
       <h2>Seus Cursos</h2>
       <div class="curso-lista" id="listaCursos"></div>
     </div>
 
-    <div class="painel-topicos" data-aos="fade-up" id="notasCursos">
+    <div class="painel-topicos" id="notasCursos">
       <h2>Notas</h2>
       <div id="notasCursos"></div>
     </div>
 
-    <div class="painel-topicos" data-aos="fade-up" id="historicoAluno">
+    <div class="painel-topicos" id="historicoAluno">
       <h2>Histórico</h2>
       <ul id="historicoAluno"></ul>
     </div>
 
-    <div class="painel-topicos" data-aos="fade-up">
+    <div class="painel-topicos">
       <h2>Progresso</h2>
       <canvas id="graficoProgresso"></canvas>
     </div>
 
-    <div class="painel-topicos" data-aos="fade-up" id="financeiroInfo">
+    <div class="painel-topicos">
       <h2>Financeiro</h2>
-      <p id="financeiroInfo"></p>
+      <div id="financeiroInfo"></div>
     </div>
 
-   <div class="painel-topicos" data-aos="fade-up">
-     <h2>Calendário</h2>
-     <ul id="calendarioAluno"></ul>
-   </div>
+    <div class="painel-topicos">
+      <h2>Calendário</h2>
+      <ul id="calendarioAluno"></ul>
+    </div>
 
-    <div class="painel-topicos" data-aos="fade-up" id="perfilAluno">
+    <div class="painel-topicos" id="perfilAluno">
       <h2>Perfil do Aluno</h2>
       <p><strong>Nome:</strong> <span id="perfilNome"></span></p>
       <p><strong>Email:</strong> <span id="perfilEmail"></span></p>
@@ -289,7 +289,7 @@
       <button onclick="editarPerfil()">Editar Perfil</button>
     </div>
 
-    <div class="painel-topicos" data-aos="fade-up">
+    <div class="painel-topicos">
       <h2>Bate-Papo</h2>
       <div id="chat-box"></div>
       <input type="text" id="chat-input" placeholder="Digite sua mensagem...">
@@ -301,6 +301,7 @@
       <a href="#" class="btn-sair" onclick="logout()">Sair da conta</a>
     </div>
   </div>
+
 <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
 <script>
   AOS.init({ duration: 1000, once: true });
@@ -375,46 +376,38 @@
     }
   });
 
-// ✅ Painel Financeiro: último pagamento, status geral e por curso
-const financeiro = aluno.financeiro;
-const painelFinanceiro = document.getElementById("financeiroInfo");
+  // Painel Financeiro
+  const financeiro = aluno.financeiro;
+  const painelFinanceiro = document.getElementById("financeiroInfo");
+  painelFinanceiro.innerHTML = `
+    Último pagamento: <strong>${financeiro.ultimoPagamento}</strong><br>
+    Status: <span style="color:${financeiro.status === 'Em dia' ? 'green' : 'red'};">${financeiro.status}</span>
+  `;
+  if (aluno.pagamentos) {
+    const statusCursos = cursos.map(curso => {
+      const nomeCurso = nomes[curso];
+      const pago = aluno.pagamentos[curso];
+      const status = pago ? "✅ Pago" : "❌ Não pago";
+      return `<p><strong>${nomeCurso}:</strong> ${status}</p>`;
+    }).join("");
+    painelFinanceiro.innerHTML += `<br><br>${statusCursos}`;
+  }
 
-// Status geral
-painelFinanceiro.innerHTML = `
-  Último pagamento: <strong>${financeiro.ultimoPagamento}</strong><br>
-  Status: <span style="color:${financeiro.status === 'Em dia' ? 'green' : 'red'};">${financeiro.status}</span>
-`;
-
-// Status por curso (se houver pagamentos registrados)
-if (aluno.pagamentos) {
-  const statusCursos = cursos.map(curso => {
-    const nomeCurso = nomes[curso];
-    const pago = aluno.pagamentos[curso];
-    const status = pago ? "✅ Pago" : "❌ Não pago";
-    return `<p><strong>${nomeCurso}:</strong> ${status}</p>`;
-  }).join("");
-  painelFinanceiro.innerHTML += `<br><br>${statusCursos}`;
-}
-
-// ✅ Calendário: data atual + eventos
-const calendarioUl = document.getElementById("calendarioAluno");
-
-// Data de hoje
-const hoje = new Date();
-const opcoes = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-const dataFormatada = hoje.toLocaleDateString('pt-BR', opcoes);
-const liHoje = document.createElement("li");
-liHoje.innerHTML = `<strong>Hoje:</strong> ${dataFormatada}`;
-calendarioUl.appendChild(liHoje);
-
-// Eventos do aluno
-if (Array.isArray(aluno.calendario)) {
-  aluno.calendario.forEach(evento => {
-    const li = document.createElement("li");
-    li.textContent = evento;
-    calendarioUl.appendChild(li);
-  });
-}
+  // Calendário
+  const calendarioUl = document.getElementById("calendarioAluno");
+  const hoje = new Date();
+  const opcoes = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+  const dataFormatada = hoje.toLocaleDateString('pt-BR', opcoes);
+  const liHoje = document.createElement("li");
+  liHoje.innerHTML = `<strong>Hoje:</strong> ${dataFormatada}`;
+  calendarioUl.appendChild(liHoje);
+  if (Array.isArray(aluno.calendario)) {
+    aluno.calendario.forEach(evento => {
+      const li = document.createElement("li");
+      li.textContent = evento;
+      calendarioUl.appendChild(li);
+    });
+  }
 
   function enviarMensagem() {
     const input = document.getElementById('chat-input');
@@ -423,6 +416,8 @@ if (Array.isArray(aluno.calendario)) {
       const msgElement = document.createElement('div');
       msgElement.textContent = `Você: ${mensagem}`;
       document.getElementById('chat-box').appendChild(msgElement);
+      input.value = '';
+            document.getElementById('chat-box').appendChild(msgElement);
       input.value = '';
       document.getElementById('chat-box').scrollTop = document.getElementById('chat-box').scrollHeight;
     }
@@ -458,7 +453,7 @@ if (Array.isArray(aluno.calendario)) {
     notificacoes.style.display = "block";
   }, 3000);
 
-    document.querySelectorAll('.sidebar a').forEach(link => {
+  document.querySelectorAll('.sidebar a').forEach(link => {
     link.addEventListener('click', function(e) {
       e.preventDefault();
       const target = document.querySelector(this.getAttribute('href'));
