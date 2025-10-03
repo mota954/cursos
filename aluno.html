@@ -60,11 +60,6 @@
     }
     section {
       margin-bottom: 40px;
-      animation: fadeIn 1s ease;
-    }
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(10px); }
-      to { opacity: 1; transform: translateY(0); }
     }
     .curso-card {
       background: #fff;
@@ -107,6 +102,7 @@
       color: white;
       font-weight: bold;
       cursor: pointer;
+      margin-top: 10px;
     }
   </style>
 </head>
@@ -119,6 +115,7 @@
     <a href="#calendario">📅 Calendário</a>
     <a href="#progresso">📊 Progresso</a>
     <a href="#perfil">👤 Perfil</a>
+    <a href="#" onclick="sair()">🚪 Sair</a>
   </div>
 
   <div class="header">
@@ -201,7 +198,7 @@
     }
 
     const calendarioUl = document.getElementById("calendarioAluno");
-    const hoje = new Date().toLocaleDateString('pt-BR', { weekday: 'long', day: 'numeric', month: 'long', year
+    const hoje = new Date().toLocaleDateString('pt-BR', {
       weekday: 'long',
       day: 'numeric',
       month: 'long',
@@ -257,10 +254,14 @@
       location.reload();
     }
 
+    function sair() {
+      localStorage.removeItem("usuarioLogado");
+      window.location.href = "acesso.html";
+    }
+
     if ('serviceWorker' in navigator) {
       navigator.serviceWorker.register('service-worker.js');
     }
   </script>
 </body>
-</html>
-                                                     
+</html>                                     
