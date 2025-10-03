@@ -107,7 +107,7 @@
   </style>
 </head>
 <body>
-  <div class="sidebar">
+ <div class="sidebar">
     <a href="#cursos">📘 Cursos</a>
     <a href="#notas">📝 Notas</a>
     <a href="#historico">📚 Histórico</a>
@@ -141,6 +141,7 @@
 
   <script>
     AOS.init();
+
     const email = localStorage.getItem("usuarioLogado");
     const usuarios = JSON.parse(localStorage.getItem("usuarios")) || {};
     const aluno = usuarios[email];
@@ -166,7 +167,7 @@
         const card = document.createElement("div");
         card.className = "curso-card";
         card.innerHTML = `
-          <h3>${nomes[curso]}</h3>
+          <h3>${nomes[curso] || curso}</h3>
           <button onclick="window.location.href='${curso}.html'">Acessar material</button>
         `;
         lista.appendChild(card);
@@ -174,26 +175,32 @@
     }
 
     const notasDiv = document.getElementById("notasCursos");
-    for (const curso in aluno.notas) {
-      notasDiv.innerHTML += `<p>${nomes[curso]}: <strong>${aluno.notas[curso]}</strong></p>`;
+    if (aluno.notas) {
+      for (const curso in aluno.notas) {
+        notasDiv.innerHTML += `<p>${nomes[curso] || curso}: <strong>${aluno.notas[curso]}</strong></p>`;
+      }
     }
 
     const historicoUl = document.getElementById("historicoAluno");
-    aluno.historico.forEach(item => {
-      const li = document.createElement("li");
-      li.textContent = item;
-      historicoUl.appendChild(li);
-    });
+    if (aluno.historico) {
+      aluno.historico.forEach(item => {
+        const li = document.createElement("li");
+        li.textContent = item;
+        historicoUl.appendChild(li);
+      });
+    }
 
     const painelFinanceiro = document.getElementById("financeiroInfo");
-    painelFinanceiro.innerHTML = `
-      Último pagamento: <strong>${aluno.financeiro.ultimoPagamento}</strong><br>
-      Status: <span style="color:${aluno.financeiro.status === 'Em dia' ? 'green' : 'red'};">${aluno.financeiro.status}</span>
-    `;
+    if (aluno.financeiro) {
+      painelFinanceiro.innerHTML = `
+        Último pagamento: <strong>${aluno.financeiro.ultimoPagamento}</strong><br>
+        Status: <span style="color:${aluno.financeiro.status === 'Em dia' ? 'green' : 'red'};">${aluno.financeiro.status}</span>
+      `;
+    }
     if (aluno.pagamentos) {
       cursos.forEach(curso => {
         const pago = aluno.pagamentos[curso];
-        painelFinanceiro.innerHTML += `<p>${nomes[curso]}: ${pago ? "✅ Pago" : "❌ Não pago"}</p>`;
+        painelFinanceiro.innerHTML += `<p>${nomes[curso] || curso}: ${pago ? "✅ Pago" : "❌ Não pago"}</p>`;
       });
     }
 
@@ -205,14 +212,18 @@
       year: 'numeric'
     });
     calendarioUl.innerHTML += `<li><strong>Hoje:</strong> ${hoje}</li>`;
-    aluno.calendario.forEach(evento => {
-      const li = document.createElement("li");
-      li.innerHTML = `${evento} <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(evento)}" target="_blank">📅</a>`;
-      calendarioUl.appendChild(li);
-    });
+    if (aluno.calendario) {
+      aluno.calendario.forEach(evento => {
+        const li = document.createElement("li");
+        li.innerHTML = `${evento} <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(evento)}" target="_blank">📅</a>`;
+        calendarioUl.appendChild(li);
+      });
+    }
 
     function atualizarGrafico() {
-      const ctx = document.getElementById('graficoProgresso').getContext('2d');
+      const canvas = document.getElementById('graficoProgresso');
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
       const progressoTotal = cursos.reduce((acc, curso) => acc + (aluno.progresso?.[curso] || 0), 0);
       const media = cursos.length ? Math.round(progressoTotal / cursos.length) : 0;
       if (window.grafico) window.grafico.destroy();
@@ -233,7 +244,7 @@
         }
       });
     }
-    atualizarGrafico();
+    if (aluno.progresso) atualizarGrafico();
 
     function alternarTema() {
       document.body.classList.toggle("dark");
@@ -264,4 +275,4 @@
     }
   </script>
 </body>
-</html>                                     
+</html>
