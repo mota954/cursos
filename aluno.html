@@ -129,7 +129,7 @@
   </style>
 </head>
 <body>
-  <div class="sidebar">
+<div class="sidebar">
     <a href="#cursos">📘 Cursos</a>
     <a href="#notas">📝 Notas</a>
     <a href="#calendario">📅 Calendário</a>
@@ -194,6 +194,28 @@
       vendas: "Gestão de Vendas", pessoas: "Gestão de Pessoas", financas: "Finanças"
     };
 
+    const linksMateriais = {
+      programacao: "material-programacao.html",
+      marketing: "material-marketing.html",
+      economia: "material-economia.html",
+      contabilidade: "material-contabilidade.html",
+      administracao: "material-administracao.html",
+      vendas: "material-vendas.html",
+      pessoas: "material-pessoas.html",
+      financas: "material-financas.html"
+    };
+
+    const linksAvaliacoes = {
+      programacao: "avaliacao-programacao.html",
+      marketing: "avaliacao-marketing.html",
+      economia: "avaliacao-economia.html",
+      contabilidade: "avaliacao-contabilidade.html",
+      administracao: "avaliacao-administracao.html",
+      vendas: "avaliacao-vendas.html",
+      pessoas: "avaliacao-pessoas.html",
+      financas: "avaliacao-financas.html"
+    };
+
     const cursos = aluno.cursosComprados || [];
     const lista = document.getElementById("listaCursos");
     if (cursos.length === 0) {
@@ -202,9 +224,14 @@
       cursos.forEach(curso => {
         const card = document.createElement("div");
         card.className = "curso-card";
+
+        const linkMaterial = linksMateriais[curso] || `${curso}.html`;
+        const linkAvaliacao = linksAvaliacoes[curso] || `avaliacao-${curso}.html`;
+
         card.innerHTML = `
           <h3>${nomes[curso] || curso}</h3>
-          <button onclick="window.location.href='${curso}.html'">Acessar material</button>
+          <button onclick="window.location.href='${linkMaterial}'">Acessar material</button>
+          <button onclick="window.location.href='${linkAvaliacao}'">Fazer avaliação</button>
         `;
         lista.appendChild(card);
       });
@@ -224,7 +251,7 @@
       month: 'long',
       year: 'numeric'
     });
-        calendarioUl.innerHTML += `<li><strong>Hoje:</strong> ${hoje}</li>`;
+    calendarioUl.innerHTML += `<li><strong>Hoje:</strong> ${hoje}</li>`;
     if (Array.isArray(aluno.calendario)) {
       aluno.calendario.forEach(evento => {
         const li = document.createElement("li");
