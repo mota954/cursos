@@ -4,7 +4,6 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Carrinho de Compras</title>
-  <link rel="stylesheet" href="style.css" />
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
@@ -206,14 +205,14 @@
     };
 
     const precos = {
-      programacao: 29,99,
-      marketing: 18,90,
-      economia: 29,90,
-      contabilidade: 29,90,
-      administracao: 29,99,
-      vendas: 29,99,
-      pessoas: 15,90,
-      financas: 15,90
+      programacao: 29.99,
+      marketing: 18.90,
+      economia: 29.90,
+      contabilidade: 29.90,
+      administracao: 29.99,
+      vendas: 29.99,
+      pessoas: 15.90,
+      financas: 15.90
     };
 
     const email = localStorage.getItem("usuarioLogado");
@@ -256,13 +255,13 @@
         card.innerHTML = `
           <button class="remover" onclick="removerCurso(${index})">&times;</button>
           <h3>${nomes[curso]}</h3>
-          <p>Valor: R$ ${precos[curso].toFixed(2)}</p>
+                    <p>Valor: R$ ${precos[curso].toFixed(2)}</p>
         `;
         lista.appendChild(card);
         total += precos[curso];
       });
 
-           valorTotal.innerText = `Valor total: R$ ${total.toFixed(2)}`;
+      valorTotal.innerText = `Valor total: R$ ${total.toFixed(2)}`;
     }
 
     function removerCurso(index) {
