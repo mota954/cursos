@@ -110,7 +110,7 @@
       background: #c82333;
     }
 
-    .finalizar {
+    .finalizar, .voltar {
       padding: 14px 36px;
       background: var(--verde);
       color: white;
@@ -122,9 +122,14 @@
       position: relative;
       overflow: hidden;
       transition: background 0.3s ease;
+      margin: 10px;
     }
 
-    .finalizar::after {
+    .voltar {
+      background: var(--azul);
+    }
+
+    .finalizar::after, .voltar::after {
       content: "";
       position: absolute;
       top: 0;
@@ -135,12 +140,16 @@
       transition: left 0.6s ease;
     }
 
-    .finalizar:hover::after {
+    .finalizar:hover::after, .voltar:hover::after {
       left: 100%;
     }
 
     .finalizar:hover {
       background: #218838;
+    }
+
+    .voltar:hover {
+      background: #0056b3;
     }
 
     .vazio {
@@ -178,7 +187,7 @@
     }
 
     @media (max-width: 600px) {
-      .finalizar {
+      .finalizar, .voltar {
         width: 100%;
       }
     }
@@ -193,6 +202,7 @@
     <p class="vazio" id="mensagemVazio">Nenhum curso no carrinho.</p>
     <p class="total" id="valorTotal"></p>
     <button class="finalizar" id="btnFinalizar">Finalizar compra</button>
+    <button class="voltar" onclick="window.location.href='index.html'">Voltar para comprar mais cursos</button>
   </div>
 
   <div id="modalSucesso" class="modal-sucesso">✅ Compra finalizada com sucesso!</div>
@@ -239,7 +249,7 @@
     const lista = document.getElementById("listaCarrinho");
     const vazio = document.getElementById("mensagemVazio");
     const btnFinalizar = document.getElementById("btnFinalizar");
-    const valorTotal = document.getElementById("valorTotal");
+        const valorTotal = document.getElementById("valorTotal");
     const modalSucesso = document.getElementById("modalSucesso");
 
     function renderizarCarrinho() {
@@ -254,7 +264,7 @@
       }
 
       vazio.style.display = "none";
-            btnFinalizar.style.display = "inline-block";
+      btnFinalizar.style.display = "inline-block";
 
       carrinho.forEach((curso, index) => {
         const card = document.createElement("div");
@@ -282,20 +292,19 @@
     btnFinalizar.addEventListener("click", () => {
       const comprados = usuarios[email].cursosComprados || [];
 
-      carrinho.forEach(curso => {
-        if (!comprados.includes(curso)) {
-          comprados.push(curso);
-        }
-      });
+      const novosCursos = carrinho.filter(curso => !comprados.includes(curso));
 
-      usuarios[email].cursosComprados = comprados;
+      if (novosCursos.length === 0) {
+        alert("Nenhum novo curso para finalizar.");
+        return;
+      }
+
+      usuarios[email].cursosComprados = [...comprados, ...novosCursos];
       usuarios[email].carrinho = [];
       localStorage.setItem("usuarios", JSON.stringify(usuarios));
 
-      // Exibe modal de sucesso com animação
       modalSucesso.style.display = "block";
 
-      // Redireciona após 2 segundos
       setTimeout(() => {
         modalSucesso.style.display = "none";
         window.location.href = "aluno.html";
