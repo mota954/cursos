@@ -12,6 +12,12 @@
     body {
       background: linear-gradient(135deg, #f0f8ff, #ffffff);
       font-family: 'Roboto', sans-serif;
+      animation: fundoAnimado 10s ease infinite alternate;
+    }
+
+    @keyframes fundoAnimado {
+      0% { background-position: 0% 50%; }
+      100% { background-position: 100% 50%; }
     }
 
     .carrinho-container {
@@ -22,12 +28,20 @@
       border-radius: 16px;
       box-shadow: 0 10px 30px rgba(0,0,0,0.1);
       text-align: center;
+      position: relative;
     }
 
     .icone-carrinho {
-      font-size: 2.5em;
+      font-size: 3em;
       color: #007bff;
       margin-bottom: 10px;
+      animation: pulse 1.5s infinite;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.1); }
+      100% { transform: scale(1); }
     }
 
     .carrinho-container h2 {
@@ -52,10 +66,11 @@
       width: 240px;
       transition: transform 0.3s ease;
       position: relative;
+      transform: translateY(0);
     }
 
     .curso-card:hover {
-      transform: scale(1.05);
+      transform: translateY(-5px) scale(1.05);
       box-shadow: 0 0 25px rgba(0,123,255,0.3);
     }
 
@@ -97,6 +112,23 @@
       cursor: pointer;
       font-size: 1em;
       margin-top: 20px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .finalizar::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(120deg, transparent, rgba(255,255,255,0.4), transparent);
+      transition: left 0.6s ease;
+    }
+
+    .finalizar:hover::after {
+      left: 100%;
     }
 
     .finalizar:hover {
@@ -114,6 +146,27 @@
       font-weight: bold;
       color: #333;
       margin-top: 10px;
+    }
+
+    .modal-sucesso {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: #28a745;
+      color: white;
+      padding: 20px 40px;
+      border-radius: 12px;
+      font-size: 1.2em;
+      box-shadow: 0 0 20px rgba(0,0,0,0.2);
+      animation: fadeIn 0.8s ease forwards;
+      z-index: 999;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translate(-50%, -60%); }
+      to { opacity: 1; transform: translate(-50%, -50%); }
     }
 
     @media (max-width: 768px) {
@@ -135,6 +188,8 @@
     <button class="finalizar" id="btnFinalizar">Finalizar compra</button>
   </div>
 
+  <div id="modalSucesso" class="modal-sucesso">✅ Compra finalizada com sucesso!</div>
+
   <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
   <script>
     AOS.init({ duration: 1000, once: true });
@@ -151,14 +206,14 @@
     };
 
     const precos = {
-      programacao: 120,
-      marketing: 100,
-      economia: 90,
-      contabilidade: 95,
-      administracao: 110,
-      vendas: 85,
-      pessoas: 105,
-      financas: 115
+      programacao: 29,99,
+      marketing: 18,90,
+      economia: 29,90,
+      contabilidade: 29,90,
+      administracao: 29,99,
+      vendas: 29,99,
+      pessoas: 15,90,
+      financas: 15,90
     };
 
     const email = localStorage.getItem("usuarioLogado");
@@ -178,6 +233,7 @@
     const vazio = document.getElementById("mensagemVazio");
     const btnFinalizar = document.getElementById("btnFinalizar");
     const valorTotal = document.getElementById("valorTotal");
+    const modalSucesso = document.getElementById("modalSucesso");
 
     function renderizarCarrinho() {
       lista.innerHTML = "";
@@ -206,7 +262,7 @@
         total += precos[curso];
       });
 
-      valorTotal.innerText = `Valor total: R$ ${total.toFixed(2)}`;
+           valorTotal.innerText = `Valor total: R$ ${total.toFixed(2)}`;
     }
 
     function removerCurso(index) {
@@ -229,8 +285,14 @@
       usuarios[email].carrinho = [];
       localStorage.setItem("usuarios", JSON.stringify(usuarios));
 
-      alert("Compra finalizada com sucesso!");
-      window.location.href = "aluno.html";
+      // Exibe modal de sucesso com animação
+      modalSucesso.style.display = "block";
+
+      // Redireciona após 2 segundos
+      setTimeout(() => {
+        modalSucesso.style.display = "none";
+        window.location.href = "aluno.html";
+      }, 2000);
     });
 
     renderizarCarrinho();
